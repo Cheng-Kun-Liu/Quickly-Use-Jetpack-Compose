@@ -5,6 +5,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.slideIn
 import androidx.compose.animation.slideOut
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -49,7 +50,9 @@ class AnimatedSlideFromBottomScopeImpl : AnimatedSlideFromBottomScope {
 @Composable
 fun AnimatedSlideFromBottom(content: @Composable AnimatedSlideFromBottomScope.() -> Unit) {
     val animatedScopeImpl = remember { AnimatedSlideFromBottomScopeImpl() }
-    animatedScopeImpl.show()
+    LaunchedEffect(Unit) {
+        animatedScopeImpl.show()
+    }
     AnimatedVisibility(
         visible = animatedScopeImpl.isInOrOut.value == true, enter = slideIn(
             animationSpec = tween(animatedScopeImpl.animTime), initialOffset = {

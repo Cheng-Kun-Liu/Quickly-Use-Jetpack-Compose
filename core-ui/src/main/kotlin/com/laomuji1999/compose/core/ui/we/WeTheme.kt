@@ -8,6 +8,7 @@ import android.view.WindowInsets
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -27,6 +28,7 @@ import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.DialogWindowProvider
 import androidx.core.view.WindowInsetsControllerCompat
 import com.laomuji1999.compose.core.ui.WeIndication
+import com.laomuji1999.compose.core.ui.clickableDebounce
 import com.laomuji1999.compose.core.ui.ifCondition
 import com.laomuji1999.compose.core.ui.isPreview
 import com.laomuji1999.compose.core.ui.we.colorscheme.LocalWeColorScheme
@@ -158,8 +160,11 @@ internal fun getAdapterDensity(designWidth: Float = 375f): Density {
  */
 @Composable
 fun WeDialog(
-    onDismissRequest: () -> Unit,
-    properties: DialogProperties = DialogProperties(),
+    onDismissRequest: () -> Unit = {},
+    properties: DialogProperties = DialogProperties(
+        usePlatformDefaultWidth = false,
+        decorFitsSystemWindows = false,
+    ),
     dimProgress: Float = 1f,
     lightStatusBars: Boolean = true,
     content: @Composable () -> Unit
@@ -173,7 +178,6 @@ fun WeDialog(
         LaunchedEffect(dimProgress) {
             dialogWindow.setDimAmount(originDim * dimProgress)
         }
-
         LaunchedEffect(lightStatusBars) {
             WindowInsetsControllerCompat(dialogWindow, dialogWindow.decorView).apply {
                 isAppearanceLightStatusBars = lightStatusBars
@@ -181,7 +185,14 @@ fun WeDialog(
             }
         }
         CompositionLocalProvider(LocalDensity provides getAdapterDensity()) {
-            content()
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .navigationBarsPadding()
+                    .clickableDebounce(indication = null, onClick = onDismissRequest)
+            ) {
+                content()
+            }
         }
     }
 }
