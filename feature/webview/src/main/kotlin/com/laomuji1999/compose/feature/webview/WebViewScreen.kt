@@ -3,6 +3,7 @@ package com.laomuji1999.compose.feature.webview
 import android.annotation.SuppressLint
 import android.webkit.WebSettings
 import android.webkit.WebView
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -53,34 +54,42 @@ private fun WebViewScreenUi(
 ) {
     val context = LocalContext.current
     var webView: WebView? by remember { mutableStateOf(null) }
+
+    val webviewBack:()->Unit = {
+        webView?.run {
+            if (canGoBack()) {
+                goBack()
+            } else {
+                onBackClick()
+                return@run
+            }
+            val urlList = copyBackForwardList()
+            val endPosition = urlList.currentIndex
+            var targetPosition = 0
+            for (position in endPosition downTo 0) {
+                val urlInfo = urlList.getItemAtIndex(position)
+                if (urlInfo.url != "about:blank") {
+                    targetPosition = endPosition - position
+                    break
+                }
+                if (position == 0) {
+                    onBackClick()
+                    return@run
+                }
+            }
+            goBackOrForward(targetPosition)
+        } ?: onBackClick()
+    }
+
+    BackHandler {
+        webviewBack()
+    }
     WeScaffold(
         topBar = {
             WeTopBar(
                 title = uiState.title,
                 onBackClick = {
-                    webView?.run {
-                        if (canGoBack()) {
-                            goBack()
-                        } else {
-                            onBackClick()
-                            return@run
-                        }
-                        val urlList = copyBackForwardList()
-                        val endPosition = urlList.currentIndex
-                        var targetPosition = 0
-                        for (position in endPosition downTo 0) {
-                            val urlInfo = urlList.getItemAtIndex(position)
-                            if (urlInfo.url != "about:blank") {
-                                targetPosition = endPosition - position
-                                break
-                            }
-                            if (position == 0) {
-                                onBackClick()
-                                return@run
-                            }
-                        }
-                        goBackOrForward(targetPosition)
-                    } ?: onBackClick()
+                    webviewBack()
                 },
                 actions = {
                     WeTopBarAction(

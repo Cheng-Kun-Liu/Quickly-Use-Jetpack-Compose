@@ -86,12 +86,10 @@ fun BackInvokedCallbackProgress(
             }
 
             override fun handleOnBackPressed() {
-                onBackProgressChanged(null)
                 onBackHandle()
             }
 
             override fun handleOnBackCancelled() {
-                onBackProgressChanged(null)
                 onBackCancel?.invoke()
             }
         }

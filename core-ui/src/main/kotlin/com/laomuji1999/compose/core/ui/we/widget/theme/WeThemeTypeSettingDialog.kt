@@ -21,12 +21,20 @@ fun WeThemeSettingDialog(
         return
     }
     val selectedType by WeThemeColorType.currentWeThemeColorType.collectAsStateWithLifecycle()
+    var animHide: (() -> Unit)? = null
     WeActionSheetDialog(
-        onDismissRequest = onDismissRequest
+        onDismissRequest = {
+            animHide?.invoke()
+        }
     ) {
+        animHide = {
+            hide {
+                onDismissRequest()
+            }
+        }
         val changeTheme: (WeThemeColorType) -> Unit = {
             setWeThemeColorType(it)
-            hide { onDismissRequest() }
+            animHide()
         }
         WeThemeTypeSettingDialogColorItem(
             text = stringResource(com.laomuji1999.compose.res.R.string.string_theme_dialog_we_theme_system),
