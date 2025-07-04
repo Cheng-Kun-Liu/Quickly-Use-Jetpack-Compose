@@ -23,6 +23,7 @@ import com.laomuji1999.compose.core.ui.we.icons.WeIcons
 fun WeTopBar(
     title: String = "",
     onBackClick: (() -> Unit)? = null,
+    enableBackHandle: Boolean = false,
     actions: @Composable RowScope.() -> Unit = {}
 ) {
     Row(
@@ -36,7 +37,7 @@ fun WeTopBar(
     ) {
         Row(modifier = Modifier.weight(1f)) {
             onBackClick?.let {
-                BackHandler {
+                BackHandler(enabled = enableBackHandle) {
                     it()
                 }
                 WeTopBarAction(

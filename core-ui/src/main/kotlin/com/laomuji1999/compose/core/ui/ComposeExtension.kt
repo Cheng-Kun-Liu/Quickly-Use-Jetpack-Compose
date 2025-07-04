@@ -1,10 +1,14 @@
 package com.laomuji1999.compose.core.ui
 
+import androidx.activity.BackEventCompat
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.Indication
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.remember
@@ -67,4 +71,38 @@ fun Modifier.clickableDebounce(
                 onClick()
             }
         })
+}
+
+@Composable
+fun BackInvokedCallbackProgress(
+    onBackHandle: () -> Unit,
+    onBackCancel: (() -> Unit)? = null,
+    onBackProgressChanged: ((Float?) -> Unit),
+) {
+    val onBackPressedCallback = remember {
+        object : OnBackPressedCallback(true) {
+            override fun handleOnBackProgressed(backEvent: BackEventCompat) {
+                onBackProgressChanged(backEvent.progress)
+            }
+
+            override fun handleOnBackPressed() {
+                onBackProgressChanged(null)
+                onBackHandle()
+            }
+
+            override fun handleOnBackCancelled() {
+                onBackProgressChanged(null)
+                onBackCancel?.invoke()
+            }
+        }
+    }
+    val onBackPressedDispatcher =
+        LocalOnBackPressedDispatcherOwner.current!!.onBackPressedDispatcher
+    DisposableEffect(onBackPressedDispatcher) {
+        onBackPressedDispatcher.addCallback(onBackPressedCallback)
+
+        onDispose {
+            onBackPressedCallback.remove()
+        }
+    }
 }

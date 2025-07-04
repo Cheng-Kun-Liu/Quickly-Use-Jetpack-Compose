@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
@@ -23,12 +24,14 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import androidx.compose.ui.window.DialogWindowProvider
 import androidx.core.view.WindowInsetsControllerCompat
 import com.laomuji1999.compose.core.ui.WeIndication
 import com.laomuji1999.compose.core.ui.ifCondition
 import com.laomuji1999.compose.core.ui.isPreview
 import com.laomuji1999.compose.core.ui.we.colorscheme.LocalWeColorScheme
 import com.laomuji1999.compose.core.ui.we.colorscheme.WeColorScheme
+
 
 /**
  * 设计系统入口
@@ -78,8 +81,7 @@ private fun WeBaseContent(
         val bottomBarBackground = WeTheme.colorScheme.bottomBarBackground.toArgb()
         val isDarkFont = WeTheme.colorScheme.isDarkFont
 
-        //在当前Theme改变时修改系统栏颜色
-        LaunchedEffect(WeTheme.colorScheme) {
+        SideEffect {
             val window = (view.context as Activity).window
 
             //设置底部导航栏颜色
@@ -99,8 +101,7 @@ private fun WeBaseContent(
             }
 
             //设置顶部状态栏文字是否为深色
-            val controller = WindowInsetsControllerCompat(window, view)
-            controller.isAppearanceLightStatusBars = isDarkFont
+            WindowInsetsControllerCompat(window, view).isAppearanceLightStatusBars = isDarkFont
         }
     }
     Box(
@@ -159,12 +160,26 @@ internal fun getAdapterDensity(designWidth: Float = 375f): Density {
 fun WeDialog(
     onDismissRequest: () -> Unit,
     properties: DialogProperties = DialogProperties(),
+    dimProgress: Float = 1f,
+    lightStatusBars: Boolean = true,
     content: @Composable () -> Unit
 ) {
     Dialog(
         onDismissRequest = onDismissRequest,
         properties = properties
     ) {
+        val dialogWindow = (LocalView.current.parent as DialogWindowProvider).window
+        val originDim = remember { dialogWindow.attributes.dimAmount }
+        LaunchedEffect(dimProgress) {
+            dialogWindow.setDimAmount(originDim * dimProgress)
+        }
+
+        LaunchedEffect(lightStatusBars) {
+            WindowInsetsControllerCompat(dialogWindow, dialogWindow.decorView).apply {
+                isAppearanceLightStatusBars = lightStatusBars
+                isAppearanceLightNavigationBars = lightStatusBars
+            }
+        }
         CompositionLocalProvider(LocalDensity provides getAdapterDensity()) {
             content()
         }
