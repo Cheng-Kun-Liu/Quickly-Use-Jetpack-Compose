@@ -80,6 +80,7 @@
     <string name="string_language_screen_title">多語言</string>
     <string name="string_theme_dialog_title">主題</string>
     <string name="string_theme_dialog_we_theme_system">系統主題</string>
+    <string name="string_theme_dialog_we_theme_dynamic">動態主題</string>
     <string name="string_theme_dialog_we_theme_light">淺色主題</string>
     <string name="string_theme_dialog_we_theme_dark">深色主題</string>
     <string name="string_theme_dialog_we_theme_blue">藍色主題</string>

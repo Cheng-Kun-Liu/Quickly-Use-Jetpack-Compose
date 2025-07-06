@@ -1,5 +1,6 @@
 package com.laomuji1999.compose.core.ui.we.widget.theme
 
+import android.os.Build
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
@@ -44,6 +45,17 @@ fun WeThemeSettingDialog(
                 changeTheme(it)
             },
         )
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+            //动态取色仅在Api31以上才可用
+            WeThemeTypeSettingDialogColorItem(
+                text = stringResource(com.laomuji1999.compose.res.R.string.string_theme_dialog_we_theme_dynamic),
+                selectedType = selectedType,
+                targetType = WeThemeColorType.Dynamic,
+                onDismissRequest = {
+                    changeTheme(it)
+                },
+            )
+        }
         WeThemeTypeSettingDialogColorItem(
             text = stringResource(com.laomuji1999.compose.res.R.string.string_theme_dialog_we_theme_light),
             selectedType = selectedType,

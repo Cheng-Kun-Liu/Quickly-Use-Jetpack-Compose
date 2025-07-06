@@ -49,7 +49,7 @@ fun WeTopBar(
             text = title,
             style = WeTheme.typography.emTitle,
             color = WeTheme.colorScheme.fontColorHeavy,
-            modifier = Modifier.weight(1f),
+            modifier = Modifier.weight(2f),
             textAlign = TextAlign.Center,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis

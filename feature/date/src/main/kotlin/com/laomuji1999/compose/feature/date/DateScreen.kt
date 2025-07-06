@@ -31,6 +31,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringArrayResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -58,7 +59,7 @@ private fun DateScreenUi(
     uiState: DateScreenUiState, onAction: (DateScreenAction) -> Unit
 ) {
     WeScaffold(topBar = {
-        WeTopBar()
+        WeTopBar(title = stringResource(com.laomuji1999.compose.res.R.string.string_demo_screen_date))
         SelectYearUi(
             currentYear = uiState.currentYear,
             yearList = uiState.yearList,
