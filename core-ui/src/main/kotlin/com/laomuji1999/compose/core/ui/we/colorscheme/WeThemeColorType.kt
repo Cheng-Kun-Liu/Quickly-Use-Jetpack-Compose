@@ -11,9 +11,11 @@ import kotlinx.coroutines.flow.update
  */
 sealed class WeThemeColorType {
     data object FlowSystem : WeThemeColorType()
+    data object Dynamic : WeThemeColorType()
     data object Light : WeThemeColorType()
     data object Dark : WeThemeColorType()
     data object Blue : WeThemeColorType()
+
 
     companion object {
         private val _currentWeThemeColorType = MutableStateFlow<WeThemeColorType>(FlowSystem)
@@ -30,6 +32,7 @@ sealed class WeThemeColorType {
             val weThemeColorType = when (clsName) {
                 null -> FlowSystem
                 FlowSystem::class.java.name -> FlowSystem
+                Dynamic::class.java.name -> Dynamic
                 Light::class.java.name -> Light
                 Dark::class.java.name -> Dark
                 Blue::class.java.name -> Blue

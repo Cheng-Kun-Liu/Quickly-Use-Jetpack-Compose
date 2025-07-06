@@ -1,15 +1,20 @@
 package com.laomuji1999.compose.core.ui.we.colorscheme
 
+import androidx.compose.material3.ColorScheme
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+
+internal val LocalWeColorScheme: ProvidableCompositionLocal<WeColorScheme> =
+    staticCompositionLocalOf { WeColorSchemeLight }
+
 
 /**
  * 颜色设计
  * @author laomuji666
  * @since 2025/5/23
  */
-sealed class WeColorScheme(
+open class WeColorScheme(
     //顶部状态栏文字是否是深色
     val isDarkFont: Boolean,
 
@@ -74,5 +79,55 @@ sealed class WeColorScheme(
     val categoryBackground: Color,
 )
 
-internal val LocalWeColorScheme: ProvidableCompositionLocal<WeColorScheme> =
-    staticCompositionLocalOf { WeColorSchemeLight }
+fun ColorScheme.toWeColorScheme(
+    isDarkTheme: Boolean,
+    brandColor: Color = WeColors.Color_07C160,
+    onBrandColor: Color = WeColors.Color_FFFFFFFF,
+): WeColorScheme = object : WeColorScheme(
+    isDarkFont = !isDarkTheme,
+
+    background = background,
+    cursorColor = brandColor,
+
+    fontColorHeavy = onBackground,
+    fontColorLight = onSurfaceVariant,
+    fontColorError = error,
+    fontColorPrimary = brandColor,
+
+    primaryButton = brandColor,
+    onPrimaryButton = onBrandColor,
+
+    secondaryButton = surfaceVariant,
+    onSecondaryButton = brandColor,
+
+    disableButton = surfaceVariant,
+    onDisableButton = onSurfaceVariant.copy(alpha = 0.3f),
+
+    wrongButton = surfaceVariant,
+    onWrongButton = error,
+
+    outline = outline,
+    pressed = surfaceTint.copy(alpha = if (isDarkTheme) 0.05f else 0.08f),
+
+    rowBackground = surfaceVariant,
+
+    switchThumbColor = onPrimary,
+    switchSelectBackground = brandColor,
+    switchUnSelectBackground = outlineVariant ?: outline,
+
+    bottomBarSelect = brandColor,
+    bottomBarUnSelect = onSurfaceVariant,
+    bottomBarBackground = surface,
+
+    toastBackgroundColor = surfaceVariant,
+    onToastBackgroundColor = onSurface,
+
+    chatInputBackground = surfaceVariant,
+    chatMessageBackgroundSend = primaryContainer,
+    chatMessageBackgroundReceive = surfaceVariant,
+    chatMessageTextSend = onPrimaryContainer,
+    chatMessageTextReceive = onSurface,
+
+    categoryTextColor = onPrimary,
+    categoryBackground = brandColor
+) {}
