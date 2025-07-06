@@ -19,10 +19,9 @@ Quickly-Use-Jetpack-Compose 的架构参考安卓官方的最佳实践:[Now in A
 
 # 设计系统
 
-自定义的设计系统,不使用M3的风格,按WX的UI风格设计的一套ui系统,有白天和夜间两种颜色模式,也可以添加更多颜色模式.
+自定义的设计系统,不使用M3的风格,按WX的UI风格设计的一套ui系统.支持动态切换颜色和窗口大小.
 
-+ 竖屏以375宽度适配屏幕,横屏不适配正常显示.
-+ WeTheme: 替代MaterialTheme.
++ WeTheme: 替代MaterialTheme.竖屏以375宽度适配屏幕,横屏不适配正常显示.
 + WeColorScheme: 定义颜色.
 + WeTypography: 定义字体.
 + WeIndication: 定义触摸效果.
@@ -60,7 +59,7 @@ Quickly-Use-Jetpack-Compose 的架构参考安卓官方的最佳实践:[Now in A
 + WebView: 在Compose中使用WebView,添加一些常用的WebView功能.
 + 多语言: 动态切换多语言,支持SDK33的应用首选语言.
 + 切换动画: 为Compose和Activity提供进入和退出的滑动动画,兼容RTL布局.
-+ 多主题: 动态切换主题,不止是白天和夜间,可以选择多种主题.
++ 多主题: 动态切换主题,WX的白天和夜间主题和自定义主题.
 
 # 开发/发布环境
 
