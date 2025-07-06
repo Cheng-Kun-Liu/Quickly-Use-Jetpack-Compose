@@ -1,5 +1,6 @@
 package com.laomuji1999.compose.feature.date
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
@@ -7,11 +8,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -41,6 +40,7 @@ import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
 import com.laomuji1999.compose.core.ui.we.WeTheme
 import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutline
 import com.laomuji1999.compose.core.ui.we.widget.scaffold.WeScaffold
+import com.laomuji1999.compose.core.ui.we.widget.topbar.WeTopBar
 import kotlin.math.abs
 
 @Composable
@@ -58,7 +58,7 @@ private fun DateScreenUi(
     uiState: DateScreenUiState, onAction: (DateScreenAction) -> Unit
 ) {
     WeScaffold(topBar = {
-        Spacer(modifier = Modifier.statusBarsPadding())
+        WeTopBar()
         SelectYearUi(
             currentYear = uiState.currentYear,
             yearList = uiState.yearList,
@@ -266,6 +266,7 @@ private fun MonthDetailUi(
 @Composable
 private fun PreviewDateScreen() {
     QuicklyTheme {
+        @SuppressLint("ViewModelConstructorInComposable")
         DateScreen(viewModel = DateScreenViewModel())
     }
 }

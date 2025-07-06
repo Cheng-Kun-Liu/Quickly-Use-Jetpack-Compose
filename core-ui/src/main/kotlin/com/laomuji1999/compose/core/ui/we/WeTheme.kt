@@ -6,8 +6,8 @@ import android.os.Build
 import android.util.TypedValue
 import android.view.WindowInsets
 import androidx.compose.foundation.LocalIndication
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.captionBarPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.runtime.Composable
@@ -69,7 +69,6 @@ fun WeTheme(
 
 /**
  * 设计系统content封装
- * 设置系统栏的颜色,适配高低版本.
  * @author laomuji666
  * @since 2025/5/23
  */
@@ -102,13 +101,17 @@ private fun WeBaseContent(
                 }
             }
 
+            val windowInsetsController = WindowInsetsControllerCompat(window, view)
+            //设置底部导航栏图标是否为深色
+            windowInsetsController.isAppearanceLightNavigationBars = isDarkFont
             //设置顶部状态栏文字是否为深色
-            WindowInsetsControllerCompat(window, view).isAppearanceLightStatusBars = isDarkFont
+            windowInsetsController.isAppearanceLightStatusBars = isDarkFont
         }
     }
+
     Box(
         modifier = Modifier
-            .background(WeTheme.colorScheme.background)
+            .captionBarPadding() //Desktop和部分非全屏模式出现,官方未提供api定制颜色,添加padding,交由系统控制.
             .ifCondition(
                 condition = isOldWindowInsetsApi,
                 onTrue = {

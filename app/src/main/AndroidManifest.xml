@@ -16,6 +16,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:localeConfig="@xml/app_languages"
+        android:resizeableActivity="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.Quickly"
         tools:targetApi="33">
