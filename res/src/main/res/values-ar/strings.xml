@@ -80,7 +80,7 @@
     <string name="string_language_screen_title">لغة</string>
     <string name="string_theme_dialog_title">السمة</string>
     <string name="string_theme_dialog_we_theme_system">سمة النظام</string>
-    <string name="string_theme_dialog_we_theme_dynamic">السمة الديناميكية</string>
+    <string name="string_theme_dialog_we_theme_dynamic">سمة الخلفية Material</string>
     <string name="string_theme_dialog_we_theme_light">السمة الفاتحة</string>
     <string name="string_theme_dialog_we_theme_dark">السمة الداكنة</string>
     <string name="string_theme_dialog_we_theme_blue">السمة الزرقاء</string>

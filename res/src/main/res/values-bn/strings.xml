@@ -81,7 +81,7 @@
     <string name="string_language_screen_title">ভাষা</string>
     <string name="string_theme_dialog_title">থিম</string>
     <string name="string_theme_dialog_we_theme_system">সিস্টেম থিম</string>
-    <string name="string_theme_dialog_we_theme_dynamic">ডায়নামিক থিম</string>
+    <string name="string_theme_dialog_we_theme_dynamic">Material ওয়ালপেপার থিম</string>
     <string name="string_theme_dialog_we_theme_light">হালকা থিম</string>
     <string name="string_theme_dialog_we_theme_dark">গাঢ় থিম</string>
     <string name="string_theme_dialog_we_theme_blue">নীল থিম</string>

@@ -113,7 +113,7 @@
     <!--  ThemeDialog  -->
     <string name="string_theme_dialog_title">Theme</string>
     <string name="string_theme_dialog_we_theme_system">System Theme</string>
-    <string name="string_theme_dialog_we_theme_dynamic">Dynamic Theme</string>
+    <string name="string_theme_dialog_we_theme_dynamic">Material Wallpaper Theme</string>
     <string name="string_theme_dialog_we_theme_light">Light Theme</string>
     <string name="string_theme_dialog_we_theme_dark">Dark Theme</string>
     <string name="string_theme_dialog_we_theme_blue">Blue Theme</string>

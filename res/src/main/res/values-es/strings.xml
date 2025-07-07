@@ -81,7 +81,7 @@
     <string name="string_language_screen_title">Idiomas</string>
     <string name="string_theme_dialog_title">Tema</string>
     <string name="string_theme_dialog_we_theme_system">Tema del sistema</string>
-    <string name="string_theme_dialog_we_theme_dynamic">Tema dinámico</string>
+    <string name="string_theme_dialog_we_theme_dynamic">Tema de fondo Material</string>
     <string name="string_theme_dialog_we_theme_light">Tema claro</string>
     <string name="string_theme_dialog_we_theme_dark">Tema oscuro</string>
     <string name="string_theme_dialog_we_theme_blue">Tema azul</string>

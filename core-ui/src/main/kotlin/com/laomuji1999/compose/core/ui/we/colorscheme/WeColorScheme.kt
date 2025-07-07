@@ -81,53 +81,51 @@ open class WeColorScheme(
 
 fun ColorScheme.toWeColorScheme(
     isDarkTheme: Boolean,
-    brandColor: Color = WeColors.Color_07C160,
-    onBrandColor: Color = WeColors.Color_FFFFFFFF,
-): WeColorScheme = object : WeColorScheme(
+): WeColorScheme = WeColorScheme(
     isDarkFont = !isDarkTheme,
 
-    background = background,
-    cursorColor = brandColor,
+    background = if (isDarkTheme) background else Color(0xFFF5F5F5),
+    cursorColor = primary,
 
-    fontColorHeavy = onBackground,
-    fontColorLight = onSurfaceVariant,
+    fontColorHeavy = if (isDarkTheme) Color.White.copy(alpha = 0.9f) else Color.Black.copy(alpha = 0.9f),
+    fontColorLight = if (isDarkTheme) Color.White.copy(alpha = 0.5f) else Color.Black.copy(alpha = 0.5f),
     fontColorError = error,
-    fontColorPrimary = brandColor,
+    fontColorPrimary = primary,
 
-    primaryButton = brandColor,
-    onPrimaryButton = onBrandColor,
+    primaryButton = primary,
+    onPrimaryButton = onPrimary,
 
-    secondaryButton = surfaceVariant,
-    onSecondaryButton = brandColor,
+    secondaryButton = if (isDarkTheme) Color.White.copy(alpha = 0.15f) else Color.Black.copy(alpha = 0.05f),
+    onSecondaryButton = primary,
 
-    disableButton = surfaceVariant,
-    onDisableButton = onSurfaceVariant.copy(alpha = 0.3f),
+    disableButton = surfaceVariant.copy(alpha = 0.5f),
+    onDisableButton = outline.copy(alpha = 0.5f),
 
-    wrongButton = surfaceVariant,
+    wrongButton = error.copy(alpha = 0.2f),
     onWrongButton = error,
 
-    outline = outline,
-    pressed = surfaceTint.copy(alpha = if (isDarkTheme) 0.05f else 0.08f),
+    outline = outline.copy(alpha = 0.5f),
+    pressed = primary.copy(alpha = 0.1f),
 
-    rowBackground = surfaceVariant,
-
-    switchThumbColor = onPrimary,
-    switchSelectBackground = brandColor,
-    switchUnSelectBackground = outlineVariant ?: outline,
-
-    bottomBarSelect = brandColor,
-    bottomBarUnSelect = onSurfaceVariant,
     bottomBarBackground = surface,
+    bottomBarSelect = primary,
+    bottomBarUnSelect = if (isDarkTheme) Color.White.copy(alpha = 0.5f) else Color.Black.copy(alpha = 0.5f),
 
-    toastBackgroundColor = surfaceVariant,
+    toastBackgroundColor = surface.copy(alpha = 0.9f),
     onToastBackgroundColor = onSurface,
 
+    switchThumbColor = surface,
+    switchSelectBackground = primary,
+    switchUnSelectBackground = outline.copy(alpha = 0.5f),
+
+    rowBackground = surfaceVariant,
     chatInputBackground = surfaceVariant,
-    chatMessageBackgroundSend = primaryContainer,
+
+    chatMessageBackgroundSend = primary,
     chatMessageBackgroundReceive = surfaceVariant,
-    chatMessageTextSend = onPrimaryContainer,
+    chatMessageTextSend = onPrimary,
     chatMessageTextReceive = onSurface,
 
     categoryTextColor = onPrimary,
-    categoryBackground = brandColor
-) {}
+    categoryBackground = primary,
+)

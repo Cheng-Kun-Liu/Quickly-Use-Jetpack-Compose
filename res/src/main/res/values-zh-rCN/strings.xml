@@ -80,7 +80,7 @@
     <string name="string_language_screen_title">多语言</string>
     <string name="string_theme_dialog_title">主题</string>
     <string name="string_theme_dialog_we_theme_system">系统主题</string>
-    <string name="string_theme_dialog_we_theme_dynamic">动态主题</string>
+    <string name="string_theme_dialog_we_theme_dynamic">Material 壁纸主题</string>
     <string name="string_theme_dialog_we_theme_light">浅色主题</string>
     <string name="string_theme_dialog_we_theme_dark">深色主题</string>
     <string name="string_theme_dialog_we_theme_blue">蓝色主题</string>
