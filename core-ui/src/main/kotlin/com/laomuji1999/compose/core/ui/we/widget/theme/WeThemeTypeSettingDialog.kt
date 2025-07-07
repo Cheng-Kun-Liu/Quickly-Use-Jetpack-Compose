@@ -35,7 +35,7 @@ fun WeThemeSettingDialog(
         }
         val changeTheme: (WeThemeColorType) -> Unit = {
             setWeThemeColorType(it)
-            animHide()
+            animHide?.invoke()
         }
         WeThemeTypeSettingDialogColorItem(
             text = stringResource(com.laomuji1999.compose.res.R.string.string_theme_dialog_we_theme_system),
@@ -45,7 +45,7 @@ fun WeThemeSettingDialog(
                 changeTheme(it)
             },
         )
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             //动态取色仅在Api31以上才可用
             WeThemeTypeSettingDialogColorItem(
                 text = stringResource(com.laomuji1999.compose.res.R.string.string_theme_dialog_we_theme_dynamic),
@@ -81,6 +81,7 @@ fun WeThemeSettingDialog(
             },
         )
         WeOutline(weOutlineType = WeOutlineType.Split)
+        WeOutline(weOutlineType = WeOutlineType.Full)
         WeActionSheet(
             text = stringResource(com.laomuji1999.compose.res.R.string.string_theme_dialog_we_theme_cancel),
             onClick = {

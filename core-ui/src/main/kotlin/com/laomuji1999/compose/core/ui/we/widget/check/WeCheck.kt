@@ -12,7 +12,6 @@ import com.laomuji1999.compose.core.ui.we.WeTheme
 import com.laomuji1999.compose.core.ui.we.icons.Select
 import com.laomuji1999.compose.core.ui.we.icons.Unselect
 import com.laomuji1999.compose.core.ui.we.icons.WeIcons
-import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutlineType
 import com.laomuji1999.compose.core.ui.we.widget.row.WeRow
 
 @Composable
@@ -20,7 +19,6 @@ fun WeCheck(
     title: String,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
-    weOutlineType: WeOutlineType = WeOutlineType.None
 ) {
     WeRow(
         start = {
@@ -36,8 +34,9 @@ fun WeCheck(
                 style = WeTheme.typography.title,
                 color = WeTheme.colorScheme.fontColorHeavy
             )
-        }, onClick = {
+        },
+        onClick = {
             onCheckedChange(!checked)
-        }, weOutlineType = weOutlineType
+        },
     )
 }

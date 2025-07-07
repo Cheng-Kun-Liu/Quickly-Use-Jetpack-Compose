@@ -8,7 +8,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
-import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutlineType
 
 @PreviewLightDark
 @Composable
@@ -23,25 +22,21 @@ fun PreviewWeCheck() {
                 title = "Item1",
                 checked = checked1,
                 onCheckedChange = { checked1 = it },
-                weOutlineType = WeOutlineType.PaddingHorizontal
             )
             WeCheck(
                 title = "Item2",
                 checked = checked2,
                 onCheckedChange = { checked2 = it },
-                weOutlineType = WeOutlineType.PaddingHorizontal,
             )
             WeCheck(
                 title = "Item3",
                 checked = checked3,
                 onCheckedChange = { checked3 = it },
-                weOutlineType = WeOutlineType.PaddingHorizontal,
             )
             WeCheck(
                 title = "Item4",
                 checked = checked4,
                 onCheckedChange = { checked4 = it },
-                weOutlineType = WeOutlineType.None
             )
         }
     }

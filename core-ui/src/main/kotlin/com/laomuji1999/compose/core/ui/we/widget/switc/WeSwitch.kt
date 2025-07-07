@@ -28,7 +28,6 @@ fun WeSwitch(
     title: String,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit = {},
-    weOutlineType: WeOutlineType = WeOutlineType.None
 ) {
     WeRow(
         start = {
@@ -43,7 +42,7 @@ fun WeSwitch(
             )
         }, onClick = {
             onCheckedChange(!checked)
-        }, weOutlineType = weOutlineType
+        }
     )
 }
 

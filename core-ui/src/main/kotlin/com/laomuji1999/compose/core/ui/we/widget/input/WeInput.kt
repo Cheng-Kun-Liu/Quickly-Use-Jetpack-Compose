@@ -20,7 +20,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.input.ImeAction
 import com.laomuji1999.compose.core.ui.we.WeTheme
-import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutlineType
 import com.laomuji1999.compose.core.ui.we.widget.row.WeRow
 
 @Composable
@@ -33,72 +32,74 @@ fun WeInput(
     keyboardOptions: KeyboardOptions = KeyboardOptions(
         imeAction = ImeAction.Done
     ),
-    weOutlineType: WeOutlineType = WeOutlineType.PaddingHorizontal,
     onImeAction: () -> Unit = {}
 ) {
     val focusRequester = remember { FocusRequester() }
     WeRow(
-        modifier = modifier, center = {
-        Row(verticalAlignment = Alignment.CenterVertically) {
-            title?.let {
-                Text(
-                    text = it,
-                    style = WeTheme.typography.title,
-                    color = WeTheme.colorScheme.fontColorHeavy,
-                    modifier = Modifier.width(WeTheme.dimens.inputLabelWidth)
-                )
-                Spacer(modifier = Modifier.width(WeTheme.dimens.rowInnerPaddingHorizontal))
-            }
-            BasicTextField(
-                value = value,
-                onValueChange = onValueChange,
-                modifier = Modifier
-                    .focusRequester(focusRequester)
-                    .fillMaxHeight()
-                    .weight(1f),
-                decorationBox = { innerTextField ->
-                    Box(modifier = Modifier.fillMaxSize()) {
-                        Row(
-                            modifier = Modifier.fillMaxSize(),
-                            verticalAlignment = Alignment.CenterVertically
-                        ) {
-                            innerTextField()
-                        }
-                        if (value.isEmpty()) {
+        modifier = modifier,
+        center = {
+            Row(verticalAlignment = Alignment.CenterVertically) {
+                title?.let {
+                    Text(
+                        text = it,
+                        style = WeTheme.typography.title,
+                        color = WeTheme.colorScheme.fontColorHeavy,
+                        modifier = Modifier.width(WeTheme.dimens.inputLabelWidth)
+                    )
+                    Spacer(modifier = Modifier.width(WeTheme.dimens.rowInnerPaddingHorizontal))
+                }
+                BasicTextField(
+                    value = value,
+                    onValueChange = onValueChange,
+                    modifier = Modifier
+                        .focusRequester(focusRequester)
+                        .fillMaxHeight()
+                        .weight(1f),
+                    decorationBox = { innerTextField ->
+                        Box(modifier = Modifier.fillMaxSize()) {
                             Row(
                                 modifier = Modifier.fillMaxSize(),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
-                                Text(
-                                    text = tip,
-                                    style = WeTheme.typography.title,
-                                    color = WeTheme.colorScheme.fontColorLight
-                                )
+                                innerTextField()
+                            }
+                            if (value.isEmpty()) {
+                                Row(
+                                    modifier = Modifier.fillMaxSize(),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Text(
+                                        text = tip,
+                                        style = WeTheme.typography.title,
+                                        color = WeTheme.colorScheme.fontColorLight
+                                    )
+                                }
                             }
                         }
-                    }
-                },
-                textStyle = WeTheme.typography.title.copy(color = WeTheme.colorScheme.fontColorHeavy),
-                cursorBrush = SolidColor(WeTheme.colorScheme.cursorColor),
-                singleLine = true,
-                keyboardOptions = keyboardOptions,
-                keyboardActions = KeyboardActions(onPrevious = {
-                    onImeAction()
-                }, onNext = {
-                    onImeAction()
-                }, onDone = {
-                    onImeAction()
-                }, onSearch = {
-                    onImeAction()
-                }, onSend = {
-                    onImeAction()
-                }, onGo = {
-                    onImeAction()
-                })
-            )
-        }
-    }, onClick = {
-        focusRequester.requestFocus()
-    }, weOutlineType = weOutlineType, backgroundColor = Color.Transparent
+                    },
+                    textStyle = WeTheme.typography.title.copy(color = WeTheme.colorScheme.fontColorHeavy),
+                    cursorBrush = SolidColor(WeTheme.colorScheme.cursorColor),
+                    singleLine = true,
+                    keyboardOptions = keyboardOptions,
+                    keyboardActions = KeyboardActions(onPrevious = {
+                        onImeAction()
+                    }, onNext = {
+                        onImeAction()
+                    }, onDone = {
+                        onImeAction()
+                    }, onSearch = {
+                        onImeAction()
+                    }, onSend = {
+                        onImeAction()
+                    }, onGo = {
+                        onImeAction()
+                    })
+                )
+            }
+        },
+        onClick = {
+            focusRequester.requestFocus()
+        },
+        backgroundColor = Color.Transparent,
     )
 }

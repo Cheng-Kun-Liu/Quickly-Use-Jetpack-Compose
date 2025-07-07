@@ -108,6 +108,8 @@ fun MeScreenUi(
             onCheckedChange = {
                 onEnableNotificationClick()
             },
+        )
+        WeOutline(
             weOutlineType = WeOutlineType.Full
         )
     }

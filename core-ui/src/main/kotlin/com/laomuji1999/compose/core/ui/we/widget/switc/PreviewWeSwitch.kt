@@ -8,7 +8,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
-import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutlineType
+import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutline
 
 @PreviewLightDark
 @Composable
@@ -21,10 +21,9 @@ fun PreviewWeSwitch() {
                 title = "勿扰模式",
                 checked = checked1,
                 onCheckedChange = { checked1 = it },
-                weOutlineType = WeOutlineType.PaddingHorizontal
             )
-            WeSwitch(
-                title = "消息推送", checked = checked2, onCheckedChange = { checked2 = it })
+            WeOutline()
+            WeSwitch(title = "消息推送", checked = checked2, onCheckedChange = { checked2 = it })
         }
     }
 }

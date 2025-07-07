@@ -13,7 +13,6 @@ import androidx.compose.ui.layout.ContentScale
 import com.laomuji1999.compose.core.ui.we.WeTheme
 import com.laomuji1999.compose.core.ui.we.icons.Arrow
 import com.laomuji1999.compose.core.ui.we.icons.WeIcons
-import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutlineType
 import com.laomuji1999.compose.core.ui.we.widget.row.WeRow
 import com.laomuji1999.compose.core.ui.we.widget.row.WeRowType
 
@@ -23,7 +22,6 @@ fun WeClick(
     summary: String? = null,
     summaryInBottom: Boolean = false,
     onClick: () -> Unit = {},
-    weOutlineType: WeOutlineType = WeOutlineType.None
 ) {
     WeRow(
         start = {
@@ -69,8 +67,7 @@ fun WeClick(
                 modifier = Modifier.height(WeTheme.dimens.actionIconSize)
             )
         },
-        weTableRowType = if (summaryInBottom) WeRowType.Double else WeRowType.Single,
+        weRowType = if (summaryInBottom) WeRowType.Double else WeRowType.Single,
         onClick = onClick,
-        weOutlineType = weOutlineType
     )
 }

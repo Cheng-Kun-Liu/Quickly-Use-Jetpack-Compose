@@ -72,32 +72,37 @@ private fun UiDemoScreenUi(
     ) {
         PreviewBannerView()
         WeOutline(weOutlineType = WeOutlineType.Split)
+        WeOutline(weOutlineType = WeOutlineType.Full)
         WeClick(
             title = stringResource(id = R.string.string_demo_screen_long_click_sort),
             onClick = onLongClickSortClick,
-            weOutlineType = WeOutlineType.PaddingHorizontal,
         )
+        WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
         WeClick(
             title = stringResource(id = R.string.string_demo_screen_date),
             onClick = {
                 onAction(MainScreenAction.OnDateClick)
             },
-            weOutlineType = WeOutlineType.PaddingHorizontal,
         )
+        WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
         WeClick(
-            title = "${stringResource(id = R.string.string_demo_screen_scroll_connect)}\n${stringResource(id = R.string.string_demo_screen_scroll_dispatcher)}",
+            title = "${stringResource(id = R.string.string_demo_screen_scroll_connect)}\n${
+                stringResource(
+                    id = R.string.string_demo_screen_scroll_dispatcher
+                )
+            }",
             onClick = {
                 onAction(MainScreenAction.OnNestedScrollConnectionScreenClick)
             },
-            weOutlineType = WeOutlineType.PaddingHorizontal,
         )
+        WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
         WeClick(
             title = stringResource(id = R.string.string_demo_screen_painter),
             onClick = {
                 onAction(MainScreenAction.OnPainterScreenClick)
             },
-            weOutlineType = WeOutlineType.PaddingHorizontal,
         )
+        WeOutline(weOutlineType = WeOutlineType.Full)
     }
 }
 

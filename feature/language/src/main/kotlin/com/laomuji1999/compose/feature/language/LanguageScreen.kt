@@ -1,7 +1,7 @@
 package com.laomuji1999.compose.feature.language
 
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -15,6 +15,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji1999.compose.core.logic.AppLanguages
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
+import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutline
 import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutlineType
 import com.laomuji1999.compose.core.ui.we.widget.radio.WeRadio
 import com.laomuji1999.compose.core.ui.we.widget.scaffold.WeScaffold
@@ -60,15 +61,25 @@ private fun LanguageScreenUi(
         }
     ) {
         LazyColumn {
-            items(items = uiState.appLanguageList) {
+            item {
+                WeOutline(weOutlineType = WeOutlineType.Full)
+            }
+            itemsIndexed(items = uiState.appLanguageList, key = { _, item ->
+                item.tag
+            }) { index, item ->
                 WeRadio(
-                    title = it.getDisplayName(context),
-                    checked = it == uiState.usingLanguage,
+                    title = item.getDisplayName(context),
+                    checked = item == uiState.usingLanguage,
                     onClick = {
-                        onAction(LanguageScreenAction.OnLanguageClick(it, context))
+                        onAction(LanguageScreenAction.OnLanguageClick(item, context))
                     },
-                    weOutlineType = WeOutlineType.PaddingStart
                 )
+                if (index < uiState.appLanguageList.lastIndex) {
+                    WeOutline(weOutlineType = WeOutlineType.PaddingStart)
+                }
+            }
+            item {
+                WeOutline(weOutlineType = WeOutlineType.Full)
             }
         }
     }
