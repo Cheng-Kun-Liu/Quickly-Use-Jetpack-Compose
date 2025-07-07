@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
 import com.laomuji1999.compose.core.ui.we.widget.click.WeClick
+import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutline
 import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutlineType
 import com.laomuji1999.compose.core.ui.we.widget.theme.WeThemeSettingDialog
 import com.laomuji1999.compose.feature.main.MainScreenAction
@@ -42,16 +43,24 @@ fun SettingsScreenUi(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
+        WeOutline(weOutlineType = WeOutlineType.Full)
+
         WeClick(
-            title = stringResource(id = R.string.string_language_screen_title), onClick = {
+            title = stringResource(id = R.string.string_language_screen_title),
+            onClick = {
                 onAction(MainScreenAction.OnLanguageClick)
-            }, weOutlineType = WeOutlineType.PaddingHorizontal
+            },
         )
+        WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
         WeClick(
-            title = stringResource(id = R.string.string_theme_dialog_title), onClick = {
+            title = stringResource(id = R.string.string_theme_dialog_title),
+            onClick = {
                 showThemeSettingDialog = true
-            }, weOutlineType = WeOutlineType.PaddingHorizontal
+            },
         )
+
+
+        WeOutline(weOutlineType = WeOutlineType.Full)
     }
 }
 

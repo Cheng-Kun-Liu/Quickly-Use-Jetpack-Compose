@@ -13,7 +13,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -50,6 +50,7 @@ import com.laomuji1999.compose.core.ui.clickableDebounce
 import com.laomuji1999.compose.core.ui.ifCondition
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
 import com.laomuji1999.compose.core.ui.we.WeTheme
+import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutline
 import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutlineType
 import com.laomuji1999.compose.core.ui.we.widget.row.WeRow
 import com.laomuji1999.compose.core.ui.we.widget.row.WeRowType
@@ -81,7 +82,8 @@ fun ContactsScreen(
 
 @Composable
 private fun ContactsScreenUi(
-    contactInfoList: List<ContactInfo>, onContactClick: (ContactInfoEntity) -> Unit
+    contactInfoList: List<ContactInfo>,
+    onContactClick: (ContactInfoEntity) -> Unit,
 ) {
     val state = rememberLazyListState()
     Box(modifier = Modifier.fillMaxSize()) {
@@ -91,16 +93,36 @@ private fun ContactsScreenUi(
             contactInfoList.forEach {
                 item {
                     WeTitle(
-                        modifier = Modifier, title = it.category
+                        modifier = Modifier,
+                        title = it.category,
                     )
                 }
-                items(items = it.contactList, key = { item ->
-                    item.account
-                }) { item ->
-                    WeContactItem(
-                        avatar = item.avatarUri, text = item.nickname, onClick = {
-                            onContactClick(item)
-                        })
+                item {
+                    WeOutline(weOutlineType = WeOutlineType.Full)
+                }
+                itemsIndexed(
+                    items = it.contactList,
+                    key = { _, item -> item.account }) { index, item ->
+                    Column {
+                        WeContactItem(
+                            avatar = item.avatarUri,
+                            text = item.nickname,
+                            onClick = {
+                                onContactClick(item)
+                            },
+                        )
+                        if (index < it.contactList.lastIndex) {
+                            WeOutline(
+                                weOutlineType = WeOutlineType.Custom(
+                                    start = WeTheme.dimens.rowIconSize + WeTheme.dimens.rowPaddingHorizontal * 2,
+                                    height = WeTheme.dimens.outlineHeight,
+                                ),
+                            )
+                        }
+                    }
+                }
+                item {
+                    WeOutline(weOutlineType = WeOutlineType.Full)
                 }
             }
         }
@@ -220,8 +242,7 @@ private fun CategoryIndicator(
             )
     ) {
         Canvas(
-            modifier = Modifier
-                .fillMaxSize()
+            modifier = Modifier.fillMaxSize()
         ) {
             val radius = size.width
             val center = Offset(size.width / 2, size.height / 2)
@@ -255,16 +276,13 @@ fun WeContactItem(
     text: String,
     onClick: () -> Unit,
 ) {
-    val imageRequest =
-        ImageRequest.Builder(LocalContext.current).data(avatar).diskCacheKey(avatar.toString())
-            .build()
-
     WeRow(
         start = {
             AsyncImage(
-                model = imageRequest,
+                model = ImageRequest.Builder(LocalContext.current).data(avatar)
+                    .diskCacheKey(avatar.toString()).build(),
                 contentDescription = null,
-                placeholder = painterResource(id = com.laomuji1999.compose.res.R.mipmap.ic_launcher),
+                placeholder = painterResource(id = R.mipmap.ic_launcher),
                 modifier = Modifier
                     .size(WeTheme.dimens.rowIconSize)
                     .clip(RoundedCornerShape(WeTheme.dimens.rowIconRoundedCornerDp)),
@@ -281,11 +299,7 @@ fun WeContactItem(
                 )
             }
         },
-        weTableRowType = WeRowType.Single,
-        weOutlineType = WeOutlineType.Custom(
-            start = WeTheme.dimens.rowIconSize + WeTheme.dimens.rowPaddingHorizontal * 2,
-            height = WeTheme.dimens.outlineHeight
-        ),
+        weRowType = WeRowType.Single,
         onClick = onClick,
     )
 }

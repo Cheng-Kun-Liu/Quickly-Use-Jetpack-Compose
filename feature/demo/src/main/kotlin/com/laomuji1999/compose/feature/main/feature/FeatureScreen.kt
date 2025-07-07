@@ -19,6 +19,7 @@ import com.laomuji1999.compose.core.logic.common.Toast
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
 import com.laomuji1999.compose.core.ui.view.LoadingDialog
 import com.laomuji1999.compose.core.ui.we.widget.click.WeClick
+import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutline
 import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutlineType
 import com.laomuji1999.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji1999.compose.core.ui.we.widget.switc.WeSwitch
@@ -117,28 +118,44 @@ private fun FeatureScreenUi(
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
+        WeOutline(weOutlineType = WeOutlineType.Full)
+
         WeClick(
-            title = stringResource(id = R.string.string_demo_screen_firebase_demo), onClick = {
+            title = stringResource(id = R.string.string_demo_screen_firebase_demo),
+            onClick = {
                 onAction(MainScreenAction.OnFirebaseClick)
-            }, weOutlineType = WeOutlineType.PaddingHorizontal
+            },
         )
+        WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
+
         WeClick(
-            title = stringResource(id = R.string.string_demo_screen_http_demo), onClick = {
+            title = stringResource(id = R.string.string_demo_screen_http_demo),
+            onClick = {
                 onAction(MainScreenAction.OnHttpClick)
-            }, weOutlineType = WeOutlineType.PaddingHorizontal
+            },
         )
+        WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
+
         WeClick(
-            title = stringResource(id = R.string.string_demo_screen_ai_chat), onClick = {
+            title = stringResource(id = R.string.string_demo_screen_ai_chat),
+            onClick = {
                 onAction(MainScreenAction.OnAiChatClick)
-            }, weOutlineType = WeOutlineType.PaddingHorizontal
+            },
         )
+        WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
+
+
         WeClick(
-            title = stringResource(id = R.string.string_demo_screen_biometric), onClick = {
+            title = stringResource(id = R.string.string_demo_screen_biometric),
+            onClick = {
                 onAction(MainScreenAction.OnBiometricScreenClick)
-            }, weOutlineType = WeOutlineType.PaddingHorizontal
+            },
         )
+        WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
+
         WeClick(
-            title = stringResource(id = R.string.string_demo_screen_google_login_demo), onClick = {
+            title = stringResource(id = R.string.string_demo_screen_google_login_demo),
+            onClick = {
                 GoogleAuthenticate().requestLogin(
                     activityContext = context,
                     onSuccess = { email, idToken ->
@@ -147,13 +164,18 @@ private fun FeatureScreenUi(
                     onFail = {
                         Toast.showText(context, "...")
                     })
-            }, weOutlineType = WeOutlineType.PaddingHorizontal
+            },
         )
+        WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
+
+
         WeClick(
-            title = stringResource(id = R.string.string_demo_screen_web_view_demo), onClick = {
+            title = stringResource(id = R.string.string_demo_screen_web_view_demo),
+            onClick = {
                 onAction(MainScreenAction.OnWebViewClick)
-            }, weOutlineType = WeOutlineType.Split
+            },
         )
+        WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
 
         WeSwitch(
             title = stringResource(id = R.string.string_demo_screen_switch_app_logo),
@@ -161,34 +183,44 @@ private fun FeatureScreenUi(
             onCheckedChange = {
                 onSwitchAppLogoClick()
             },
-            weOutlineType = WeOutlineType.PaddingHorizontal
         )
+        WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
+
         WeClick(
             title = stringResource(id = R.string.string_demo_screen_get_location),
             summary = uiState.location,
             onClick = onLocationClick,
-            weOutlineType = WeOutlineType.PaddingHorizontal
         )
+        WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
+
+
         WeClick(
             title = stringResource(id = R.string.string_demo_screen_select_mobile_demo),
             onClick = onSelectMobileClick,
-            weOutlineType = WeOutlineType.PaddingHorizontal
         )
+        WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
+
         WeClick(
             title = stringResource(id = R.string.string_demo_screen_open_album),
             onClick = onOpenAlbumClick,
-            weOutlineType = WeOutlineType.PaddingHorizontal
         )
+        WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
+
+
         WeClick(
             title = stringResource(id = R.string.string_demo_screen_open_camera),
             onClick = onOpenCameraClick,
-            weOutlineType = WeOutlineType.PaddingHorizontal
         )
+        WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
+
         WeClick(
             title = stringResource(id = R.string.string_demo_screen_open_contact),
             onClick = onOpenContactClick,
-            weOutlineType = WeOutlineType.PaddingHorizontal
         )
+
+
+
+        WeOutline(weOutlineType = WeOutlineType.Full)
     }
 }
 

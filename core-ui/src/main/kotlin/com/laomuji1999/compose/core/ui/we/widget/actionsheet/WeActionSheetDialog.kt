@@ -1,5 +1,6 @@
 package com.laomuji1999.compose.core.ui.we.widget.actionsheet
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -71,6 +72,7 @@ fun WeActionSheetDialog(
                                 topEnd = WeTheme.dimens.actionSheetRoundedCornerDp
                             )
                         )
+                        .background(WeTheme.colorScheme.background)
                 ) {
                     content()
                 }

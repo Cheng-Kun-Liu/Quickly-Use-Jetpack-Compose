@@ -8,7 +8,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
-import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutlineType
 
 
 @PreviewLightDark
@@ -22,7 +21,6 @@ fun PreviewWeRadio() {
                 WeRadio(
                     title = title,
                     checked = index == currentItem,
-                    weOutlineType = if (index == titleList.lastIndex) WeOutlineType.None else WeOutlineType.PaddingHorizontal,
                     onClick = { currentItem = index })
             }
         }

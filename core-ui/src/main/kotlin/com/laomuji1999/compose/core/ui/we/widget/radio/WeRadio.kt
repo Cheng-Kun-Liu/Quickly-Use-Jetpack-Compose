@@ -16,7 +16,6 @@ import androidx.compose.ui.layout.ContentScale
 import com.laomuji1999.compose.core.ui.we.WeTheme
 import com.laomuji1999.compose.core.ui.we.icons.Checked
 import com.laomuji1999.compose.core.ui.we.icons.WeIcons
-import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutlineType
 import com.laomuji1999.compose.core.ui.we.widget.row.WeRow
 
 @Composable
@@ -24,31 +23,32 @@ fun WeRadio(
     title: String,
     checked: Boolean,
     onClick: () -> Unit = {},
-    weOutlineType: WeOutlineType = WeOutlineType.None
 ) {
     WeRow(
         start = {
-        Text(
-            text = title,
-            style = WeTheme.typography.title,
-            color = WeTheme.colorScheme.fontColorHeavy
-        )
-    }, end = {
-        Row(modifier = Modifier.size(WeTheme.dimens.actionIconSize)) {
-            AnimatedVisibility(
-                visible = checked, enter = expandHorizontally(
-                    animationSpec = tween(800), expandFrom = Alignment.Start
-                ), exit = fadeOut(animationSpec = tween(0))
-            ) {
-                Image(
-                    imageVector = WeIcons.Checked,
-                    contentDescription = null,
-                    contentScale = ContentScale.FillHeight,
-                    modifier = Modifier.fillMaxSize()
-                )
+            Text(
+                text = title,
+                style = WeTheme.typography.title,
+                color = WeTheme.colorScheme.fontColorHeavy
+            )
+        },
+        end = {
+            Row(modifier = Modifier.size(WeTheme.dimens.actionIconSize)) {
+                AnimatedVisibility(
+                    visible = checked, enter = expandHorizontally(
+                        animationSpec = tween(800), expandFrom = Alignment.Start
+                    ), exit = fadeOut(animationSpec = tween(0))
+                ) {
+                    Image(
+                        imageVector = WeIcons.Checked,
+                        contentDescription = null,
+                        contentScale = ContentScale.FillHeight,
+                        modifier = Modifier.fillMaxSize()
+                    )
+                }
             }
-        }
-    }, onClick = onClick, weOutlineType = weOutlineType
+        },
+        onClick = onClick,
     )
 }
 

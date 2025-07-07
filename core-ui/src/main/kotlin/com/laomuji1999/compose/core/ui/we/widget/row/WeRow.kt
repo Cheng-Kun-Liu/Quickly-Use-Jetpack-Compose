@@ -15,8 +15,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import com.laomuji1999.compose.core.ui.clickableDebounce
 import com.laomuji1999.compose.core.ui.we.WeTheme
-import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutline
-import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutlineType
 
 @Composable
 fun WeRow(
@@ -26,11 +24,10 @@ fun WeRow(
     end: @Composable RowScope.() -> Unit = {},
     backgroundColor: Color = WeTheme.colorScheme.rowBackground,
     onClick: () -> Unit = {},
-    weTableRowType: WeRowType = WeRowType.Single,
-    weOutlineType: WeOutlineType = WeOutlineType.PaddingHorizontal,
+    weRowType: WeRowType = WeRowType.Single,
     paddingHorizontal: Dp = WeTheme.dimens.rowPaddingHorizontal,
 ) {
-    val rowHeight = when (weTableRowType) {
+    val rowHeight = when (weRowType) {
         WeRowType.Single -> WeTheme.dimens.rowSingleHeight
         WeRowType.Double -> WeTheme.dimens.rowDoubleHeight
     }
@@ -51,8 +48,5 @@ fun WeRow(
             center()
             end()
         }
-        WeOutline(
-            weOutlineType = weOutlineType
-        )
     }
 }
