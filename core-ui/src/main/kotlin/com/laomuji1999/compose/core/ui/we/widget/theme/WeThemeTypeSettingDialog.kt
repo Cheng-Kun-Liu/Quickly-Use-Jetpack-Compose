@@ -22,20 +22,23 @@ fun WeThemeSettingDialog(
         return
     }
     val selectedType by WeThemeColorType.currentWeThemeColorType.collectAsStateWithLifecycle()
-    var animHide: (() -> Unit)? = null
+
+    var animateHide: () -> Unit = {
+        onDismissRequest()
+    }
     WeActionSheetDialog(
         onDismissRequest = {
-            animHide?.invoke()
+            animateHide()
         }
-    ) {
-        animHide = {
-            hide {
+    ) { state ->
+        animateHide = {
+            state.hide {
                 onDismissRequest()
             }
         }
         val changeTheme: (WeThemeColorType) -> Unit = {
             setWeThemeColorType(it)
-            animHide?.invoke()
+            animateHide.invoke()
         }
         WeThemeTypeSettingDialogColorItem(
             text = stringResource(com.laomuji1999.compose.res.R.string.string_theme_dialog_we_theme_system),
@@ -85,7 +88,7 @@ fun WeThemeSettingDialog(
         WeActionSheet(
             text = stringResource(com.laomuji1999.compose.res.R.string.string_theme_dialog_we_theme_cancel),
             onClick = {
-                hide { onDismissRequest() }
+                animateHide()
             },
         )
     }

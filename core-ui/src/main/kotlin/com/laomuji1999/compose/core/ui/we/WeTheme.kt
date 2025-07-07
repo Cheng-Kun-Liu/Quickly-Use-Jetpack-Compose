@@ -7,6 +7,7 @@ import android.util.TypedValue
 import android.view.WindowInsets
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.captionBarPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -170,7 +171,7 @@ fun WeDialog(
     ),
     dimProgress: Float = 1f,
     lightStatusBars: Boolean = true,
-    content: @Composable () -> Unit
+    content: @Composable BoxScope.() -> Unit
 ) {
     Dialog(
         onDismissRequest = onDismissRequest,
