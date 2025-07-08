@@ -46,6 +46,7 @@ fun WeToast(
     ) {
         Column(
             modifier = Modifier
+                .align(Alignment.Center)
                 .clip(RoundedCornerShape(12.dp))
                 .background(WeTheme.colorScheme.toastBackgroundColor)
                 .size(LocalWeDimens.current.toastSize),
