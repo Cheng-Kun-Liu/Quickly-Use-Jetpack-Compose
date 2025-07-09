@@ -34,6 +34,8 @@ import com.laomuji1999.compose.core.ui.ifCondition
 import com.laomuji1999.compose.core.ui.isPreview
 import com.laomuji1999.compose.core.ui.we.colorscheme.LocalWeColorScheme
 import com.laomuji1999.compose.core.ui.we.colorscheme.WeColorScheme
+import com.laomuji1999.compose.core.ui.we.typography.LocalWeTypography
+import com.laomuji1999.compose.core.ui.we.typography.WeTypography
 
 
 /**

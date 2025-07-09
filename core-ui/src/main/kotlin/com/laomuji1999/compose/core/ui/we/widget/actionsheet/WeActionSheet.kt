@@ -30,7 +30,7 @@ fun WeActionSheet(
                     WeActionSheetType.Summary -> {
                         Text(
                             text = text,
-                            style = WeTheme.typography.desc,
+                            style = WeTheme.typography.body,
                             color = WeTheme.colorScheme.fontColorLight
                         )
                     }

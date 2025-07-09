@@ -58,7 +58,7 @@ fun WeButton(
     ) {
         Text(
             text = text,
-            style = WeTheme.typography.emTitle,
+            style = WeTheme.typography.titleEm,
             color = textColor,
             maxLines = 1,
             overflow = TextOverflow.Ellipsis,

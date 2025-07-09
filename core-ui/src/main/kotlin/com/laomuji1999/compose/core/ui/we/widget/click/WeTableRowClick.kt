@@ -35,7 +35,7 @@ fun WeClick(
                     summary?.let {
                         Text(
                             text = it,
-                            style = WeTheme.typography.desc,
+                            style = WeTheme.typography.body,
                             color = WeTheme.colorScheme.fontColorLight
                         )
                     }

@@ -10,12 +10,15 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji1999.compose.core.ui.we.WeDimensDefault
 import com.laomuji1999.compose.core.ui.we.WeTheme
-import com.laomuji1999.compose.core.ui.we.WeTypographyDefault
+import com.laomuji1999.compose.core.ui.we.cache.WeCacheColorScheme
+import com.laomuji1999.compose.core.ui.we.cache.WeCacheTypography
 import com.laomuji1999.compose.core.ui.we.colorscheme.WeColorSchemeBlue
 import com.laomuji1999.compose.core.ui.we.colorscheme.WeColorSchemeDark
 import com.laomuji1999.compose.core.ui.we.colorscheme.WeColorSchemeLight
-import com.laomuji1999.compose.core.ui.we.colorscheme.WeThemeColorType
 import com.laomuji1999.compose.core.ui.we.colorscheme.toWeColorScheme
+import com.laomuji1999.compose.core.ui.we.typography.WeTypography13
+import com.laomuji1999.compose.core.ui.we.typography.WeTypography14
+import com.laomuji1999.compose.core.ui.we.typography.WeTypography15
 
 /**
  * 设计系统快速入口,不接受自定义主题.
@@ -27,11 +30,11 @@ import com.laomuji1999.compose.core.ui.we.colorscheme.toWeColorScheme
 fun QuicklyTheme(
     content: @Composable () -> Unit
 ) {
-    val weThemeColorType by WeThemeColorType.currentWeThemeColorType.collectAsStateWithLifecycle()
+    val weCacheColorScheme by WeCacheColorScheme.currentWeThemeColorType.collectAsStateWithLifecycle()
     val hasDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
-    val weColorScheme = when (weThemeColorType) {
-        WeThemeColorType.FlowSystem -> if (isSystemInDarkTheme()) WeColorSchemeDark else WeColorSchemeLight
-        WeThemeColorType.Dynamic -> if (hasDynamicColor) {
+    val weColorScheme = when (weCacheColorScheme) {
+        WeCacheColorScheme.FlowSystem -> if (isSystemInDarkTheme()) WeColorSchemeDark else WeColorSchemeLight
+        WeCacheColorScheme.Dynamic -> if (hasDynamicColor) {
             if (isSystemInDarkTheme()) {
                 dynamicDarkColorScheme(LocalContext.current).toWeColorScheme(isDarkTheme = true)
             } else {
@@ -44,14 +47,23 @@ fun QuicklyTheme(
                 WeColorSchemeLight
             }
         }
-        WeThemeColorType.Light -> WeColorSchemeLight
-        WeThemeColorType.Dark -> WeColorSchemeDark
-        WeThemeColorType.Blue -> WeColorSchemeBlue
+
+        WeCacheColorScheme.Light -> WeColorSchemeLight
+        WeCacheColorScheme.Dark -> WeColorSchemeDark
+        WeCacheColorScheme.Blue -> WeColorSchemeBlue
     }
+
+    val weCacheTypography by WeCacheTypography.currentWeCacheTypography.collectAsStateWithLifecycle()
+    val weTypography = when (weCacheTypography) {
+        WeCacheTypography.Size13 -> WeTypography13
+        WeCacheTypography.Size14 -> WeTypography14
+        WeCacheTypography.Size15 -> WeTypography15
+    }
+
     WeTheme(
         weColorScheme = weColorScheme,
         weDimens = WeDimensDefault,
-        weTypography = WeTypographyDefault,
+        weTypography = weTypography,
         content = content,
     )
 }

@@ -20,7 +20,7 @@ fun WeTitle(
     ) {
         Text(
             text = title,
-            style = WeTheme.typography.desc,
+            style = WeTheme.typography.body,
             color = WeTheme.colorScheme.fontColorLight,
             modifier = Modifier.padding(vertical = WeTheme.dimens.rowInnerPaddingHorizontal)
         )

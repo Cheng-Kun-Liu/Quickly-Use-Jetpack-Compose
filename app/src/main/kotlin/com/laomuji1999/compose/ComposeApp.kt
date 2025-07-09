@@ -7,7 +7,7 @@ import coil.disk.DiskCache
 import coil.request.CachePolicy
 import coil.util.DebugLogger
 import com.laomuji1999.compose.core.logic.Language
-import com.laomuji1999.compose.core.ui.we.WeThemeCache
+import com.laomuji1999.compose.core.ui.we.cache.WeCache
 import dagger.hilt.android.HiltAndroidApp
 import javax.inject.Inject
 
@@ -36,6 +36,6 @@ class ComposeApp : Application(), ImageLoaderFactory {
         super.onCreate()
         language.initLanguage(this)
 
-        WeThemeCache.initWeThemeCache(this)
+        WeCache.initWeThemeCache(this)
     }
 }

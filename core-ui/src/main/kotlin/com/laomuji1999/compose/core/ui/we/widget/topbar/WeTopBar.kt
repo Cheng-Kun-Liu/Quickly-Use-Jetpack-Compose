@@ -47,7 +47,7 @@ fun WeTopBar(
         }
         Text(
             text = title,
-            style = WeTheme.typography.emTitle,
+            style = WeTheme.typography.titleEm,
             color = WeTheme.colorScheme.fontColorHeavy,
             modifier = Modifier.weight(2f),
             textAlign = TextAlign.Center,

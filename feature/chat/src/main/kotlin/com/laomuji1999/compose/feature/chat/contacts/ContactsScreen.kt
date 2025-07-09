@@ -194,7 +194,7 @@ private fun CategoryView(
                             modifier = Modifier.align(Alignment.Center),
                             text = it.category,
                             textAlign = TextAlign.Center,
-                            style = WeTheme.typography.small,
+                            style = WeTheme.typography.micro,
                             color = if (index == currentIndex) WeTheme.colorScheme.categoryTextColor else WeTheme.colorScheme.fontColorLight,
                         )
                     }

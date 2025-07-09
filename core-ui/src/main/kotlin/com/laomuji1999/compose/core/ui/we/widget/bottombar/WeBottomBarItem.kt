@@ -58,7 +58,7 @@ fun RowScope.WeBottomBarItem(
             }
         }
         Text(
-            text = title, style = WeTheme.typography.footnote, color = color
+            text = title, style = WeTheme.typography.caption, color = color
         )
     }
 }

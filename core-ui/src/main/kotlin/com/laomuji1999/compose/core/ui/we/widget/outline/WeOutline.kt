@@ -15,6 +15,7 @@ fun WeOutline(
     modifier: Modifier = Modifier,
     color: Color = WeTheme.colorScheme.outline,
     splitColor: Color = WeTheme.colorScheme.background,
+    backgroundColor: Color = WeTheme.colorScheme.rowBackground,
     weOutlineType: WeOutlineType = WeOutlineType.Full,
 ) {
     when (weOutlineType) {
@@ -25,6 +26,7 @@ fun WeOutline(
                 modifier = modifier
                     .height(WeTheme.dimens.outlineHeight)
                     .fillMaxWidth()
+                    .background(backgroundColor)
                     .background(color)
             )
         }
@@ -34,6 +36,7 @@ fun WeOutline(
                 modifier = modifier
                     .height(WeTheme.dimens.outlineSplitHeight)
                     .fillMaxWidth()
+                    .background(backgroundColor)
                     .background(splitColor)
             )
         }
@@ -43,6 +46,7 @@ fun WeOutline(
                 modifier = modifier
                     .height(WeTheme.dimens.outlineHeight)
                     .fillMaxWidth()
+                    .background(backgroundColor)
                     .padding(horizontal = WeTheme.dimens.rowPaddingHorizontal)
                     .background(color)
             )
@@ -53,6 +57,7 @@ fun WeOutline(
                 modifier = modifier
                     .height(WeTheme.dimens.outlineHeight)
                     .fillMaxWidth()
+                    .background(backgroundColor)
                     .padding(start = WeTheme.dimens.rowPaddingHorizontal)
                     .background(color)
             )
@@ -63,6 +68,7 @@ fun WeOutline(
                 modifier = modifier
                     .height(weOutlineType.height)
                     .fillMaxWidth()
+                    .background(backgroundColor)
                     .padding(start = weOutlineType.start, end = weOutlineType.end)
                     .background(color)
             )

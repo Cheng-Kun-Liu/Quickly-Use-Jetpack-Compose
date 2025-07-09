@@ -1,4 +1,4 @@
-package com.laomuji1999.compose.core.ui.we.colorscheme
+package com.laomuji1999.compose.core.ui.we.cache
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -9,28 +9,29 @@ import kotlinx.coroutines.flow.update
  * @author laomuji666
  * @since 2025/5/23
  */
-sealed class WeThemeColorType {
-    data object FlowSystem : WeThemeColorType()
-    data object Dynamic : WeThemeColorType()
-    data object Light : WeThemeColorType()
-    data object Dark : WeThemeColorType()
-    data object Blue : WeThemeColorType()
+sealed class WeCacheColorScheme {
+    data object FlowSystem : WeCacheColorScheme()
+    data object Dynamic : WeCacheColorScheme()
+    data object Light : WeCacheColorScheme()
+    data object Dark : WeCacheColorScheme()
+    data object Blue : WeCacheColorScheme()
 
 
     companion object {
-        private val _currentWeThemeColorType = MutableStateFlow<WeThemeColorType>(FlowSystem)
+        private val _currentWeCacheColorScheme = MutableStateFlow<WeCacheColorScheme>(
+            FlowSystem
+        )
 
-        val currentWeThemeColorType = _currentWeThemeColorType.asStateFlow()
+        val currentWeThemeColorType = _currentWeCacheColorScheme.asStateFlow()
 
-        fun setWeThemeColorType(weThemeColorType: WeThemeColorType) {
-            _currentWeThemeColorType.update {
-                weThemeColorType
+        fun setWeThemeColorType(weCacheColorScheme: WeCacheColorScheme) {
+            _currentWeCacheColorScheme.update {
+                weCacheColorScheme
             }
         }
 
         fun setWeThemeColorType(clsName: String?) {
             val weThemeColorType = when (clsName) {
-                null -> FlowSystem
                 FlowSystem::class.java.name -> FlowSystem
                 Dynamic::class.java.name -> Dynamic
                 Light::class.java.name -> Light

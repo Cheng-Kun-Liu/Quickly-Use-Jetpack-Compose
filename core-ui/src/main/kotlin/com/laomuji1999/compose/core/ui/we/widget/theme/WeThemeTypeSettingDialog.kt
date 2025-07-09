@@ -5,8 +5,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.laomuji1999.compose.core.ui.we.colorscheme.WeThemeColorType
-import com.laomuji1999.compose.core.ui.we.colorscheme.WeThemeColorType.Companion.setWeThemeColorType
+import com.laomuji1999.compose.core.ui.we.cache.WeCacheColorScheme
+import com.laomuji1999.compose.core.ui.we.cache.WeCacheColorScheme.Companion.setWeThemeColorType
 import com.laomuji1999.compose.core.ui.we.widget.actionsheet.WeActionSheet
 import com.laomuji1999.compose.core.ui.we.widget.actionsheet.WeActionSheetDialog
 import com.laomuji1999.compose.core.ui.we.widget.actionsheet.WeActionSheetType
@@ -21,7 +21,7 @@ fun WeThemeSettingDialog(
     if (!isShowDialog) {
         return
     }
-    val selectedType by WeThemeColorType.currentWeThemeColorType.collectAsStateWithLifecycle()
+    val selectedType by WeCacheColorScheme.currentWeThemeColorType.collectAsStateWithLifecycle()
 
     var animateHide: () -> Unit = {
         onDismissRequest()
@@ -36,14 +36,14 @@ fun WeThemeSettingDialog(
                 onDismissRequest()
             }
         }
-        val changeTheme: (WeThemeColorType) -> Unit = {
+        val changeTheme: (WeCacheColorScheme) -> Unit = {
             setWeThemeColorType(it)
             animateHide.invoke()
         }
         WeThemeTypeSettingDialogColorItem(
             text = stringResource(com.laomuji1999.compose.res.R.string.string_theme_dialog_we_theme_system),
             selectedType = selectedType,
-            targetType = WeThemeColorType.FlowSystem,
+            targetType = WeCacheColorScheme.FlowSystem,
             onDismissRequest = {
                 changeTheme(it)
             },
@@ -53,7 +53,7 @@ fun WeThemeSettingDialog(
             WeThemeTypeSettingDialogColorItem(
                 text = stringResource(com.laomuji1999.compose.res.R.string.string_theme_dialog_we_theme_dynamic),
                 selectedType = selectedType,
-                targetType = WeThemeColorType.Dynamic,
+                targetType = WeCacheColorScheme.Dynamic,
                 onDismissRequest = {
                     changeTheme(it)
                 },
@@ -62,7 +62,7 @@ fun WeThemeSettingDialog(
         WeThemeTypeSettingDialogColorItem(
             text = stringResource(com.laomuji1999.compose.res.R.string.string_theme_dialog_we_theme_light),
             selectedType = selectedType,
-            targetType = WeThemeColorType.Light,
+            targetType = WeCacheColorScheme.Light,
             onDismissRequest = {
                 changeTheme(it)
             },
@@ -70,7 +70,7 @@ fun WeThemeSettingDialog(
         WeThemeTypeSettingDialogColorItem(
             text = stringResource(com.laomuji1999.compose.res.R.string.string_theme_dialog_we_theme_dark),
             selectedType = selectedType,
-            targetType = WeThemeColorType.Dark,
+            targetType = WeCacheColorScheme.Dark,
             onDismissRequest = {
                 changeTheme(it)
             },
@@ -78,7 +78,7 @@ fun WeThemeSettingDialog(
         WeThemeTypeSettingDialogColorItem(
             text = stringResource(com.laomuji1999.compose.res.R.string.string_theme_dialog_we_theme_blue),
             selectedType = selectedType,
-            targetType = WeThemeColorType.Blue,
+            targetType = WeCacheColorScheme.Blue,
             onDismissRequest = {
                 changeTheme(it)
             },
@@ -97,9 +97,9 @@ fun WeThemeSettingDialog(
 @Composable
 private fun WeThemeTypeSettingDialogColorItem(
     text: String,
-    selectedType: WeThemeColorType,
-    targetType: WeThemeColorType,
-    onDismissRequest: (WeThemeColorType) -> Unit,
+    selectedType: WeCacheColorScheme,
+    targetType: WeCacheColorScheme,
+    onDismissRequest: (WeCacheColorScheme) -> Unit,
 ) {
     WeActionSheet(
         text = text,
