@@ -62,7 +62,7 @@ private fun HttpScreenUi(
         Spacer(modifier = Modifier.height(20.dp))
         Text(
             text = stringResource(id = R.string.string_http_screen_is_online, uiState.isConnect),
-            style = WeTheme.typography.emTitle,
+            style = WeTheme.typography.titleEm,
             color = WeTheme.colorScheme.fontColorHeavy,
             modifier = Modifier.fillMaxWidth(),
             textAlign = TextAlign.Center

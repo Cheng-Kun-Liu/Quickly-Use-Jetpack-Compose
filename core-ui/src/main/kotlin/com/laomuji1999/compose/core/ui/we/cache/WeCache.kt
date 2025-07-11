@@ -1,9 +1,8 @@
-package com.laomuji1999.compose.core.ui.we
+package com.laomuji1999.compose.core.ui.we.cache
 
 import android.app.Application
 import android.content.Context
 import androidx.core.content.edit
-import com.laomuji1999.compose.core.ui.we.colorscheme.WeThemeColorType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
@@ -15,7 +14,7 @@ import kotlinx.coroutines.launch
  * @author laomuji666
  * @since 2025/5/23
  */
-object WeThemeCache {
+object WeCache {
     private fun Context.getWeThemeCache() =
         getSharedPreferences("${packageName}_WeThemeCache", Context.MODE_PRIVATE)
 
@@ -26,23 +25,39 @@ object WeThemeCache {
      * @param application Application
      */
     fun initWeThemeCache(application: Application) {
-        looperWeThemeColorType(application)
+        looperWeCacheColorScheme(application)
+        looperWeCacheTypography(application)
     }
 
     /**
      * 监听设计系统颜色类型变化,在发生变化时立即更新缓存.
      * @param context Context
      */
-    private fun looperWeThemeColorType(context: Context) {
+    private fun looperWeCacheColorScheme(context: Context) {
         //使用缓存的值作为正在使用的颜色类型
-        WeThemeColorType.setWeThemeColorType(
-            context.getWeThemeCache().getString("WeThemeColorType", null)
+        WeCacheColorScheme.setWeThemeColorType(
+            context.getWeThemeCache().getString(WeCacheColorScheme::class.simpleName, null)
         )
         //在协程中持续监听
         coroutineScope.launch {
-            WeThemeColorType.currentWeThemeColorType.collect {
+            WeCacheColorScheme.currentWeThemeColorType.collect {
                 context.getWeThemeCache().edit {
-                    putString("WeThemeColorType", it.javaClass.name)
+                    putString(WeCacheColorScheme::class.simpleName, it.javaClass.name)
+                }
+            }
+        }
+    }
+
+    private fun looperWeCacheTypography(context: Context) {
+        //使用缓存的值作为正在使用的字体类型
+        WeCacheTypography.setWeCacheTypography(
+            context.getWeThemeCache().getString(WeCacheTypography::class.simpleName, null)
+        )
+        //在协程中持续监听
+        coroutineScope.launch {
+            WeCacheTypography.currentWeCacheTypography.collect {
+                context.getWeThemeCache().edit {
+                    putString(WeCacheTypography::class.simpleName, it.javaClass.name)
                 }
             }
         }

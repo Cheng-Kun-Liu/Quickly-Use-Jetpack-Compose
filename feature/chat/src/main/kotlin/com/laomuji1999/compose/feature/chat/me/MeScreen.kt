@@ -84,13 +84,13 @@ fun MeScreenUi(
                     .padding(vertical = WeTheme.dimens.rowPaddingHorizontal / 4)) {
                     Text(
                         text = stringResource(id = R.string.string_ai_chat_me_screen_we_chat_name),
-                        style = WeTheme.typography.emTitle,
+                        style = WeTheme.typography.titleEm,
                         color = WeTheme.colorScheme.fontColorHeavy
                     )
                     Spacer(modifier = Modifier.weight(1f))
                     Text(
                         text = stringResource(id = R.string.string_ai_chat_me_screen_we_chat_number_format, stringResource(id = R.string.string_ai_chat_me_screen_we_chat_number)),
-                        style = WeTheme.typography.desc,
+                        style = WeTheme.typography.body,
                         color = WeTheme.colorScheme.fontColorLight
                     )
                 }

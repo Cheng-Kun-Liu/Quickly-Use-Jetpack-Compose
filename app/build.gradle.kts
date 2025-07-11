@@ -50,6 +50,7 @@ dependencies {
     implementation(project(":core-logic:common"))
     implementation(project(":core-logic:notification"))
     implementation(project(":core-logic:language"))
+
     implementation(project(":feature:demo"))
     implementation(project(":feature:firebase"))
     implementation(project(":feature:http"))
@@ -60,7 +61,8 @@ dependencies {
     implementation(project(":feature:painter"))
     implementation(project(":feature:video"))
     implementation(project(":feature:webview"))
-    implementation(project(":feature:language"))
+    implementation(project(":feature:setting:language"))
+    implementation(project(":feature:setting:font"))
 
     //firebase 崩溃分析
     implementation(platform(libs.firebase.bom))

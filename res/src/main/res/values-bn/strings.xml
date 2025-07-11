@@ -86,4 +86,7 @@
     <string name="string_theme_dialog_we_theme_dark">গাঢ় থিম</string>
     <string name="string_theme_dialog_we_theme_blue">নীল থিম</string>
     <string name="string_theme_dialog_we_theme_cancel">বাতিল</string>
+    <string name="string_font_screen_title">ফন্ট আকার</string>
+    <string name="string_font_screen_confirm">সম্পন্ন</string>
+    <string name="string_font_screen_example">A</string>
 </resources>

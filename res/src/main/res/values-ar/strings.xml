@@ -85,4 +85,7 @@
     <string name="string_theme_dialog_we_theme_dark">السمة الداكنة</string>
     <string name="string_theme_dialog_we_theme_blue">السمة الزرقاء</string>
     <string name="string_theme_dialog_we_theme_cancel">إلغاء</string>
+    <string name="string_font_screen_title">حجم الخط</string>
+    <string name="string_font_screen_confirm">تم</string>
+    <string name="string_font_screen_example">A</string>
 </resources>

@@ -80,7 +80,7 @@ private fun DateScreenUi(
         ) {
             Text(
                 text = "${uiState.currentYear}/${uiState.currentMonth}/${uiState.currentDay}",
-                style = WeTheme.typography.emTitle,
+                style = WeTheme.typography.titleEm,
                 color = WeTheme.colorScheme.fontColorPrimary,
                 modifier = Modifier
             )
@@ -131,7 +131,7 @@ private fun SelectYearUi(
         items(yearList) { item ->
             Text(
                 text = "$item",
-                style = WeTheme.typography.emTitle,
+                style = WeTheme.typography.titleEm,
                 modifier = Modifier
                     .onGloballyPositioned {
                         if (itemWidth == 0 && it.size.width > 0) {
@@ -226,7 +226,7 @@ private fun MonthDetailUi(
                 Box(modifier = Modifier.weight(1f)) {
                     Text(
                         text = it,
-                        style = WeTheme.typography.footnote,
+                        style = WeTheme.typography.caption,
                         modifier = Modifier.align(Alignment.Center),
                         color = WeTheme.colorScheme.fontColorLight
                     )
@@ -246,7 +246,7 @@ private fun MonthDetailUi(
                         Box(modifier = Modifier.weight(1f)) {
                             Text(
                                 text = "${if (day == -1) "" else day}",
-                                style = WeTheme.typography.small,
+                                style = WeTheme.typography.micro,
                                 modifier = Modifier
                                     .align(Alignment.Center)
                                     .clickable {

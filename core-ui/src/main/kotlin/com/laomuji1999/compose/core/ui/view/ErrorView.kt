@@ -68,7 +68,7 @@ fun ErrorView(copyContent: @Composable ErrorViewContent.() -> Unit) {
                 Text(
                     text = stringResource(id = R.string.string_error_view_content),
                     color = WeTheme.colorScheme.fontColorError,
-                    style = WeTheme.typography.desc
+                    style = WeTheme.typography.body
                 )
                 Spacer(modifier = Modifier.height(10.dp))
                 WeButton(

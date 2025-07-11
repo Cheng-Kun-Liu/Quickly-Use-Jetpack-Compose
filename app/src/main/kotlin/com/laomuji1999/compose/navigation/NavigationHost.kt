@@ -19,6 +19,9 @@ import com.laomuji1999.compose.feature.date.DateScreenRoute.composeDateScreen
 import com.laomuji1999.compose.feature.date.DateScreenRoute.navigateToDateScreen
 import com.laomuji1999.compose.feature.firebase.FirebaseScreenRoute.composeFirebaseScreen
 import com.laomuji1999.compose.feature.firebase.FirebaseScreenRoute.navigateToFirebaseScreen
+import com.laomuji1999.compose.feature.font.FontScreenRoute
+import com.laomuji1999.compose.feature.font.FontScreenRoute.composeFontScreen
+import com.laomuji1999.compose.feature.font.FontScreenRoute.navigateToFontScreen
 import com.laomuji1999.compose.feature.http.HttpScreenRoute.composeHttpScreen
 import com.laomuji1999.compose.feature.http.HttpScreenRoute.navigateToHttpScreen
 import com.laomuji1999.compose.feature.language.LanguageScreenRoute
@@ -58,6 +61,7 @@ fun NavigationHost(
                     MainScreenRoute.Graph.Firebase -> navHostController.navigateToFirebaseScreen()
                     MainScreenRoute.Graph.Http -> navHostController.navigateToHttpScreen()
                     MainScreenRoute.Graph.Language -> navHostController.navigateToLanguageScreen()
+                    MainScreenRoute.Graph.Font -> navHostController.navigateToFontScreen()
                     MainScreenRoute.Graph.NestedScrollConnection -> navHostController.navigateToNestedScrollScreen()
                     MainScreenRoute.Graph.Painter -> navHostController.navigateToPainterScreen()
                     MainScreenRoute.Graph.WebView -> activity?.let {
@@ -103,6 +107,14 @@ fun NavigationHost(
             navigateToGraph = {
                 when (it) {
                     LanguageScreenRoute.Graph.Back -> navHostController.safePopBackStack()
+                }
+            },
+        )
+
+        composeFontScreen(
+            navigateToGraph = {
+                when (it) {
+                    FontScreenRoute.Graph.Back -> navHostController.safePopBackStack()
                 }
             },
         )

@@ -24,6 +24,7 @@ data class WeDimens(
     val smallButtonWidth: Dp,
     val smallButtonHeight: Dp,
     val warpButtonHorizontalPaddingDp: Dp,
+    val warpButtonVerticalPaddingDp: Dp,
 
     //Row组件 尺寸
     val rowSingleHeight: Dp,
@@ -55,7 +56,7 @@ data class WeDimens(
 
     //聊天页面,特定尺寸
     val chatInputHeight: Dp,
-    val chatPaddingHorizontal: Dp,
+    val chatPadding: Dp,
     val chatAvatarSize: Dp,
     val chatAvatarRoundedCornerDp: Dp,
 
@@ -76,6 +77,7 @@ val WeDimensDefault = WeDimens(
     smallButtonHeight = 40.dp,
     buttonRondCornerDp = 4.dp,
     warpButtonHorizontalPaddingDp = 10.dp,
+    warpButtonVerticalPaddingDp = 6.dp,
 
     rowSingleHeight = 54.dp,
     rowDoubleHeight = 80.dp,
@@ -104,7 +106,7 @@ val WeDimensDefault = WeDimens(
     inputLabelWidth = 60.dp,
 
     chatInputHeight = 56.dp,
-    chatPaddingHorizontal = 10.dp,
+    chatPadding = 10.dp,
     chatAvatarSize = 40.dp,
     chatAvatarRoundedCornerDp = 4.dp,
 

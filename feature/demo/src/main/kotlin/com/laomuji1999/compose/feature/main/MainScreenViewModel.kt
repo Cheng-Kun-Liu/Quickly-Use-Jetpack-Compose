@@ -20,6 +20,7 @@ class MainScreenViewModel @Inject constructor() : ViewModel() {
             MainScreenAction.OnFirebaseClick -> _graph.emitGraph(MainScreenRoute.Graph.Firebase)
             MainScreenAction.OnHttpClick -> _graph.emitGraph(MainScreenRoute.Graph.Http)
             MainScreenAction.OnLanguageClick -> _graph.emitGraph(MainScreenRoute.Graph.Language)
+            MainScreenAction.OnFontClick -> _graph.emitGraph(MainScreenRoute.Graph.Font)
             MainScreenAction.OnNestedScrollConnectionScreenClick -> _graph.emitGraph(MainScreenRoute.Graph.NestedScrollConnection)
             MainScreenAction.OnPainterScreenClick -> _graph.emitGraph(MainScreenRoute.Graph.Painter)
             MainScreenAction.OnWebViewClick -> _graph.emitGraph(MainScreenRoute.Graph.WebView)
