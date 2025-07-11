@@ -1,5 +1,16 @@
 package com.laomuji1999.compose.core.ui.we.cache
 
+import android.os.Build
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.dynamicDarkColorScheme
+import androidx.compose.material3.dynamicLightColorScheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
+import com.laomuji1999.compose.core.ui.we.colorscheme.WeColorScheme
+import com.laomuji1999.compose.core.ui.we.colorscheme.WeColorSchemeBlue
+import com.laomuji1999.compose.core.ui.we.colorscheme.WeColorSchemeDark
+import com.laomuji1999.compose.core.ui.we.colorscheme.WeColorSchemeLight
+import com.laomuji1999.compose.core.ui.we.colorscheme.toWeColorScheme
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -40,6 +51,31 @@ sealed class WeCacheColorScheme {
                 else -> FlowSystem
             }
             setWeThemeColorType(weThemeColorType)
+        }
+
+        @Composable
+        fun WeCacheColorScheme.toWeColorScheme(): WeColorScheme {
+            val hasDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+            return when (this) {
+                FlowSystem -> if (isSystemInDarkTheme()) WeColorSchemeDark else WeColorSchemeLight
+                Dynamic -> if (hasDynamicColor) {
+                    if (isSystemInDarkTheme()) {
+                        dynamicDarkColorScheme(LocalContext.current).toWeColorScheme(isDarkTheme = true)
+                    } else {
+                        dynamicLightColorScheme(LocalContext.current).toWeColorScheme(isDarkTheme = false)
+                    }
+                } else {
+                    if (isSystemInDarkTheme()) {
+                        WeColorSchemeDark
+                    } else {
+                        WeColorSchemeLight
+                    }
+                }
+
+                Light -> WeColorSchemeLight
+                Dark -> WeColorSchemeDark
+                Blue -> WeColorSchemeBlue
+            }
         }
     }
 }

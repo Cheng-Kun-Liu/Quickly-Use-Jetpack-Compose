@@ -42,8 +42,8 @@ import com.laomuji1999.compose.core.ui.we.typography.WeTypography
  * 设计系统入口
  * 把值设为默认值
  *
- * @param weColorScheme 颜色
  * @param weDimens 尺寸
+ * @param weColorScheme 颜色
  * @param weTypography 字体
  * @param content 内容
  *
@@ -52,8 +52,8 @@ import com.laomuji1999.compose.core.ui.we.typography.WeTypography
  */
 @Composable
 fun WeTheme(
-    weColorScheme: WeColorScheme,
     weDimens: WeDimens,
+    weColorScheme: WeColorScheme,
     weTypography: WeTypography,
     content: @Composable () -> Unit,
 ) {

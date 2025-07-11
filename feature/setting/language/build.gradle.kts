@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.laomuji1999.compose.feature.language"
+    namespace = "com.laomuji1999.compose.feature.setting.language"
 }
 
 dependencies {

@@ -16,7 +16,7 @@ import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
 import com.laomuji1999.compose.core.ui.we.widget.click.WeClick
 import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutline
 import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutlineType
-import com.laomuji1999.compose.core.ui.we.widget.theme.WeThemeSettingDialog
+import com.laomuji1999.compose.core.ui.we.widget.theme.WeThemeColorSchemeSettingDialog
 import com.laomuji1999.compose.feature.main.MainScreenAction
 import com.laomuji1999.compose.res.R
 
@@ -34,7 +34,7 @@ fun SettingsScreenUi(
     onAction: (MainScreenAction) -> Unit,
 ) {
     var showThemeSettingDialog by rememberSaveable { mutableStateOf(false) }
-    WeThemeSettingDialog(showThemeSettingDialog) {
+    WeThemeColorSchemeSettingDialog(showThemeSettingDialog) {
         showThemeSettingDialog = false
     }
 
@@ -51,14 +51,22 @@ fun SettingsScreenUi(
                 onAction(MainScreenAction.OnLanguageClick)
             },
         )
-        WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
+        WeOutline(weOutlineType = WeOutlineType.PaddingStart)
+
         WeClick(
             title = stringResource(id = R.string.string_theme_dialog_title),
             onClick = {
                 showThemeSettingDialog = true
             },
         )
+        WeOutline(weOutlineType = WeOutlineType.PaddingStart)
 
+        WeClick(
+            title = stringResource(id = R.string.string_font_screen_title),
+            onClick = {
+                onAction(MainScreenAction.OnFontClick)
+            },
+        )
 
         WeOutline(weOutlineType = WeOutlineType.Full)
     }

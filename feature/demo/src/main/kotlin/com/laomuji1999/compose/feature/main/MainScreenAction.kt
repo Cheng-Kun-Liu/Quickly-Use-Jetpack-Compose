@@ -10,4 +10,5 @@ sealed interface MainScreenAction {
     data object OnPainterScreenClick : MainScreenAction
     data object OnWebViewClick : MainScreenAction
     data object OnLanguageClick : MainScreenAction
+    data object OnFontClick : MainScreenAction
 }

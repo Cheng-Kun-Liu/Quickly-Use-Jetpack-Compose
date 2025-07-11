@@ -86,4 +86,7 @@
     <string name="string_theme_dialog_we_theme_dark">Tema oscuro</string>
     <string name="string_theme_dialog_we_theme_blue">Tema azul</string>
     <string name="string_theme_dialog_we_theme_cancel">Cancelar</string>
+    <string name="string_font_screen_title">Tamaño de fuente</string>
+    <string name="string_font_screen_confirm">Hecho</string>
+    <string name="string_font_screen_example">A</string>
 </resources>

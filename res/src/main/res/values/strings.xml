@@ -109,6 +109,11 @@
     <!--  Language  -->
     <string name="string_language_system">System language</string>
     <string name="string_language_screen_title">Language</string>
+    
+    <!--  Font  -->
+    <string name="string_font_screen_title">Font Size</string>
+    <string name="string_font_screen_confirm">Done</string>
+    <string name="string_font_screen_example">A</string>
 
     <!--  ThemeDialog  -->
     <string name="string_theme_dialog_title">Theme</string>

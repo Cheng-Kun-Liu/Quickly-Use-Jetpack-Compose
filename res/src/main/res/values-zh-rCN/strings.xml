@@ -85,4 +85,7 @@
     <string name="string_theme_dialog_we_theme_dark">深色主题</string>
     <string name="string_theme_dialog_we_theme_blue">蓝色主题</string>
     <string name="string_theme_dialog_we_theme_cancel">取消</string>
+    <string name="string_font_screen_title">字体大小</string>
+    <string name="string_font_screen_confirm">完成</string>
+    <string name="string_font_screen_example">A</string>
 </resources>

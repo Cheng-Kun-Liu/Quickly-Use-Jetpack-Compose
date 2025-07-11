@@ -101,7 +101,7 @@ private fun ChatScreenUi(
                         .background(WeTheme.colorScheme.chatInputBackground)
                         .fillMaxWidth()
                         .height(WeTheme.dimens.chatInputHeight)
-                        .padding(horizontal = WeTheme.dimens.chatPaddingHorizontal),
+                        .padding(horizontal = WeTheme.dimens.chatPadding),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     WeInput(
@@ -129,18 +129,18 @@ private fun ChatScreenUi(
         }
     ) {
         LazyColumn(
-            modifier = Modifier.padding(horizontal = WeTheme.dimens.chatPaddingHorizontal),
+            modifier = Modifier.padding(horizontal = WeTheme.dimens.chatPadding),
             reverseLayout = true
         ) {
             itemsIndexed(uiState.messageList) { index, item ->
-                Column(modifier = Modifier.padding(top = WeTheme.dimens.chatPaddingHorizontal)) {
+                Column(modifier = Modifier.padding(top = WeTheme.dimens.chatPadding)) {
                     ChatMessageText(
                         avatar = if (item.isSend) uiState.sendAvatar else uiState.receiveAvatar,
                         text = item.text,
                         isSend = item.isSend
                     )
                     if (index == 0) {
-                        Spacer(modifier = Modifier.height(WeTheme.dimens.chatPaddingHorizontal))
+                        Spacer(modifier = Modifier.height(WeTheme.dimens.chatPadding))
                     }
                 }
             }
@@ -191,10 +191,10 @@ private fun ChatMessageText(
             SelectionContainer {
                 Text(
                     modifier = Modifier
-                        .padding(horizontal = WeTheme.dimens.chatPaddingHorizontal)
+                        .padding(horizontal = WeTheme.dimens.chatPadding)
                         .clip(RoundedCornerShape(WeTheme.dimens.chatAvatarRoundedCornerDp))
                         .background(if (isSend) WeTheme.colorScheme.chatMessageBackgroundSend else WeTheme.colorScheme.chatMessageBackgroundReceive)
-                        .padding(WeTheme.dimens.chatPaddingHorizontal),
+                        .padding(WeTheme.dimens.chatPadding),
                     text = text,
                     style = WeTheme.typography.title,
                     color = if (isSend) WeTheme.colorScheme.chatMessageTextSend else WeTheme.colorScheme.chatMessageTextReceive

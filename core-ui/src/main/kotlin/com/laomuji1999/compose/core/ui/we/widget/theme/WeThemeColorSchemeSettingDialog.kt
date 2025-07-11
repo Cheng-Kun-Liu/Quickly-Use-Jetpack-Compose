@@ -14,14 +14,14 @@ import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutline
 import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutlineType
 
 @Composable
-fun WeThemeSettingDialog(
+fun WeThemeColorSchemeSettingDialog(
     isShowDialog: Boolean,
     onDismissRequest: () -> Unit,
 ) {
     if (!isShowDialog) {
         return
     }
-    val selectedType by WeCacheColorScheme.currentWeThemeColorType.collectAsStateWithLifecycle()
+    val currentWeThemeColorType by WeCacheColorScheme.currentWeThemeColorType.collectAsStateWithLifecycle()
 
     var animateHide: () -> Unit = {
         onDismissRequest()
@@ -36,51 +36,51 @@ fun WeThemeSettingDialog(
                 onDismissRequest()
             }
         }
-        val changeTheme: (WeCacheColorScheme) -> Unit = {
+        val changedCallback: (WeCacheColorScheme) -> Unit = {
             setWeThemeColorType(it)
             animateHide.invoke()
         }
-        WeThemeTypeSettingDialogColorItem(
+        Item(
             text = stringResource(com.laomuji1999.compose.res.R.string.string_theme_dialog_we_theme_system),
-            selectedType = selectedType,
+            selectedType = currentWeThemeColorType,
             targetType = WeCacheColorScheme.FlowSystem,
             onDismissRequest = {
-                changeTheme(it)
+                changedCallback(it)
             },
         )
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             //动态取色仅在Api31以上才可用
-            WeThemeTypeSettingDialogColorItem(
+            Item(
                 text = stringResource(com.laomuji1999.compose.res.R.string.string_theme_dialog_we_theme_dynamic),
-                selectedType = selectedType,
+                selectedType = currentWeThemeColorType,
                 targetType = WeCacheColorScheme.Dynamic,
                 onDismissRequest = {
-                    changeTheme(it)
+                    changedCallback(it)
                 },
             )
         }
-        WeThemeTypeSettingDialogColorItem(
+        Item(
             text = stringResource(com.laomuji1999.compose.res.R.string.string_theme_dialog_we_theme_light),
-            selectedType = selectedType,
+            selectedType = currentWeThemeColorType,
             targetType = WeCacheColorScheme.Light,
             onDismissRequest = {
-                changeTheme(it)
+                changedCallback(it)
             },
         )
-        WeThemeTypeSettingDialogColorItem(
+        Item(
             text = stringResource(com.laomuji1999.compose.res.R.string.string_theme_dialog_we_theme_dark),
-            selectedType = selectedType,
+            selectedType = currentWeThemeColorType,
             targetType = WeCacheColorScheme.Dark,
             onDismissRequest = {
-                changeTheme(it)
+                changedCallback(it)
             },
         )
-        WeThemeTypeSettingDialogColorItem(
+        Item(
             text = stringResource(com.laomuji1999.compose.res.R.string.string_theme_dialog_we_theme_blue),
-            selectedType = selectedType,
+            selectedType = currentWeThemeColorType,
             targetType = WeCacheColorScheme.Blue,
             onDismissRequest = {
-                changeTheme(it)
+                changedCallback(it)
             },
         )
         WeOutline(weOutlineType = WeOutlineType.Split)
@@ -95,7 +95,7 @@ fun WeThemeSettingDialog(
 }
 
 @Composable
-private fun WeThemeTypeSettingDialogColorItem(
+private fun Item(
     text: String,
     selectedType: WeCacheColorScheme,
     targetType: WeCacheColorScheme,

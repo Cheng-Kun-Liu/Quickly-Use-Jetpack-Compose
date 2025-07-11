@@ -20,6 +20,7 @@ data object MainScreenRoute {
         data object Painter : Graph
         data object WebView : Graph
         data object Language : Graph
+        data object Font : Graph
     }
 
     fun NavHostController.navigateToMainScreen(
