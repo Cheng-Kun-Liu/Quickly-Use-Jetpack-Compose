@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -33,18 +34,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.laomuji1999.compose.core.ui.we.WeTheme
 import com.laomuji1999.compose.core.ui.we.typography.LocalWeTypography
-import com.laomuji1999.compose.core.ui.we.typography.WeTypography14
 import com.laomuji1999.compose.core.ui.we.widget.button.WeButton
 import com.laomuji1999.compose.core.ui.we.widget.button.WeButtonColor
 import com.laomuji1999.compose.core.ui.we.widget.button.WeButtonType
@@ -53,6 +55,7 @@ import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutlineType
 import com.laomuji1999.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji1999.compose.core.ui.we.widget.topbar.WeTopBar
 import com.laomuji1999.compose.res.R
+import kotlin.math.max
 import kotlin.math.roundToInt
 
 @Composable
@@ -68,7 +71,7 @@ fun FontScreen(
 
     FontScreenUi(
         uiState = viewModel.uiState.collectAsStateWithLifecycle().value,
-        onAction = viewModel::onAction
+        onAction = viewModel::onAction,
     )
 }
 
@@ -77,28 +80,25 @@ private fun FontScreenUi(
     uiState: FontScreenUiState,
     onAction: (FontScreenAction) -> Unit,
 ) {
+    if (uiState.allWeTypography.isEmpty()) {
+        return
+    }
     val weTypography = uiState.currentWeTypography ?: LocalWeTypography.current
     WeScaffold(
         topBar = {
-            WeTopBar(
-                title = stringResource(id = R.string.string_font_screen_title),
-                onBackClick = {
-                    onAction(FontScreenAction.OnClickBack)
-                },
-                actions = {
-                    WeButton(
-                        text = stringResource(id = R.string.string_font_screen_confirm),
-                        weButtonType = WeButtonType.Warp,
-                        weButtonColor = WeButtonColor.Primary,
-                        onClick = {
-                            onAction(FontScreenAction.OnConfirm)
-                        }
-                    )
-                }
-            )
+            WeTopBar(title = stringResource(id = R.string.string_font_screen_title), onBackClick = {
+                onAction(FontScreenAction.OnClickBack)
+            }, actions = {
+                WeButton(
+                    text = stringResource(id = R.string.string_font_screen_confirm),
+                    weButtonType = WeButtonType.Warp,
+                    weButtonColor = WeButtonColor.Primary,
+                    onClick = {
+                        onAction(FontScreenAction.OnConfirm)
+                    })
+            })
             WeOutline(weOutlineType = WeOutlineType.Full)
-        }
-    ) {
+        }) {
         Column(
             modifier = Modifier
                 .weight(1f)
@@ -129,47 +129,70 @@ private fun FontScreenUi(
                 }
             }
         }
-        CompositionLocalProvider(
-            LocalWeTypography provides WeTypography14
+
+        Column(
+            modifier = Modifier
+                .background(WeTheme.colorScheme.rowBackground)
+                .fillMaxWidth()
+                .padding(WeTheme.dimens.chatPadding * 2)
         ) {
-            Column(
-                modifier = Modifier
-                    .background(WeTheme.colorScheme.rowBackground)
-                    .fillMaxWidth()
-                    .padding(WeTheme.dimens.chatPadding * 2)
+            var paddingStart by remember { mutableIntStateOf(0) }
+            var paddingEnd by remember { mutableIntStateOf(0) }
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.Bottom,
             ) {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.Bottom,
+                CompositionLocalProvider(
+                    LocalWeTypography provides uiState.allWeTypography.first()
                 ) {
                     Text(
                         text = stringResource(R.string.string_font_screen_example),
-                        style = WeTheme.typography.micro,
-                        color = WeTheme.colorScheme.fontColorHeavy
-                    )
-                    Spacer(modifier = Modifier.weight(1f))
-                    Text(
-                        text = stringResource(R.string.string_font_screen_example),
-                        style = WeTheme.typography.titleEm,
-                        color = WeTheme.colorScheme.fontColorHeavy
+                        style = WeTheme.typography.title,
+                        color = WeTheme.colorScheme.fontColorHeavy,
+                        modifier = Modifier.onGloballyPositioned {
+                            paddingStart = it.size.width / 4
+                        },
                     )
                 }
-                Spacer(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .height(WeTheme.dimens.chatPadding)
-                )
+
+                Spacer(modifier = Modifier.weight(1f))
+                CompositionLocalProvider(
+                    LocalWeTypography provides uiState.allWeTypography.last()
+                ) {
+                    Text(
+                        text = stringResource(R.string.string_font_screen_example),
+                        style = WeTheme.typography.title,
+                        color = WeTheme.colorScheme.fontColorHeavy,
+                        modifier = Modifier.onGloballyPositioned {
+                            paddingEnd = it.size.width / 4
+                        },
+                    )
+                }
+
+            }
+            Spacer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(WeTheme.dimens.chatPadding / 2)
+            )
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(
+                        start = max(paddingStart - 1, 0).dp,
+                        end = max(paddingEnd - 2, 0).dp,
+                    ),
+            ) {
                 FontSlide(
                     index = uiState.currentIndex,
-                    min = 0,
-                    max = uiState.totalSize - 1,
+                    max = uiState.allWeTypography.size - 1,
                     onValueChange = {
                         onAction(FontScreenAction.OnChangeTypography(it))
-                    }
+                    },
                 )
             }
-        }
 
+        }
     }
 }
 
@@ -179,11 +202,8 @@ private fun ChatMessageAvatar(
 ) {
     Box(modifier = Modifier.size(WeTheme.dimens.chatAvatarSize)) {
         if (isShow) {
-            val imageRequest = ImageRequest
-                .Builder(LocalContext.current)
-                .data("")
-                .diskCacheKey("")
-                .build()
+            val imageRequest =
+                ImageRequest.Builder(LocalContext.current).data("").diskCacheKey("").build()
             AsyncImage(
                 model = imageRequest,
                 contentDescription = null,
@@ -200,8 +220,7 @@ private fun ChatMessageAvatar(
 
 @Composable
 private fun ChatMessageText(
-    text: String,
-    isSend: Boolean
+    text: String, isSend: Boolean
 ) {
     Row(
         modifier = Modifier.fillMaxWidth()
@@ -230,42 +249,59 @@ private fun ChatMessageText(
 
 @Composable
 private fun FontSlide(
-    index: Int,
-    min: Int,
-    max: Int,
-    onValueChange: (Int) -> Unit
+    index: Int, max: Int,
+    onValueChange: (Int) -> Unit,
 ) {
     if (index < 0) {
         return
     }
-
     var sliderPos by remember(index) {
-        mutableFloatStateOf((index - min).toFloat() / (max - min).coerceAtLeast(1))
+        mutableFloatStateOf((index).toFloat() / (max).coerceAtLeast(1))
     }
     var trackWidth by remember { mutableIntStateOf(0) }
     val knobSize = WeTheme.dimens.actionIconSize
     val knobRadius = knobSize / 2
 
     Box(contentAlignment = Alignment.CenterStart) {
-        Spacer(
+        Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(knobRadius)
-                .clip(CircleShape)
-                .background(WeTheme.colorScheme.secondaryButton)
                 .pointerInput(Unit) {
                     detectHorizontalDragGestures { _, dragAmount ->
                         sliderPos = (sliderPos + dragAmount / trackWidth).coerceIn(0f, 1f)
-                        onValueChange((min + (max - min) * sliderPos).roundToInt())
+                        onValueChange(((max) * sliderPos).roundToInt())
                     }
                 }
                 .pointerInput(Unit) {
                     detectTapGestures { offset ->
                         sliderPos = (offset.x / trackWidth).coerceIn(0f, 1f)
-                        onValueChange((min + (max - min) * sliderPos).roundToInt())
+                        onValueChange(((max) * sliderPos).roundToInt())
                     }
+                },
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            for (i in 0..max) {
+                Spacer(
+                    modifier = Modifier
+                        .height(knobRadius)
+                        .width(WeTheme.dimens.outlineHeight)
+                        .background(
+                            WeTheme.colorScheme.fontColorLight
+                        ),
+                )
+                if (i < max) {
+                    Spacer(
+                        modifier = Modifier
+                            .height(WeTheme.dimens.outlineHeight)
+                            .weight(1f)
+                            .background(
+                                WeTheme.colorScheme.fontColorLight
+                            ),
+                    )
                 }
-        )
+            }
+        }
         Box(
             modifier = Modifier
                 .fillMaxWidth()
@@ -276,14 +312,12 @@ private fun FontSlide(
                 modifier = Modifier
                     .offset {
                         IntOffset(
-                            (trackWidth * sliderPos).toInt() - knobRadius.roundToPx(),
-                            0
+                            (trackWidth * sliderPos).toInt() - knobRadius.roundToPx(), 0
                         )
                     }
                     .size(knobSize)
                     .clip(CircleShape)
-                    .background(WeTheme.colorScheme.primaryButton)
-            )
+                    .background(WeTheme.colorScheme.primaryButton))
         }
     }
 }

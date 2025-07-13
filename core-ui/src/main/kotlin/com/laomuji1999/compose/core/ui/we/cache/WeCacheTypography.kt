@@ -16,58 +16,30 @@ import kotlinx.coroutines.flow.update
  * @since 2025/7/9
  */
 sealed class WeCacheTypography {
-    data object Size13 : WeCacheTypography()
-    data object Size14 : WeCacheTypography()
-    data object Size15 : WeCacheTypography()
-    data object Size16 : WeCacheTypography()
-    data object Size17 : WeCacheTypography()
-
 
     companion object {
-        private val _currentWeCacheTypography = MutableStateFlow<WeCacheTypography>(
-            Size14
+        private val _currentWeTypography = MutableStateFlow<WeTypography>(
+            WeTypography13
         )
 
-        val currentWeCacheTypography = _currentWeCacheTypography.asStateFlow()
+        val currentWeTypography = _currentWeTypography.asStateFlow()
 
-        fun setWeCacheTypography(weCacheColorScheme: WeCacheTypography) {
-            _currentWeCacheTypography.update {
-                weCacheColorScheme
+        fun setWeTypography(weTypography: WeTypography) {
+            _currentWeTypography.update {
+                weTypography
             }
         }
 
-        fun setWeCacheTypography(clsName: String?) {
-            val weCacheTypography = when (clsName) {
-                Size13::class.java.name -> Size13
-                Size14::class.java.name -> Size14
-                Size15::class.java.name -> Size15
-                Size16::class.java.name -> Size16
-                Size17::class.java.name -> Size17
-                else -> Size14
+        fun setWeTypography(clsName: String?) {
+            val weTypography = when (clsName) {
+                WeTypography13::class.java.name -> WeTypography13
+                WeTypography14::class.java.name -> WeTypography14
+                WeTypography15::class.java.name -> WeTypography15
+                WeTypography16::class.java.name -> WeTypography16
+                WeTypography17::class.java.name -> WeTypography17
+                else -> WeTypography14
             }
-            setWeCacheTypography(weCacheTypography)
-        }
-
-
-        fun WeCacheTypography.toWeTypography(): WeTypography {
-            return when (this) {
-                Size13 -> WeTypography13
-                Size14 -> WeTypography14
-                Size15 -> WeTypography15
-                Size16 -> WeTypography16
-                Size17 -> WeTypography17
-            }
-        }
-
-        fun WeTypography.toWeCacheTypography(): WeCacheTypography {
-            return when (this) {
-                WeTypography13 -> Size13
-                WeTypography14 -> Size14
-                WeTypography15 -> Size15
-                WeTypography16 -> Size16
-                WeTypography17 -> Size17
-                else -> Size14
-            }
+            setWeTypography(weTypography)
         }
     }
 }

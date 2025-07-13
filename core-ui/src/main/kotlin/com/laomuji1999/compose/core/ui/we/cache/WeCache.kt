@@ -50,12 +50,12 @@ object WeCache {
 
     private fun looperWeCacheTypography(context: Context) {
         //使用缓存的值作为正在使用的字体类型
-        WeCacheTypography.setWeCacheTypography(
+        WeCacheTypography.setWeTypography(
             context.getWeThemeCache().getString(WeCacheTypography::class.simpleName, null)
         )
         //在协程中持续监听
         coroutineScope.launch {
-            WeCacheTypography.currentWeCacheTypography.collect {
+            WeCacheTypography.currentWeTypography.collect {
                 context.getWeThemeCache().edit {
                     putString(WeCacheTypography::class.simpleName, it.javaClass.name)
                 }
