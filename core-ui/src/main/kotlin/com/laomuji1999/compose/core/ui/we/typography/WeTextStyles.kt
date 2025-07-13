@@ -105,4 +105,34 @@ object WeTextStyles {
         fontSize = 20.sp,
     )
 
+    val Text_21_0_Normal = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 21.sp,
+    )
+
+    val Text_21_0_Medium = TextStyle(
+        fontWeight = FontWeight.Medium,
+        fontSize = 21.sp,
+    )
+
+    val Text_22_0_Normal = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 22.sp,
+    )
+
+    val Text_22_0_Medium = TextStyle(
+        fontWeight = FontWeight.Medium,
+        fontSize = 22.sp,
+    )
+
+    val Text_23_0_Normal = TextStyle(
+        fontWeight = FontWeight.Normal,
+        fontSize = 23.sp,
+    )
+
+    val Text_23_0_Medium = TextStyle(
+        fontWeight = FontWeight.Medium,
+        fontSize = 23.sp,
+    )
+
 }

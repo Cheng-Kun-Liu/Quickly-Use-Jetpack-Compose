@@ -5,14 +5,15 @@ import androidx.lifecycle.viewModelScope
 import com.laomuji1999.compose.core.ui.emitGraph
 import com.laomuji1999.compose.core.ui.stateInTimeout
 import com.laomuji1999.compose.core.ui.we.cache.WeCacheTypography
-import com.laomuji1999.compose.core.ui.we.cache.WeCacheTypography.Companion.toWeCacheTypography
-import com.laomuji1999.compose.core.ui.we.cache.WeCacheTypography.Companion.toWeTypography
 import com.laomuji1999.compose.core.ui.we.typography.WeTypography
 import com.laomuji1999.compose.core.ui.we.typography.WeTypography13
 import com.laomuji1999.compose.core.ui.we.typography.WeTypography14
 import com.laomuji1999.compose.core.ui.we.typography.WeTypography15
 import com.laomuji1999.compose.core.ui.we.typography.WeTypography16
 import com.laomuji1999.compose.core.ui.we.typography.WeTypography17
+import com.laomuji1999.compose.core.ui.we.typography.WeTypography18
+import com.laomuji1999.compose.core.ui.we.typography.WeTypography19
+import com.laomuji1999.compose.core.ui.we.typography.WeTypography20
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,11 +28,19 @@ class FontScreenViewModel @Inject constructor(
     private val _graph = MutableSharedFlow<FontScreenRoute.Graph>()
     val graph = _graph.asSharedFlow()
 
-    private val allWeTypography = listOf(WeTypography13, WeTypography14, WeTypography15, WeTypography16, WeTypography17)
-    private val _currentWeTypography: MutableStateFlow<WeTypography?> =
-        MutableStateFlow(null)
+    private val allWeTypography = listOf(
+        WeTypography13,
+        WeTypography14,
+        WeTypography15,
+        WeTypography16,
+        WeTypography17,
+        WeTypography18,
+        WeTypography19,
+        WeTypography20,
+    )
+    private val _currentWeTypography: MutableStateFlow<WeTypography?> = MutableStateFlow(null)
     private val _currentIndex =
-        MutableStateFlow(allWeTypography.indexOf(WeCacheTypography.currentWeCacheTypography.value.toWeTypography()))
+        MutableStateFlow(allWeTypography.indexOf(WeCacheTypography.currentWeTypography.value))
 
     val uiState = combine(
         _currentWeTypography,
@@ -40,7 +49,7 @@ class FontScreenViewModel @Inject constructor(
         FontScreenUiState(
             currentWeTypography = currentWeTypography,
             currentIndex = index,
-            totalSize = allWeTypography.size,
+            allWeTypography = allWeTypography,
         )
     }.stateInTimeout(viewModelScope, FontScreenUiState())
 
@@ -59,7 +68,7 @@ class FontScreenViewModel @Inject constructor(
 
             FontScreenAction.OnConfirm -> {
                 _currentWeTypography.value?.let {
-                    WeCacheTypography.setWeCacheTypography(it.toWeCacheTypography())
+                    WeCacheTypography.setWeTypography(it)
                 }
                 _graph.emitGraph(FontScreenRoute.Graph.Back)
             }
