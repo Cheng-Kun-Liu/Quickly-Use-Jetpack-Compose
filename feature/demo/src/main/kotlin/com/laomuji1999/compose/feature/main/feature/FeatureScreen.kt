@@ -43,21 +43,21 @@ fun FeatureScreen(
     val context = LocalContext.current
 
     val selectMobile = selectMobileLauncher(onSuccess = {
-        Toast.showText(context, it)
+        Toast.showText(it)
     }, onFail = {
-        Toast.showText(context, "...")
+        Toast.showText("...")
     })
 
     val openAlbum = openAlbum {
-        Toast.showText(context, "$it")
+        Toast.showText("$it")
     }
 
     val openCamera = openCamera {
-        Toast.showText(context, "$it")
+        Toast.showText("$it")
     }
 
     val openContact = openContact {
-        Toast.showText(context, "${it.name} : ${it.mobile}")
+        Toast.showText("${it.name} : ${it.mobile}")
     }
 
     val launcherMultiplePermissions = PermissionUtil.getPermissionsLauncher(
@@ -159,10 +159,10 @@ private fun FeatureScreenUi(
                 GoogleAuthenticate().requestLogin(
                     activityContext = context,
                     onSuccess = { email, idToken ->
-                        Toast.showText(context, "$email $idToken")
+                        Toast.showText("$email $idToken")
                     },
                     onFail = {
-                        Toast.showText(context, "...")
+                        Toast.showText("...")
                     })
             },
         )
