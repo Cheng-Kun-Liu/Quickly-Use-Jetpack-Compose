@@ -41,6 +41,10 @@ Quickly-Use-Jetpack-Compose 的架构参考安卓官方的最佳实践:[Now in A
 
 # 已提供的示例代码
 
++ 屏幕切换动画: 为Compose和Activity提供进入和退出的滑动动画,兼容RTL布局.
++ 动态切换语言: 兼容高低版本语言切换,支持SDK33的应用首选语言.
++ 动态切换主题: 白天和夜间主题,Material动态主题,自定义主题.
++ 动态切换字体: 字体大小任意切换.
 + ktor: 序列化,ViewModel+Flow,等待响应,异常处理.
 + firebase: 埋点,崩溃分析,推送.
 + google登录: CredentialManager添加登录选项.
@@ -57,9 +61,6 @@ Quickly-Use-Jetpack-Compose 的架构参考安卓官方的最佳实践:[Now in A
 + 绘画画板: 选择线条宽度和颜色,绘制到屏幕上.
 + 视频播放.: 使用media3进行视频播放.
 + WebView: 在Compose中使用WebView,添加一些常用的WebView功能.
-+ 多语言: 动态切换多语言,支持SDK33的应用首选语言.
-+ 切换动画: 为Compose和Activity提供进入和退出的滑动动画,兼容RTL布局.
-+ 多主题: 动态切换主题,WX的白天和夜间主题,动态主题,自定义主题.
 
 # 开发/发布环境
 
