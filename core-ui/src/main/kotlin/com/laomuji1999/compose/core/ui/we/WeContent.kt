@@ -18,7 +18,6 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowInsetsControllerCompat
 import com.laomuji1999.compose.core.logic.common.Toast
-import com.laomuji1999.compose.core.ui.ifCondition
 import com.laomuji1999.compose.core.ui.isPreview
 import com.laomuji1999.compose.core.ui.we.widget.toast.WeToast
 import com.laomuji1999.compose.core.ui.we.widget.toast.WeToastType
@@ -32,8 +31,43 @@ import com.laomuji1999.compose.core.ui.we.widget.toast.WeToastType
 internal fun WeContent(
     content: @Composable () -> Unit
 ) {
+    ApplySystemBar()
+
+    //captionBarPadding 是 Desktop和部分非全屏模式出现,官方未提供api定制颜色,添加padding,交由系统控制.
+    Box(
+        modifier = Modifier
+            .captionBarPadding()
+            .oldWindowInsetsApiPadding()
+    ) {
+        content()
+    }
+
+    //自定义Toast组件
+    var toastText by remember { mutableStateOf("") }
+    LaunchedEffect(Unit) {
+        Toast.toastShardFlow.collect {
+            toastText = it
+        }
+    }
+    if (toastText.isNotEmpty()) {
+        WeToast(
+            weToastType = WeToastType.Error,
+            message = toastText,
+        )
+    }
+}
+
+/**
+ * 是否是旧版本的WindowInsetsApi
+ */
+private val isOldWindowInsetsApi = Build.VERSION.SDK_INT < Build.VERSION_CODES.S
+
+/**
+ * 沉浸式系统栏
+ */
+@Composable
+private fun ApplySystemBar() {
     val view = LocalView.current
-    val isOldWindowInsetsApi = Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM
     if (!isPreview()) {
         val bottomBarBackground = WeTheme.colorScheme.bottomBarBackground.toArgb()
         val isDarkFont = WeTheme.colorScheme.isDarkFont
@@ -64,32 +98,17 @@ internal fun WeContent(
             windowInsetsController.isAppearanceLightStatusBars = isDarkFont
         }
     }
+}
 
-    //captionBarPadding 是 Desktop和部分非全屏模式出现,官方未提供api定制颜色,添加padding,交由系统控制.
-    Box(
-        modifier = Modifier
-            .captionBarPadding()
-            .ifCondition(
-                condition = isOldWindowInsetsApi,
-                onTrue = {
-                    navigationBarsPadding()
-                },
-            )
-    ) {
-        content()
-    }
-
-    //自定义Toast组件
-    var toastText by remember { mutableStateOf("") }
-    LaunchedEffect(Unit) {
-        Toast.toastShardFlow.collect {
-            toastText = it
-        }
-    }
-    if (toastText.isNotEmpty()) {
-        WeToast(
-            weToastType = WeToastType.Error,
-            message = toastText,
-        )
+/**
+ * 旧版本的WindowInsetsApi需要增加的padding
+ * 当然也可以不加,这里是为了和微信保持一致.
+ */
+@Composable
+private fun Modifier.oldWindowInsetsApiPadding(): Modifier {
+    return if (isOldWindowInsetsApi) {
+        this.navigationBarsPadding()
+    } else {
+        this
     }
 }

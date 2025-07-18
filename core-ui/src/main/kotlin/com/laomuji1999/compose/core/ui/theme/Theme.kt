@@ -3,7 +3,7 @@ package com.laomuji1999.compose.core.ui.theme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.laomuji1999.compose.core.ui.we.WeDimensDefault
+import com.laomuji1999.compose.core.ui.we.LocalWeDimens
 import com.laomuji1999.compose.core.ui.we.WeTheme
 import com.laomuji1999.compose.core.ui.we.cache.WeCacheColorScheme
 import com.laomuji1999.compose.core.ui.we.cache.WeCacheColorScheme.Companion.toWeColorScheme
@@ -22,7 +22,7 @@ fun QuicklyTheme(
     val weCacheColorScheme by WeCacheColorScheme.currentWeThemeColorType.collectAsStateWithLifecycle()
     val weTypography by WeCacheTypography.currentWeTypography.collectAsStateWithLifecycle()
     WeTheme(
-        weDimens = WeDimensDefault,
+        weDimens = LocalWeDimens.current,
         weColorScheme = weCacheColorScheme.toWeColorScheme(),
         weTypography = weTypography,
         content = content,

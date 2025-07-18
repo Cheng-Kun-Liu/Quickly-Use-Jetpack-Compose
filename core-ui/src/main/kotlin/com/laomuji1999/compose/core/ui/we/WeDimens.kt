@@ -4,6 +4,11 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
+/**
+ * 尺寸设计
+ * @author laomuji666
+ * @since 2025/5/23
+ */
 data class WeDimens(
     //事件(有点击效果的) Icon 尺寸
     val actionIconSize: Dp,

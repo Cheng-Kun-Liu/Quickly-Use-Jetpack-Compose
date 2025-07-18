@@ -61,6 +61,7 @@ Quickly-Use-Jetpack-Compose 的架构参考安卓官方的最佳实践:[Now in A
 + 绘画画板: 选择线条宽度和颜色,绘制到屏幕上.
 + 视频播放.: 使用media3进行视频播放.
 + WebView: 在Compose中使用WebView,添加一些常用的WebView功能.
++ 自定义Toast: 只需要字符串即可全局显示的Toast.
 
 # 开发/发布环境
 
