@@ -8,6 +8,11 @@ import com.laomuji1999.compose.core.ui.we.widget.toast.WeToast
 import com.laomuji1999.compose.core.ui.we.widget.toast.WeToastType
 import com.laomuji1999.compose.res.R
 
+/**
+ * 加载弹窗
+ * @author laomuji666
+ * @since 2025/7/18
+ */
 @Composable
 fun LoadingDialog(loading: Boolean) {
     if (!loading) {

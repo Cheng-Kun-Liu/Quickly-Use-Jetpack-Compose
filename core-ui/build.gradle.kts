@@ -10,6 +10,9 @@ dependencies {
     //为所有ui引入资源文件
     api(project(":res"))
 
+    //引入common
+    implementation(project(":core-logic:common"))
+
     //为Android提供kotlin扩展功能,view,context,collection,和其它扩展
     api(libs.androidx.core.ktx)
     //管理Android生命周期

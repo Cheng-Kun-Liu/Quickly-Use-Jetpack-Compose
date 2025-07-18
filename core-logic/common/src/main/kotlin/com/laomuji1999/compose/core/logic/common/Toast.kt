@@ -1,18 +1,27 @@
 package com.laomuji1999.compose.core.logic.common
 
 import android.content.Context
-import android.widget.Toast
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
-object Toast{
-    fun showText(context: Context, text: CharSequence){
+object Toast {
+    val toastShardFlow = MutableSharedFlow<String>()
+
+    fun showText(text: CharSequence) {
         CoroutineScope(Dispatchers.Main).launch {
-            Toast.makeText(context, text, Toast.LENGTH_SHORT).show()
+            CoroutineScope(Dispatchers.IO + SupervisorJob()).launch {
+                toastShardFlow.emit("$text")
+                delay(2000)
+                toastShardFlow.emit("")
+            }
         }
     }
-    fun showText(context: Context, resId: Int){
-        showText(context, context.resources.getText(resId))
+
+    fun showText(context: Context, resId: Int) {
+        showText(context.resources.getText(resId))
     }
 }

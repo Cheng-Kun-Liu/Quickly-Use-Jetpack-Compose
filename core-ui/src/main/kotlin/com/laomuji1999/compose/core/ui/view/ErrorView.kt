@@ -30,16 +30,11 @@ import com.laomuji1999.compose.core.ui.we.widget.button.WeButtonType
 import com.laomuji1999.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji1999.compose.res.R
 
-class ErrorViewContent {
-    @Composable
-    fun uniqueKey(): String {
-        val saveData = rememberSaveable {
-            "${System.currentTimeMillis()}"
-        }
-        return saveData
-    }
-}
-
+/**
+ * 异常刷新页面
+ * @author laomuji666
+ * @since 2025/7/18
+ */
 @Composable
 fun ErrorView(copyContent: @Composable ErrorViewContent.() -> Unit) {
     var isClickRefresh by rememberSaveable { mutableStateOf(false) }
@@ -79,6 +74,16 @@ fun ErrorView(copyContent: @Composable ErrorViewContent.() -> Unit) {
                 )
             }
         }
+    }
+}
+
+class ErrorViewContent {
+    @Composable
+    fun uniqueKey(): String {
+        val saveData = rememberSaveable {
+            "${System.currentTimeMillis()}"
+        }
+        return saveData
     }
 }
 

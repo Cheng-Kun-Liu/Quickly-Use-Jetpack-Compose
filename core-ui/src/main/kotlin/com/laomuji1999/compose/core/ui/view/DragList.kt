@@ -22,8 +22,12 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.zIndex
 import com.laomuji1999.compose.core.ui.we.WeTheme
 import com.laomuji1999.compose.core.ui.we.widget.check.WeCheck
-import com.laomuji1999.compose.core.ui.we.widget.radio.WeRadio
 
+/**
+ * 长按拖动排序
+ * @author laomuji666
+ * @since 2025/7/18
+ */
 @Composable
 fun <T> DragList(
     modifier: Modifier = Modifier,
