@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.laomuji1999.compose.hilt)
     alias(libs.plugins.google.gms.google.services)
     alias(libs.plugins.google.firebase.crashlytics)
+    alias(libs.plugins.baselineprofile)
 }
 
 //自定义 Gradle Plugin, 在运行app的 build.gradle.kts 文件时,会被调用
@@ -40,12 +41,12 @@ android {
 }
 
 dependencies {
-    //compose必须的依赖
+    //compose 必须的依赖
     implementation(libs.androidx.lifecycle.runtime.compose)
-    //关联view和compose
+    //关联 view 和 compose
     implementation(libs.androidx.activity.compose)
 
-    //其它module
+    //其它 module
     implementation(project(":core-ui"))
     implementation(project(":core-logic:common"))
     implementation(project(":core-logic:notification"))
@@ -68,9 +69,12 @@ dependencies {
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics)
 
-    //根据不同的渠道引入不同的module
-    val gpImplementation by configurations
-    val samImplementation by configurations
-    gpImplementation(project(":flavor:flavor-gp"))
-    samImplementation(project(":flavor:flavor-sam"))
+    //引入 profileinstaller 用来在app首次启动时加载并安装 baseline profile
+    implementation(libs.androidx.profileinstaller)
+    //为 build variant 注册 baseline profile module
+    "baselineProfile"(project(":baseline-profile"))
+
+    //根据不同的渠道引入不同的 module
+    "gpImplementation"(project(":flavor:flavor-gp"))
+    "samImplementation"(project(":flavor:flavor-sam"))
 }

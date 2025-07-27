@@ -27,6 +27,12 @@ generativeai = "0.9.0"
 playServicesLocation = "21.3.0"
 appcompat = "1.7.0"
 documentfile = "1.1.0"
+junit = "1.2.1"
+espressoCore = "3.6.1"
+uiautomator = "2.3.0"
+benchmarkMacroJunit4 = "1.3.4"
+baselineprofile = "1.2.4"
+profileinstaller = "1.4.1"
 
 [libraries]
 # app
@@ -86,6 +92,11 @@ play-services-location = { group = "com.google.android.gms", name = "play-servic
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 # documentfile
 androidx-documentfile = { group = "androidx.documentfile", name = "documentfile", version.ref = "documentfile" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+androidx-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
+androidx-benchmark-macro-junit4 = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "benchmarkMacroJunit4" }
+androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "profileinstaller" }
 
 
 [plugins]
@@ -101,6 +112,8 @@ google-firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.
 laomuji1999-compose-hilt = { id = "laomuji1999.compose.hilt", version = "unspecified" }
 laomuji1999-compose-application = { id = "laomuji1999.compose.application", version = "unspecified" }
 laomuji1999-compose-library = { id = "laomuji1999.compose.library", version = "unspecified" }
+android-test = { id = "com.android.test", version.ref = "agp" }
+baselineprofile = { id = "androidx.baselineprofile", version.ref = "baselineprofile" }
 
 
 
