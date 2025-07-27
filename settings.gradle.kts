@@ -55,3 +55,4 @@ include(":feature:setting:font")
 include(":flavor:flavor-gp")
 include(":flavor:flavor-sam")
 
+include(":baseline-profile")
