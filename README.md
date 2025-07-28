@@ -19,7 +19,7 @@ Quickly-Use-Jetpack-Compose 的架构参考安卓官方的最佳实践:[Now in A
 
 # 设计系统
 
-自定义的设计系统,不使用M3的风格,按WX的UI风格设计的一套ui系统.支持动态切换颜色和窗口大小.
+自定义的设计系统,不使用M3的风格,按WX的UI风格设计的一套ui系统.支持动态切换颜色字体语言.
 
 + WeTheme: 替代MaterialTheme.竖屏以375宽度适配屏幕,横屏不适配正常显示.
 + WeColorScheme: 定义颜色.
