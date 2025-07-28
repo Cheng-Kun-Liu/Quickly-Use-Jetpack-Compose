@@ -38,7 +38,7 @@ Quickly-Use-Jetpack-Compose 的架构参考安卓官方的最佳实践:[Now in A
 + feature: 功能模块,按程序功能分成多个module,每个module都由Route,Screen,ViewModel,UiState,Action组成.
 + flavor: 区分flavor,根据不同的flavor引入不同的module,不同的module里再引入入不同的包.
 + res: 资源文件,统一管理图片,文字等资源文件.
-+ baseline-profile: 基准配置文件,加快冷启动速度.
++ baseline-profile: 基准配置文件,性能分析,减少冷启动时间,本项目的启动时间和安卓官方最佳实践一样.
 
 # 已提供的示例代码
 
