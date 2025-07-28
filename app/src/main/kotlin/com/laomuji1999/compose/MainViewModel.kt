@@ -1,7 +1,6 @@
 package com.laomuji1999.compose
 
 import android.app.Activity
-import android.webkit.WebView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.laomuji1999.compose.core.logic.common.Log
@@ -9,7 +8,6 @@ import com.laomuji1999.compose.core.ui.stateInTimeout
 import com.laomuji1999.compose.flavor.FlavorDemo
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
@@ -28,17 +26,11 @@ class MainViewModel @Inject constructor() : ViewModel() {
     )
 
     /**
-     * 初始化三方SDK
-     * 个人比较喜欢在启动屏幕初始化三方SDK
-     * 在Application中初始化会导致启动时间过长
+     * 初始化三方SDK,然后标记成功状态.
      */
     fun initModule(activity: Activity) {
         Log.debug("tag_flavor", FlavorDemo().getFlavor())
-        viewModelScope.launch {
-            //假设在这里初始化一些三方SDK
-            WebView(activity)
-            _mainUiState.value = MainUiState.Success
-        }
+        _mainUiState.value = MainUiState.Success
     }
 }
 

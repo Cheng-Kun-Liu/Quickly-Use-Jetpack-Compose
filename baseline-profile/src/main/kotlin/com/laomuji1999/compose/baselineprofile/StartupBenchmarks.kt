@@ -3,7 +3,6 @@ package com.laomuji1999.compose.baselineprofile
 import androidx.benchmark.macro.BaselineProfileMode
 import androidx.benchmark.macro.CompilationMode
 import androidx.benchmark.macro.StartupMode
-import androidx.benchmark.macro.StartupTimingMetric
 import androidx.benchmark.macro.junit4.MacrobenchmarkRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.filters.LargeTest
@@ -14,6 +13,9 @@ import org.junit.runner.RunWith
 
 /**
  * 性能测试,点击左边的运行,即可运行下方的所有性能测试.
+ * 后缀名为 perfetto-trace 的性能追溯日志所在目录:
+ * build\outputs\connected_android_test_additional_output\${BuildVariant}\connected\${DeviceName}
+ * 上传一个日志到 https://ui.perfetto.dev/ 分析性能瓶颈
  */
 @RunWith(AndroidJUnit4::class)
 @LargeTest
@@ -44,7 +46,7 @@ class StartupBenchmarks {
         rule.measureRepeated(
             packageName = InstrumentationRegistry.getArguments().getString("targetAppId")
                 ?: throw Exception("targetAppId not passed as instrumentation runner arg"),
-            metrics = listOf(StartupTimingMetric()),
+            metrics = BaselineProfileMetrics.allMetrics,
             compilationMode = compilationMode,
             startupMode = StartupMode.COLD,
             iterations = 10,
