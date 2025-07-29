@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.laomuji1999.compose.core.logic.database.entity.ContactInfoEntity
+import com.laomuji1999.compose.core.logic.model.entity.ContactInfoEntity
 
 @Dao
 interface ContactDao {

@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
     <application>
         <provider
-            android:name=".module.contacts.ContactAssetFileProvider"
+            android:name=".contacts.ContactAssetFileProvider"
             android:authorities="compose.laomuji1999.contact.assert"
             android:exported="true"
             tools:ignore="ExportedContentProvider" />

@@ -5,14 +5,15 @@ plugins {
 
 android {
     namespace = "com.laomuji1999.compose.core.logic.database"
-    defaultConfig {
-        ksp {
-            arg("room.schemaLocation", "$projectDir/schemas")
-        }
-    }
+}
+
+ksp {
+    arg("room.schemaLocation", "$projectDir/schemas")
 }
 
 dependencies {
+    //Entity
+    api(project(":core-logic:model"))
 
     //database
     implementation(libs.androidx.room.runtime)

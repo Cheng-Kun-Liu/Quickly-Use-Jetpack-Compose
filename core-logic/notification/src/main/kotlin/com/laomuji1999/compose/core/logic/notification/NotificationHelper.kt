@@ -13,8 +13,8 @@ import androidx.core.content.getSystemService
 import androidx.core.graphics.drawable.IconCompat
 import com.laomuji1999.compose.core.logic.common.Log
 import com.laomuji1999.compose.core.logic.common.cache.CacheUtil
-import com.laomuji1999.compose.core.logic.database.entity.ContactInfoEntity
-import com.laomuji1999.compose.core.logic.database.entity.MessageInfoEntity
+import com.laomuji1999.compose.core.logic.model.entity.ContactInfoEntity
+import com.laomuji1999.compose.core.logic.model.entity.MessageInfoEntity
 import javax.inject.Singleton
 
 @Singleton

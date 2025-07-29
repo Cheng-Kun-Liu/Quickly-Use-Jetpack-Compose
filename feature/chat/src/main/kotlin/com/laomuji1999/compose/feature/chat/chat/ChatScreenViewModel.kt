@@ -6,10 +6,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.laomuji1999.compose.core.logic.common.dispatchers.IoCoroutineScope
 import com.laomuji1999.compose.core.logic.database.dao.ContactDao
-import com.laomuji1999.compose.core.logic.database.entity.ContactInfoEntity
-import com.laomuji1999.compose.core.logic.database.entity.MessageInfoEntity
+import com.laomuji1999.compose.core.logic.model.entity.ContactInfoEntity
+import com.laomuji1999.compose.core.logic.model.entity.MessageInfoEntity
 import com.laomuji1999.compose.core.logic.notification.NotificationHelper
-import com.laomuji1999.compose.core.logic.repository.module.chat.ChatRepository
+import com.laomuji1999.compose.core.logic.repository.chat.ChatRepository
 import com.laomuji1999.compose.core.ui.emitGraph
 import com.laomuji1999.compose.core.ui.stateInTimeout
 import dagger.hilt.android.lifecycle.HiltViewModel

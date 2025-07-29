@@ -4,8 +4,8 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.laomuji1999.compose.core.logic.database.dao.ContactDao
 import com.laomuji1999.compose.core.logic.database.dao.MessageDao
-import com.laomuji1999.compose.core.logic.database.entity.ContactInfoEntity
-import com.laomuji1999.compose.core.logic.database.entity.MessageInfoEntity
+import com.laomuji1999.compose.core.logic.model.entity.ContactInfoEntity
+import com.laomuji1999.compose.core.logic.model.entity.MessageInfoEntity
 
 @Database(
     entities = [
