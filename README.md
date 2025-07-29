@@ -46,11 +46,11 @@ Quickly-Use-Jetpack-Compose 的架构参考安卓官方的最佳实践:[Now in A
 + 动态切换语言: 兼容高低版本语言切换,支持SDK33的应用首选语言.
 + 动态切换主题: 白天和夜间主题,Material动态主题,自定义主题.
 + 动态切换字体: 字体大小任意切换.
-+ ktor: 序列化,ViewModel+Flow,等待响应,异常处理.
-+ firebase: 埋点,崩溃分析,推送.
-+ google登录: CredentialManager添加登录选项.
 + 离线可用: 优先从Room数据库获取数据,网络获取数据后更新到数据库.
++ ktor: 序列化,ViewModel+Flow,等待响应,异常处理,分页加载.
++ google登录: CredentialManager添加登录选项.
 + ai聊天: 接入Google Ai模仿微信的聊天效果,联系人列表,聊天消息推送等.
++ firebase: 埋点,崩溃分析,推送.
 + 焦点控制: 点击焦点,键盘输入焦点控制,简化用户操作.
 + 动态切换logo: 比如双十一活动需要修改logo,但是又不想更新包.
 + 获取定位: 针对粗略和精准的权限,使用不同的方式获取定位.
