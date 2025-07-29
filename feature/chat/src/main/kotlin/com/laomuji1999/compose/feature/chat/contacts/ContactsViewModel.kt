@@ -3,8 +3,8 @@ package com.laomuji1999.compose.feature.chat.contacts
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.laomuji1999.compose.core.logic.common.dispatchers.IoCoroutineScope
-import com.laomuji1999.compose.core.logic.database.entity.ContactInfoEntity
-import com.laomuji1999.compose.core.logic.repository.module.contacts.ContactRepository
+import com.laomuji1999.compose.core.logic.model.entity.ContactInfoEntity
+import com.laomuji1999.compose.core.logic.repository.contacts.ContactRepository
 import com.laomuji1999.compose.core.ui.stateInTimeout
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope

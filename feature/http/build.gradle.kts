@@ -9,5 +9,5 @@ android {
 
 dependencies {
     implementation(project(":core-ui"))
-    implementation(project(":core-logic:http"))
+    implementation(project(":core-logic:repository"))
 }

@@ -45,7 +45,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
-import com.laomuji1999.compose.core.logic.database.entity.ContactInfoEntity
+import com.laomuji1999.compose.core.logic.model.entity.ContactInfoEntity
 import com.laomuji1999.compose.core.ui.clickableDebounce
 import com.laomuji1999.compose.core.ui.ifCondition
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme

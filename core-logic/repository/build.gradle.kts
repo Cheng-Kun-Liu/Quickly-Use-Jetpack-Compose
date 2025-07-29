@@ -11,7 +11,8 @@ dependencies {
 
     //project
     implementation(project(":core-logic:common"))
-    implementation(project(":core-ui"))
+    api(project(":core-logic:model"))
+    implementation(project(":core-logic:network:http"))
     api(project(":core-logic:database"))
     implementation(project(":core-logic:notification"))
 
