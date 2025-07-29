@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 object Toast {
     val toastShardFlow = MutableSharedFlow<String>()
 
-    fun showText(text: CharSequence) {
+    fun showText(text: CharSequence?) {
         CoroutineScope(Dispatchers.Main).launch {
             CoroutineScope(Dispatchers.IO + SupervisorJob()).launch {
                 toastShardFlow.emit("$text")

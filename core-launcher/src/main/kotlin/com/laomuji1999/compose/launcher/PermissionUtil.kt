@@ -18,7 +18,7 @@ import com.laomuji1999.compose.core.logic.common.Log
 import com.laomuji1999.compose.core.logic.common.Toast
 import com.laomuji1999.compose.res.R
 
-object PermissionUtil{
+object PermissionUtil {
     private const val TAG = "tag_permission"
 
     /**
@@ -29,7 +29,7 @@ object PermissionUtil{
     @Composable
     fun getPermissionsLauncher(
         permissions: List<String>,
-        onCallback: (granted:List<String>, denied:List<String>, foreverDenied:List<String>)->Unit
+        onCallback: (granted: List<String>, denied: List<String>, foreverDenied: List<String>) -> Unit
     ): () -> Unit {
         val activity = LocalContext.current as Activity
         val permissionLauncher = rememberLauncherForActivityResult(
@@ -39,23 +39,21 @@ object PermissionUtil{
             val deniedList = mutableListOf<String>()
             val foreverDeniedList = mutableListOf<String>()
             isGrantedMap.forEach {
-                if(it.value){
-                    Log.debug(TAG,"${it.key} granted")
+                if (it.value) {
+                    Log.debug(TAG, "${it.key} granted")
                     grantedList.add(it.key)
-                }else{
-                    if(ActivityCompat.shouldShowRequestPermissionRationale(activity, it.key)){
-                        Log.debug(TAG,"${it.key} denied")
+                } else {
+                    if (ActivityCompat.shouldShowRequestPermissionRationale(activity, it.key)) {
+                        Log.debug(TAG, "${it.key} denied")
                         deniedList.add(it.key)
-                    }else{
-                        Log.debug(TAG,"${it.key} forever denied")
+                    } else {
+                        Log.debug(TAG, "${it.key} forever denied")
                         foreverDeniedList.add(it.key)
                     }
                 }
             }
             onCallback(
-                grantedList,
-                deniedList,
-                foreverDeniedList
+                grantedList, deniedList, foreverDeniedList
             )
         }
         return {
@@ -75,13 +73,12 @@ object PermissionUtil{
     fun getPermissionLauncher(
         permission: String,
         context: Context = LocalContext.current,
-        onDenied: (context:Context)->Unit = { Setting.openSetting(context) },
-        onForeverDenied:  (context:Context)->Unit = onDenied,
-        onGranted: ()->Unit,
+        onDenied: (context: Context) -> Unit = { Setting.openSetting(context) },
+        onForeverDenied: (context: Context) -> Unit = onDenied,
+        onGranted: () -> Unit,
     ): () -> Unit {
         return getPermissionsLauncher(
-            permissions = listOf(permission),
-            onCallback = { _, denied, foreverDenied ->
+            permissions = listOf(permission), onCallback = { _, denied, foreverDenied ->
                 if (foreverDenied.isNotEmpty()) {
                     onForeverDenied(context)
                 } else if (denied.isNotEmpty()) {
@@ -89,8 +86,7 @@ object PermissionUtil{
                 } else {
                     onGranted()
                 }
-            }
-        )
+            })
     }
 
     /**
@@ -99,16 +95,16 @@ object PermissionUtil{
      * @param permission 权限
      */
     fun hasPermission(
-        context: Context,
-        permission: String
-    ) = ContextCompat.checkSelfPermission(context, permission) == android.content.pm.PackageManager.PERMISSION_GRANTED
+        context: Context, permission: String
+    ) = ContextCompat.checkSelfPermission(
+        context, permission
+    ) == android.content.pm.PackageManager.PERMISSION_GRANTED
 
     /**
      * 检查权限是否被授予
      */
     fun hasPermissions(
-        context: Context,
-        permissions: List<String>
+        context: Context, permissions: List<String>
     ): Boolean {
         for (permission in permissions) {
             if (!hasPermission(context, permission)) {
@@ -118,8 +114,8 @@ object PermissionUtil{
         return true
     }
 
-    object Setting{
-        fun openSetting(context: Context){
+    object Setting {
+        fun openSetting(context: Context) {
             val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
             intent.data = Uri.fromParts("package", context.packageName, null)
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -135,16 +131,15 @@ object PermissionUtil{
             }
         }
 
-        fun openGpsSetting(context: Context){
+        fun openGpsSetting(context: Context) {
             val intent = Intent()
             intent.setAction(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-            if(context is Application){
+            if (context is Application) {
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
             }
             context.startActivity(intent)
         }
     }
-
 
 
     /**
@@ -157,17 +152,20 @@ object PermissionUtil{
     @Composable
     fun getPostNotificationLauncher(
         context: Context = LocalContext.current,
-        onDenied: (context: Context) -> Unit = {
-            Toast.showText(context = context, resId = R.string.string_permission_notification_forever_denied)
+        onDenied: (context: Context) -> Unit = {},
+        onForeverDenied: (context: Context) -> Unit = {
+            Toast.showText(
+                context = context, resId = R.string.string_permission_notification_forever_denied
+            )
             Setting.openNotificationSettings(context)
         },
         onGranted: () -> Unit
-    ):()->Unit{
+    ): () -> Unit {
         val permissionLauncher = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             getPermissionLauncher(
                 permission = Manifest.permission.POST_NOTIFICATIONS,
                 onDenied = onDenied,
-                onForeverDenied = onDenied,
+                onForeverDenied = onForeverDenied,
                 onGranted = onGranted
             )
         } else onGranted
@@ -180,8 +178,8 @@ object PermissionUtil{
      */
     fun hasPostNotificationPermission(
         context: Context
-    ):Boolean{
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU){
+    ): Boolean {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             return hasPermission(context, Manifest.permission.POST_NOTIFICATIONS)
         }
         return true

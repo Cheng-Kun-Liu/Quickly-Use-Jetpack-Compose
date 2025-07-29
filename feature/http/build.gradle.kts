@@ -8,6 +8,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core-logic:common"))
     implementation(project(":core-ui"))
     implementation(project(":core-logic:repository"))
 }
