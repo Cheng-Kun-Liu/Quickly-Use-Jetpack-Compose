@@ -1,6 +1,10 @@
 package com.laomuji1999.compose.core.ui.we.widget.toast
 
-import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -13,11 +17,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableFloatStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -33,8 +33,6 @@ import com.laomuji1999.compose.core.ui.we.icons.Done
 import com.laomuji1999.compose.core.ui.we.icons.Error
 import com.laomuji1999.compose.core.ui.we.icons.Loading
 import com.laomuji1999.compose.core.ui.we.icons.WeIcons
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
 
 @Composable
 fun WeToast(
@@ -49,7 +47,7 @@ fun WeToast(
                 .align(Alignment.Center)
                 .clip(RoundedCornerShape(12.dp))
                 .background(WeTheme.colorScheme.toastBackgroundColor)
-                .size(LocalWeDimens.current.toastSize),
+                .size(WeTheme.dimens.toastSize),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
@@ -59,32 +57,28 @@ fun WeToast(
                         imageVector = WeIcons.Done,
                         contentDescription = null,
                         contentScale = ContentScale.FillHeight,
-                        modifier = Modifier.size(LocalWeDimens.current.toastIconSize)
+                        modifier = Modifier.size(WeTheme.dimens.toastIconSize)
                     )
                 }
 
                 WeToastType.Loading -> {
-                    var targetDegree by remember { mutableFloatStateOf(0f) }
-                    LaunchedEffect(Unit) {
-                        while (isActive) {
-                            targetDegree += 360f
-                            if (targetDegree > 360000f) {
-                                targetDegree = 0f
-                            }
-                            delay(800)
-                        }
-                    }
-                    val rotateDegree by animateFloatAsState(
-                        targetValue = targetDegree,
-                        animationSpec = tween(durationMillis = 1000),
-                        label = ""
+                    val infiniteTransition = rememberInfiniteTransition(label = "WeToastType.Loading")
+                    val rotateDegree by infiniteTransition.animateFloat(
+                        initialValue = 0f,
+                        targetValue = 360f,
+                        animationSpec = infiniteRepeatable(
+                            animation = tween(durationMillis = 1000, easing = LinearEasing),
+                            repeatMode = RepeatMode.Restart
+                        ),
+                        label = "WeToastType.Loading"
                     )
+
                     Image(
                         imageVector = WeIcons.Loading,
                         contentDescription = null,
                         contentScale = ContentScale.FillHeight,
                         modifier = Modifier
-                            .size(LocalWeDimens.current.toastIconSize)
+                            .size(WeTheme.dimens.toastIconSize)
                             .rotate(rotateDegree)
                     )
                 }
@@ -94,7 +88,7 @@ fun WeToast(
                         imageVector = WeIcons.Error,
                         contentDescription = null,
                         contentScale = ContentScale.FillHeight,
-                        modifier = Modifier.size(LocalWeDimens.current.toastIconSize)
+                        modifier = Modifier.size(WeTheme.dimens.toastIconSize)
                     )
                 }
             }
