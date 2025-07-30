@@ -1,2 +1,1 @@
-# ktor
--dontwarn org.slf4j.impl.StaticLoggerBinder
+# 针对module的混淆规则已放入对应的module中

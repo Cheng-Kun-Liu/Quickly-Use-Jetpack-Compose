@@ -10,12 +10,12 @@ class LibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target){
             with(pluginManager) {
-                //library需要的插件
-                apply("com.android.library")
-
                 //基础插件
                 apply("org.jetbrains.kotlin.android")
                 apply("org.jetbrains.kotlin.plugin.compose")
+
+                //library需要的插件
+                apply("com.android.library")
 
                 //序列化插件
                 apply("org.jetbrains.kotlin.plugin.serialization")

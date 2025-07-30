@@ -15,7 +15,11 @@ import org.junit.runner.RunWith
  * 性能测试,点击左边的运行,即可运行下方的所有性能测试.
  * 后缀名为 perfetto-trace 的性能追溯日志所在目录:
  * build\outputs\connected_android_test_additional_output\${BuildVariant}\connected\${DeviceName}
- * 上传一个日志到 https://ui.perfetto.dev/ 分析性能瓶颈
+ * 分析性能瓶颈:
+ * 1.在run里,Traces: Iteration 0 1 2 3 4 5 6 7 8 9, 点击任意一个,跳转到性能分析.
+ * 2.上传一个日志到 https://ui.perfetto.dev/
+ * 这里计算的时间是从点击图标到绘制页面的时间,是真正的冷启动时间,而不是仅启动Activity的时间.
+ * 启动Activity的时间: Logcat 中搜索 Displayed
  */
 @RunWith(AndroidJUnit4::class)
 @LargeTest

@@ -5,6 +5,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
@@ -29,7 +30,7 @@ object PermissionUtil {
     @Composable
     fun getPermissionsLauncher(
         permissions: List<String>,
-        onCallback: (granted: List<String>, denied: List<String>, foreverDenied: List<String>) -> Unit
+        onCallback: (granted: List<String>, denied: List<String>, askDenied: List<String>) -> Unit
     ): () -> Unit {
         val activity = LocalContext.current as Activity
         val permissionLauncher = rememberLauncherForActivityResult(
@@ -37,7 +38,7 @@ object PermissionUtil {
         ) { isGrantedMap ->
             val grantedList = mutableListOf<String>()
             val deniedList = mutableListOf<String>()
-            val foreverDeniedList = mutableListOf<String>()
+            val askDeniedList = mutableListOf<String>()
             isGrantedMap.forEach {
                 if (it.value) {
                     Log.debug(TAG, "${it.key} granted")
@@ -48,12 +49,12 @@ object PermissionUtil {
                         deniedList.add(it.key)
                     } else {
                         Log.debug(TAG, "${it.key} forever denied")
-                        foreverDeniedList.add(it.key)
+                        askDeniedList.add(it.key)
                     }
                 }
             }
             onCallback(
-                grantedList, deniedList, foreverDeniedList
+                grantedList, deniedList, askDeniedList
             )
         }
         return {
@@ -66,7 +67,7 @@ object PermissionUtil {
      * @param permission 权限
      * @param context 上下文, 用来跳转Setting
      * @param onDenied 权限被拒绝
-     * @param onForeverDenied 权限被永久拒绝
+     * @param onAskDenied 展示索要权限的回调
      * @param onGranted 权限被授权
      */
     @Composable
@@ -74,13 +75,13 @@ object PermissionUtil {
         permission: String,
         context: Context = LocalContext.current,
         onDenied: (context: Context) -> Unit = { Setting.openSetting(context) },
-        onForeverDenied: (context: Context) -> Unit = onDenied,
+        onAskDenied: (context: Context) -> Unit = onDenied,
         onGranted: () -> Unit,
     ): () -> Unit {
         return getPermissionsLauncher(
-            permissions = listOf(permission), onCallback = { _, denied, foreverDenied ->
-                if (foreverDenied.isNotEmpty()) {
-                    onForeverDenied(context)
+            permissions = listOf(permission), onCallback = { _, denied, askDenied ->
+                if (askDenied.isNotEmpty()) {
+                    onAskDenied(context)
                 } else if (denied.isNotEmpty()) {
                     onDenied(context)
                 } else {
@@ -98,7 +99,7 @@ object PermissionUtil {
         context: Context, permission: String
     ) = ContextCompat.checkSelfPermission(
         context, permission
-    ) == android.content.pm.PackageManager.PERMISSION_GRANTED
+    ) == PackageManager.PERMISSION_GRANTED
 
     /**
      * 检查权限是否被授予
@@ -153,9 +154,9 @@ object PermissionUtil {
     fun getPostNotificationLauncher(
         context: Context = LocalContext.current,
         onDenied: (context: Context) -> Unit = {},
-        onForeverDenied: (context: Context) -> Unit = {
+        onAskDenied: (context: Context) -> Unit = {
             Toast.showText(
-                context = context, resId = R.string.string_permission_notification_forever_denied
+                context = context, resId = R.string.string_permission_notification_ask_denied
             )
             Setting.openNotificationSettings(context)
         },
@@ -165,7 +166,7 @@ object PermissionUtil {
             getPermissionLauncher(
                 permission = Manifest.permission.POST_NOTIFICATIONS,
                 onDenied = onDenied,
-                onForeverDenied = onForeverDenied,
+                onAskDenied = onAskDenied,
                 onGranted = onGranted
             )
         } else onGranted

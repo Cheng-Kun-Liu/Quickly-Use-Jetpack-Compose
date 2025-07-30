@@ -4,8 +4,8 @@
     <string name="string_toast_done">Éxito</string>
     <string name="string_toast_loading">Cargando</string>
     <string name="string_toast_error">Falló</string>
-    <string name="string_permission_notification_forever_denied">El permiso de notificación está denegado permanentemente, se requiere autorización manual.</string>
-    <string name="string_permission_location_forever_denied">El permiso de ubicación está denegado permanentemente, actívelo manualmente.</string>
+    <string name="string_permission_notification_ask_denied">Se requiere el permiso de notificaciones para continuar.</string>
+    <string name="string_permission_location_ask_denied">Se requiere el permiso de ubicación para continuar.</string>
     <string name="string_error_view_title">Algo salió mal</string>
     <string name="string_error_view_content">Verifique la red o intente nuevamente más tarde</string>
     <string name="string_error_view_refresh">Actualizar la página actual</string>

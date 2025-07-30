@@ -1,10 +1,11 @@
 package util
 
 import com.android.build.api.dsl.ApplicationExtension
-import com.android.build.gradle.LibraryExtension
+import com.android.build.api.dsl.LibraryExtension
+import com.android.build.api.dsl.TestExtension
 import org.gradle.api.JavaVersion
 
-fun ApplicationExtension.applicationDefaultConfig(){
+fun ApplicationExtension.applicationDefaultConfig() {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
@@ -25,7 +26,7 @@ fun ApplicationExtension.applicationDefaultConfig(){
     }
 }
 
-fun LibraryExtension.libraryDefaultConfig(){
+fun LibraryExtension.libraryDefaultConfig() {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
@@ -34,5 +35,20 @@ fun LibraryExtension.libraryDefaultConfig(){
     defaultConfig {
         minSdk = DefaultConfigConstant.MIN_SDK
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+}
+
+fun TestExtension.baselineprofileDefaultConfig() {
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
+    }
+    compileSdk = DefaultConfigConstant.COMPILE_SDK
+    defaultConfig {
+        //BaselineProfile最低只能在 28+ 才能运行
+        minSdk = 28
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        //允许在模拟器上进行性能测试
+        testInstrumentationRunnerArguments["androidx.benchmark.suppressErrors"] = "EMULATOR"
     }
 }

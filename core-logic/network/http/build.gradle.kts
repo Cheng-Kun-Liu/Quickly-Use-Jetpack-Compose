@@ -5,6 +5,10 @@ plugins {
 
 android {
     namespace = "com.laomuji1999.compose.core.logic.network.http"
+
+    defaultConfig {
+        consumerProguardFiles("proguard-rules.pro")
+    }
 }
 
 dependencies {

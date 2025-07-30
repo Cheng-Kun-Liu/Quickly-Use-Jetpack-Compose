@@ -48,5 +48,9 @@ gradlePlugin {
             id = "laomuji1999.compose.library"
             implementationClass = "LibraryConventionPlugin"
         }
+        register("baselineprofile"){
+            id = "laomuji999.compose.baselineprofile"
+            implementationClass = "BaselineProfilePlugin"
+        }
     }
 }
