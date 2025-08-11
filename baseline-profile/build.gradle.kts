@@ -13,7 +13,7 @@ android {
         create("sam") { dimension = "channel" }
     }
 
-    //创建该设备来作为生成 baseline-prof.txt 的设备, 生成的设备必须是 root 过的.
+    //创建该设备来作为生成 baseline-prof.txt 的设备.
     testOptions.managedDevices.devices {
         create<com.android.build.api.dsl.ManagedVirtualDevice>("pixel6Api33") {
             device = "Pixel 6"
@@ -24,6 +24,7 @@ android {
 }
 
 //使用生成的 pixel6Api33 设备,不使用真机的原因是为了生成的目录一致.
+//运行右侧 Gradle->quickly->baseline-profile->Tasks->baseline profile 中的 gradle 命令.
 baselineProfile {
     managedDevices.clear()
     managedDevices += "pixel6Api33"

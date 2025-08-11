@@ -48,7 +48,8 @@ fun TestExtension.baselineprofileDefaultConfig() {
         //BaselineProfile最低只能在 28+ 才能运行
         minSdk = 28
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        //允许在模拟器上进行性能测试
+
+        //允许在模拟器上进行性能测试,模拟器性能不稳定,建议在真机上运行.
         testInstrumentationRunnerArguments["androidx.benchmark.suppressErrors"] = "EMULATOR"
     }
 }
