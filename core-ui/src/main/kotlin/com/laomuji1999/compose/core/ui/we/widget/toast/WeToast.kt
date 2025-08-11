@@ -11,6 +11,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -23,10 +24,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
-import com.laomuji1999.compose.core.ui.we.LocalWeDimens
 import com.laomuji1999.compose.core.ui.we.WeDialog
 import com.laomuji1999.compose.core.ui.we.WeTheme
 import com.laomuji1999.compose.core.ui.we.icons.Done
@@ -62,7 +63,8 @@ fun WeToast(
                 }
 
                 WeToastType.Loading -> {
-                    val infiniteTransition = rememberInfiniteTransition(label = "WeToastType.Loading")
+                    val infiniteTransition =
+                        rememberInfiniteTransition(label = "WeToastType.Loading")
                     val rotateDegree by infiniteTransition.animateFloat(
                         initialValue = 0f,
                         targetValue = 360f,
@@ -94,9 +96,10 @@ fun WeToast(
             }
             Spacer(modifier = Modifier.height(WeTheme.dimens.toastDividerHeight))
             Text(
-                modifier = Modifier.padding(horizontal = WeTheme.dimens.rowPaddingHorizontal),
+                modifier = Modifier.fillMaxWidth().padding(horizontal = WeTheme.dimens.rowInnerPaddingHorizontal),
                 text = message,
-                maxLines = 2,
+                maxLines = 4,
+                textAlign = TextAlign.Center,
                 overflow = TextOverflow.Ellipsis,
                 style = WeTheme.typography.title,
                 color = WeTheme.colorScheme.onToastBackgroundColor

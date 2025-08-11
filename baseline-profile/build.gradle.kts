@@ -1,39 +1,19 @@
 plugins {
-    alias(libs.plugins.android.test)
-    alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.baselineprofile)
+    alias(libs.plugins.laomuji1999.compose.baselineprofile)
 }
 
 android {
     namespace = "com.laomuji1999.compose.baselineprofile"
-    compileSdk = 36
 
-    compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_21
-        targetCompatibility = JavaVersion.VERSION_21
-    }
-
-    kotlinOptions {
-        jvmTarget = "21"
-    }
-
-    defaultConfig {
-        minSdk = 28
-        targetSdk = 36
-
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
-        testInstrumentationRunnerArguments["androidx.benchmark.suppressErrors"] = "EMULATOR"
-    }
-
+    //因为在 :app 里有flavor 所以需要在这里创建对应的编译变量
     targetProjectPath = ":app"
-
     flavorDimensions += listOf("channel")
     productFlavors {
         create("gp") { dimension = "channel" }
         create("sam") { dimension = "channel" }
     }
 
+    //创建该设备来作为生成 baseline-prof.txt 的设备.
     testOptions.managedDevices.devices {
         create<com.android.build.api.dsl.ManagedVirtualDevice>("pixel6Api33") {
             device = "Pixel 6"
@@ -43,17 +23,12 @@ android {
     }
 }
 
+//使用生成的 pixel6Api33 设备,不使用真机的原因是为了生成的目录一致.
+//运行右侧 Gradle->quickly->baseline-profile->Tasks->baseline profile 中的 gradle 命令.
 baselineProfile {
     managedDevices.clear()
     managedDevices += "pixel6Api33"
     useConnectedDevices = false
-
-}
-dependencies {
-    implementation(libs.androidx.junit)
-    implementation(libs.androidx.espresso.core)
-    implementation(libs.androidx.uiautomator)
-    implementation(libs.androidx.benchmark.macro.junit4)
 }
 
 androidComponents {

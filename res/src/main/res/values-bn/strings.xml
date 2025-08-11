@@ -4,8 +4,8 @@
     <string name="string_toast_done">সফল</string>
     <string name="string_toast_loading">লোড হচ্ছে</string>
     <string name="string_toast_error">ব্যর্থ হয়েছে</string>
-    <string name="string_permission_notification_forever_denied">বিজ্ঞপ্তি অনুমতি স্থায়ীভাবে অস্বীকার করা হয়েছে, ম্যানুয়াল অনুমোদন প্রয়োজন৷</string>
-    <string name="string_permission_location_forever_denied">অবস্থান অনুমতি স্থায়ীভাবে অস্বীকার করা হয়েছে, অনুগ্রহ করে এটি ম্যানুয়ালি চালু করুন৷</string>
+    <string name="string_permission_notification_ask_denied">চালিয়ে যেতে নোটিফিকেশন অনুমতি প্রয়োজন।</string>
+    <string name="string_permission_location_ask_denied">চালিয়ে যেতে অবস্থান অনুমতি প্রয়োজন।</string>
     <string name="string_error_view_title">কিছু ভুল হয়েছে</string>
     <string name="string_error_view_content">অনুগ্রহ করে নেটওয়ার্ক চেক করুন অথবা পরে আবার চেষ্টা করুন</string>
     <string name="string_error_view_refresh">বর্তমান পৃষ্ঠা রিফ্রেশ করুন</string>

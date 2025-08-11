@@ -3,8 +3,8 @@
     <string name="string_toast_done">Success</string>
     <string name="string_toast_loading">Loading</string>
     <string name="string_toast_error">Failed</string>
-    <string name="string_permission_notification_forever_denied">Notification permission is permanently denied, manual authorization is required.</string>
-    <string name="string_permission_location_forever_denied">Location permission is permanently denied, please turn it on manually.</string>
+    <string name="string_permission_notification_ask_denied">Notification permission is required to continue.</string>
+    <string name="string_permission_location_ask_denied">Location permission is required to continue.</string>
     <string name="string_error_view_title">Something went wrong</string>
     <string name="string_error_view_content">Please check the network or try again later</string>
     <string name="string_error_view_refresh">Refresh the current page</string>

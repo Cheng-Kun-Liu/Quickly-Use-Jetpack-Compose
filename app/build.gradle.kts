@@ -46,6 +46,11 @@ dependencies {
     //关联 view 和 compose
     implementation(libs.androidx.activity.compose)
 
+    //引入 profileinstaller 用来在app首次启动时加载并安装 baseline profile
+    implementation(libs.androidx.profileinstaller)
+    //为 build variant 注册 baseline profile module
+    "baselineProfile"(project(":baseline-profile"))
+
     //其它 module
     implementation(project(":core-ui"))
     implementation(project(":core-logic:common"))
@@ -68,11 +73,6 @@ dependencies {
     //firebase 崩溃分析
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics)
-
-    //引入 profileinstaller 用来在app首次启动时加载并安装 baseline profile
-    implementation(libs.androidx.profileinstaller)
-    //为 build variant 注册 baseline profile module
-    "baselineProfile"(project(":baseline-profile"))
 
     //根据不同的渠道引入不同的 module
     "gpImplementation"(project(":flavor:flavor-gp"))

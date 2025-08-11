@@ -3,8 +3,8 @@
     <string name="string_toast_done">تم بنجاح</string>
     <string name="string_toast_loading">جاري التحميل</string>
     <string name="string_toast_error">فشل</string>
-    <string name="string_permission_notification_forever_denied">تم رفض إذن الإشعارات نهائيًا، التفويض اليدوي مطلوب.</string>
-    <string name="string_permission_location_forever_denied">تم رفض إذن الموقع نهائيًا، يرجى تشغيله يدويًا.</string>
+    <string name="string_permission_notification_ask_denied">يلزم إذن الإشعارات للمتابعة.</string>
+    <string name="string_permission_location_ask_denied">يلزم إذن الموقع للمتابعة.</string>
     <string name="string_error_view_title">حدث خطأ ما</string>
     <string name="string_error_view_content">يرجى التحقق من الشبكة أو المحاولة مرة أخرى لاحقًا</string>
     <string name="string_error_view_refresh">تحديث الصفحة الحالية</string>

@@ -63,15 +63,15 @@ fun FeatureScreen(
     val launcherMultiplePermissions = PermissionUtil.getPermissionsLauncher(
         permissions = listOf(
             ACCESS_FINE_LOCATION, ACCESS_COARSE_LOCATION
-        ), onCallback = { _, _, foreverDenied ->
-            if (foreverDenied.contains(ACCESS_FINE_LOCATION) && foreverDenied.contains(
-                    ACCESS_COARSE_LOCATION
-                )
-            ) {
-                Toast.showText(
-                    context = context, resId = R.string.string_permission_location_forever_denied
-                )
-                PermissionUtil.Setting.openSetting(context)
+        ), onCallback = { _, _, askDenied ->
+            askDenied.apply {
+                if (contains(ACCESS_FINE_LOCATION) && contains(ACCESS_COARSE_LOCATION)) {
+                    Toast.showText(
+                        context = context,
+                        resId = R.string.string_permission_location_ask_denied,
+                    )
+                    PermissionUtil.Setting.openSetting(context)
+                }
             }
         })
 

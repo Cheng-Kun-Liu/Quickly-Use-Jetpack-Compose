@@ -3,8 +3,8 @@
     <string name="string_toast_done">成功</string>
     <string name="string_toast_loading">載入中</string>
     <string name="string_toast_error">失敗</string>
-    <string name="string_permission_notification_forever_denied">通知權限被永久拒絕,需要手動授權.</string>
-    <string name="string_permission_location_forever_denied">定位權限被永久拒絕,請手動打開.</string>
+    <string name="string_permission_notification_ask_denied">需要通知權限才能繼續</string>
+    <string name="string_permission_location_ask_denied">需要位置權限才能繼續</string>
     <string name="string_error_view_title">出錯了</string>
     <string name="string_error_view_content">請檢查網路或稍後重試</string>
     <string name="string_error_view_refresh">刷新目前頁面</string>
