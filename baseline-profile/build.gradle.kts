@@ -5,7 +5,7 @@ plugins {
 android {
     namespace = "com.laomuji1999.compose.baselineprofile"
 
-    //因为在 :app 里有flavor 所以需要在这里创建对应的编译变量
+    //因为在 :app 里有 flavor 所以需要在这里创建对应的编译变量
     targetProjectPath = ":app"
     flavorDimensions += listOf("channel")
     productFlavors {
@@ -14,7 +14,8 @@ android {
     }
 
     //创建该设备来作为生成 baseline-prof.txt 的设备.
-    testOptions.managedDevices.devices {
+    testOptions.managedDevices.allDevices  {
+        @Suppress("UnstableApiUsage")
         create<com.android.build.api.dsl.ManagedVirtualDevice>("pixel6Api33") {
             device = "Pixel 6"
             apiLevel = 33
@@ -32,6 +33,7 @@ baselineProfile {
 }
 
 androidComponents {
+    @Suppress("UnstableApiUsage")
     onVariants { v ->
         val artifactsLoader = v.artifacts.getBuiltArtifactsLoader()
         v.instrumentationRunnerArguments.put(

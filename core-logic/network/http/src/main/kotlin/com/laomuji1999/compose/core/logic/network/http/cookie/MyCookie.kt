@@ -22,7 +22,7 @@ data class MyCookie(
         cookie.name,
         cookie.value,
         cookie.encoding,
-        cookie.maxAge,
+        cookie.maxAge?:0,
         cookie.expires?.timestamp,
         cookie.domain,
         cookie.path,
