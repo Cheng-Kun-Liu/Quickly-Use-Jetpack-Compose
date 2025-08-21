@@ -53,6 +53,7 @@ import com.laomuji1999.compose.core.ui.we.widget.button.WeButtonType
 import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutline
 import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutlineType
 import com.laomuji1999.compose.core.ui.we.widget.scaffold.WeScaffold
+import com.laomuji1999.compose.core.ui.we.widget.slider.WeSlider
 import com.laomuji1999.compose.core.ui.we.widget.topbar.WeTopBar
 import com.laomuji1999.compose.res.R
 import kotlin.math.max
@@ -136,6 +137,25 @@ private fun FontScreenUi(
                 .fillMaxWidth()
                 .padding(WeTheme.dimens.chatPadding * 2)
         ) {
+
+            WeSlider(
+                modifier = Modifier.fillMaxWidth(),
+                value = uiState.currentIndex,
+                minValue = 0,
+                maxValue = uiState.allWeTypography.size - 1,
+                step = 1,
+                onValueChanged = {
+                    onAction(FontScreenAction.OnChangeTypography(it))
+                },
+            )
+
+            Spacer(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(WeTheme.dimens.chatPadding / 2)
+            )
+
+
             var paddingStart by remember { mutableIntStateOf(0) }
             var paddingEnd by remember { mutableIntStateOf(0) }
             Row(
@@ -191,7 +211,6 @@ private fun FontScreenUi(
                     },
                 )
             }
-
         }
     }
 }
@@ -249,7 +268,8 @@ private fun ChatMessageText(
 
 @Composable
 private fun FontSlide(
-    index: Int, max: Int,
+    index: Int,
+    max: Int,
     onValueChange: (Int) -> Unit,
 ) {
     if (index < 0) {
