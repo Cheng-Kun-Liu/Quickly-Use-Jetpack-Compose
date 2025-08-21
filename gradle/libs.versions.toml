@@ -1,37 +1,37 @@
 [versions]
-agp = "8.9.2"
+agp = "8.12.0"
 biometric = "1.1.0"
 coilCompose = "2.7.0"
 credentials = "1.5.0"
 googleid = "1.1.1"
 kotlin = "2.1.20"
+ksp = "2.1.20-2.0.0"
 coreKtx = "1.16.0"
 kotlinxSerializationJson = "1.8.1"
-lifecycleRuntimeKtx = "2.9.0"
+lifecycleRuntimeKtx = "2.9.2"
 activityCompose = "1.10.1"
-composeBom = "2025.05.00"
-ksp = "2.1.20-2.0.0"
-androidGradlePlugin = "8.4.2"
-hilt = "2.56"
+composeBom = "2025.07.00"
+androidGradlePlugin = "8.12.0"
+hilt = "2.57"
 androidxCoreSplashscreen = "1.0.1"
 androidxHiltNavigationCompose = "1.2.0"
-media3 = "1.6.1"
-navigationCompose = "2.9.0"
-googleGmsGoogleServices = "4.4.2"
-firebaseBom = "33.13.0"
-googleFirebaseCrashlytics = "3.0.3"
-ktor = "2.3.12"
-playServicesAuth = "21.3.0"
-androidxRoom = "2.7.1"
+media3 = "1.8.0"
+navigationCompose = "2.9.3"
+googleGmsGoogleServices = "4.4.3"
+firebaseBom = "34.1.0"
+googleFirebaseCrashlytics = "3.0.6"
+ktor = "3.2.3"
+playServicesAuth = "21.4.0"
+androidxRoom = "2.7.2"
 generativeai = "0.9.0"
 playServicesLocation = "21.3.0"
-appcompat = "1.7.0"
+appcompat = "1.7.1"
 documentfile = "1.1.0"
-junit = "1.2.1"
-espressoCore = "3.6.1"
+junit = "1.3.0"
+espressoCore = "3.7.0"
 uiautomator = "2.3.0"
-benchmarkMacroJunit4 = "1.3.4"
-baselineprofile = "1.2.4"
+benchmarkMacroJunit4 = "1.4.0"
+baselineprofile = "1.4.0"
 profileinstaller = "1.4.1"
 
 [libraries]
@@ -92,7 +92,7 @@ play-services-location = { group = "com.google.android.gms", name = "play-servic
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 # documentfile
 androidx-documentfile = { group = "androidx.documentfile", name = "documentfile", version.ref = "documentfile" }
-# baseline profile
+# baseline profile, Used by build logic
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
