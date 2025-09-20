@@ -131,7 +131,11 @@ class HttpService @Inject constructor(
         install(HttpRequestRetry) {
             maxRetries = 3
             retryOnExceptionIf { _, _ ->
+                //只有联网时才重试
                 connectivityObserver.isConnected
+            }
+            retryIf { request, response ->
+                false
             }
             exponentialDelay()
         }
