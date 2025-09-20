@@ -28,6 +28,7 @@ Quickly-Use-Jetpack-Compose 的架构参考安卓官方的最佳实践:[Now in A
 + WeDimen: 定义尺寸.
 + WeIcons: 使用ImageVector绘制图标.
 + WeWidget: 实现WX风格的组件,如顶部导航,底部导航,Button,Toast,ActionSheet,单选,多选,开关等组件.
++ View: 一些常用的Compose实现的组件,如Banner,文本替换文字颜色点击,拖动排序等.
 
 # Module目录简介
 
