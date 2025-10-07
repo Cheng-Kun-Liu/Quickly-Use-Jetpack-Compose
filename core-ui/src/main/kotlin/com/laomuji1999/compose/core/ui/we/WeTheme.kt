@@ -1,7 +1,6 @@
 package com.laomuji1999.compose.core.ui.we
 
 import android.content.res.Configuration
-import android.util.TypedValue
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -75,14 +74,10 @@ internal fun getAdapterDensity(designWidth: Float = 375f): Density {
     if (orientation != Configuration.ORIENTATION_PORTRAIT) {
         return LocalDensity.current
     } else {
-        val context = LocalContext.current
-        val resources = context.resources
+        val resources = LocalContext.current.resources
         val displayMetrics = resources.displayMetrics
         val targetDensity = displayMetrics.widthPixels / designWidth
-        val systemScaledPxPerSp = TypedValue.applyDimension(
-            TypedValue.COMPLEX_UNIT_SP, 1f, displayMetrics
-        )
-        val fontScale = systemScaledPxPerSp / targetDensity
-        return Density(density = targetDensity, fontScale = fontScale)
+        //字体缩放固定为1f,不受系统调整字体大小的影响.
+        return Density(density = targetDensity, fontScale = 1f)
     }
 }
