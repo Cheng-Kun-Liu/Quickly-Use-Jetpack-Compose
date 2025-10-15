@@ -16,27 +16,13 @@ class AppHelloWorldPlugin : Plugin<Project> {
 
 //其它AndroidApplication相关的配置在[ApplicationConventionPlugin]
 android {
-    //命名空间,尽量和applicationId一致,涉及到一些文件的路径.
+    //命名空间,尽量和applicationId一致,涉及到一些文件的路径.当然不一致也完全没问题.
     namespace = "com.laomuji1999.compose"
 
     //默认配置
     defaultConfig {
-        applicationId = "com.laomuji1999.compose"
         versionCode = 12
         versionName = "1.2"
-    }
-
-    //使用不同的 build variant
-    flavorDimensions += "channel"
-    productFlavors {
-        create("gp") {
-            dimension = "channel"
-            //这里也可以对包名后缀进行进一步区分
-            // applicationIdSuffix = ".gp"
-        }
-        create("sam") {
-            dimension = "channel"
-        }
     }
 }
 

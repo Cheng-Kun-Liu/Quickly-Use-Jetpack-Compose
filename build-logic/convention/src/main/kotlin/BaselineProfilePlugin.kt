@@ -20,6 +20,7 @@ class BaselineProfilePlugin : Plugin<Project> {
 
             extensions.configure<TestExtension> {
                 baselineprofileDefaultConfig()
+                buildConfig()
             }
 
 
@@ -30,6 +31,16 @@ class BaselineProfilePlugin : Plugin<Project> {
                 add("implementation", libs.findLibrary("androidx.benchmark.macro.junit4").get())
                 add("implementation", libs.findLibrary("androidx.profileinstaller").get())
             }
+        }
+    }
+
+    private fun TestExtension.buildConfig() {
+        //因为在 :app 里有 flavor 所以需要在这里创建对应的编译变量
+        targetProjectPath = ":app"
+        flavorDimensions += listOf("channel")
+        productFlavors {
+            create("gp") { dimension = "channel" }
+            create("sam") { dimension = "channel" }
         }
     }
 }

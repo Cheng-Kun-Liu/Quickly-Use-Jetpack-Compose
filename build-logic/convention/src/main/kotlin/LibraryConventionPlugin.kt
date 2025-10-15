@@ -8,7 +8,7 @@ import util.libs
 
 class LibraryConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        with(target){
+        with(target) {
             with(pluginManager) {
                 //基础插件
                 apply("org.jetbrains.kotlin.android")
@@ -23,14 +23,7 @@ class LibraryConventionPlugin : Plugin<Project> {
 
             extensions.configure<LibraryExtension> {
                 libraryDefaultConfig()
-
-                //构建功能
-                buildFeatures {
-                    //开启compose支持
-                    compose = true
-                    //开启buildConfig支持
-                    buildConfig = true
-                }
+                buildConfig()
             }
 
             dependencies {
@@ -38,6 +31,30 @@ class LibraryConventionPlugin : Plugin<Project> {
                 add("implementation", libs.findLibrary("androidx.lifecycle.runtime.compose").get())
                 //序列化
                 add("implementation", libs.findLibrary("kotlinx.serialization.json").get())
+            }
+        }
+    }
+
+    private fun LibraryExtension.buildConfig() {
+        //构建功能
+        buildFeatures {
+            //开启compose支持
+            compose = true
+            //开启buildConfig支持
+            buildConfig = true
+        }
+        //为所有的lib添加构建变量
+        flavorDimensions += listOf("channel")
+        productFlavors {
+            create("gp") {
+                dimension = "channel"
+                buildConfigField("String","WEB_CLIENT_ID","\"954472126977-chps0hidiamvrln1ls96hqp4lgq14co6.apps.googleusercontent.com\"")
+                buildConfigField("String","GEMINI_API_KEY","\"AIzaSyCuM1ecXRu37ZFy_DIQlIQWC9fkzkljKzg\"")
+            }
+            create("sam") {
+                dimension = "channel"
+                buildConfigField("String","WEB_CLIENT_ID","\"954472126977-chps0hidiamvrln1ls96hqp4lgq14co6.apps.googleusercontent.com\"")
+                buildConfigField("String","GEMINI_API_KEY","\"AIzaSyCuM1ecXRu37ZFy_DIQlIQWC9fkzkljKzg\"")
             }
         }
     }

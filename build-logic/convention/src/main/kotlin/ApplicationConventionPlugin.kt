@@ -1,4 +1,5 @@
 import com.android.build.api.dsl.ApplicationExtension
+import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
@@ -6,7 +7,7 @@ import util.applicationDefaultConfig
 
 class ApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
-        with(target){
+        with(target) {
             //Application需要的插件
             applicationPlugins()
 
@@ -15,13 +16,15 @@ class ApplicationConventionPlugin : Plugin<Project> {
                 applicationDefaultConfig()
 
                 //打包配置
-                buildConfig(target)
+                buildConfig()
             }
+
+            signConfig()
         }
     }
 
-    private fun Project.applicationPlugins(){
-        with(pluginManager){
+    private fun Project.applicationPlugins() {
+        with(pluginManager) {
             //基础插件
             apply("org.jetbrains.kotlin.android")
             apply("org.jetbrains.kotlin.plugin.compose")
@@ -31,50 +34,65 @@ class ApplicationConventionPlugin : Plugin<Project> {
         }
     }
 
-    private fun ApplicationExtension.buildConfig(project: Project){
-        //构建功能
+    private fun Project.signConfig(){
+        //创建SignConfig文件
+        extensions.configure<ApplicationExtension> {
+            signingConfigs {
+                create("gpSign") {
+                    storeFile = file("../keystore/key1.jks")
+                    keyAlias = "laomuji1999"
+                    storePassword = "laomuji1999123"
+                    keyPassword = "laomuji1999123"
+                }
+                create("samSign") {
+                    storeFile = file("../keystore/key2.jks")
+                    keyAlias = "laomuji1999"
+                    storePassword = "laomuji1999123"
+                    keyPassword = "laomuji1999123"
+                }
+            }
+        }
+
+        //Flavor匹配对应的Sign.
+        extensions.configure<ApplicationAndroidComponentsExtension> {
+            onVariants { variant ->
+                val flavorName = variant.flavorName ?: return@onVariants
+                val signName = "${flavorName}Sign"
+                val androidExt = extensions.getByType(ApplicationExtension::class.java)
+                val sign = androidExt.signingConfigs.findByName(signName)
+                @Suppress("UnstableApiUsage")
+                variant.signingConfig.setConfig(sign!!)
+            }
+        }
+    }
+
+    private fun ApplicationExtension.buildConfig() {
         buildFeatures {
-            //开启compose支持
             compose = true
-            //开启buildConfig支持
             buildConfig = true
         }
 
-        //打包配置
         packaging {
-            //构建资源文件
-            resources {
-                //排除文件路径,该路径的文件不会被打包.
-                excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            resources.excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+
+        flavorDimensions += "channel"
+        productFlavors {
+            create("gp") {
+                dimension = "channel"
+                applicationId = "com.laomuji1999.compose"
+            }
+            create("sam") {
+                dimension = "channel"
+                applicationId = "com.laomuji1999.compose"
             }
         }
 
-        //打包签名文件
-        signingConfigs {
-            getByName("debug") {
-                storeFile = project.file("../keystore/key.jks")
-                keyAlias = "laomuji1999"
-                storePassword = "laomuji1999123"
-                keyPassword = "laomuji1999123"
-            }
-            create("release") {
-                storeFile = project.file("../keystore/key.jks")
-                keyAlias = "laomuji1999"
-                storePassword = "laomuji1999123"
-                keyPassword = "laomuji1999123"
-            }
-        }
-        //打包配置
         buildTypes {
-            //测试配置
             debug {
-                signingConfig = signingConfigs.getByName("debug")
                 isMinifyEnabled = false
             }
-
-            //发布配置,混淆代码
             release {
-                signingConfig = signingConfigs.getByName("release")
                 isMinifyEnabled = true
                 proguardFiles(
                     getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -83,4 +101,5 @@ class ApplicationConventionPlugin : Plugin<Project> {
             }
         }
     }
+
 }

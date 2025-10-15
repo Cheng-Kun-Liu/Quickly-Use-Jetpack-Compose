@@ -5,14 +5,6 @@ plugins {
 android {
     namespace = "com.laomuji1999.compose.baselineprofile"
 
-    //因为在 :app 里有 flavor 所以需要在这里创建对应的编译变量
-    targetProjectPath = ":app"
-    flavorDimensions += listOf("channel")
-    productFlavors {
-        create("gp") { dimension = "channel" }
-        create("sam") { dimension = "channel" }
-    }
-
     //创建该设备来作为生成 baseline-prof.txt 的设备.
     testOptions.managedDevices.allDevices  {
         @Suppress("UnstableApiUsage")
