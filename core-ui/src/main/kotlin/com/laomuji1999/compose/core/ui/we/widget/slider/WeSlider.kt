@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.offset
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
@@ -24,7 +23,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.dropShadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.shadow.Shadow
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
@@ -83,7 +84,7 @@ fun WeSlider(
                     .fillMaxHeight()
                     .width(
                         with(density) {
-                            (trackWidth * sliderPosition + thumbSize.toPx() / 2).coerceAtLeast(0f).toDp()
+                            (trackWidth * sliderPosition).coerceAtLeast(0f).toDp()
                         }
                     )
                     .background(leftColor)
@@ -117,14 +118,23 @@ fun WeSlider(
                 modifier = Modifier
                     .offset {
                         IntOffset(
-                            with(density){
+                            with(density) {
                                 (trackWidth * sliderPosition).toInt() - (thumbSize / 2).roundToPx()
                             },
                             0
                         )
                     }
-                    .clip(CircleShape)
-                    .background(thumbColor)
+                    .dropShadow(
+                        shape = CircleShape,
+                        shadow = Shadow(
+                            radius = thumbSize / 6,
+                            color = Color.Black.copy(alpha = 0.3f)
+                        )
+                    )
+                    .background(
+                        shape = CircleShape,
+                        color = thumbColor,
+                    )
                     .size(thumbSize)
             )
         }
