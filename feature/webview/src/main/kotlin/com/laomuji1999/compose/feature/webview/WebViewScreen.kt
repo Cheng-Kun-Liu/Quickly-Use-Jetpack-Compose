@@ -1,6 +1,7 @@
 package com.laomuji1999.compose.feature.webview
 
 import android.annotation.SuppressLint
+import android.view.ViewGroup
 import android.webkit.WebSettings
 import android.webkit.WebView
 import androidx.activity.compose.BackHandler
@@ -137,6 +138,11 @@ fun composeWebView(
         modifier = Modifier.fillMaxSize(),
         factory = { context ->
             webView = WebView(context).apply {
+                layoutParams = ViewGroup.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.MATCH_PARENT
+                )
+
                 //开启JavaScript
                 settings.javaScriptEnabled = true
                 //开启dom
