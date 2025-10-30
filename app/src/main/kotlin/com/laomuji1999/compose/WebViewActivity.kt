@@ -16,7 +16,9 @@ import com.laomuji1999.compose.feature.webview.WebViewScreenRoute.Companion.comp
 import com.laomuji1999.compose.feature.webview.WebViewScreenRoute.Companion.navigateToWebViewScreen
 import dagger.hilt.android.AndroidEntryPoint
 
-
+/**
+ * 允许作为浏览器打开的Activity
+ */
 @AndroidEntryPoint
 class WebViewActivity : SlideActivity() {
     companion object {
@@ -28,37 +30,31 @@ class WebViewActivity : SlideActivity() {
         }
     }
 
-    private var isNeedLoadUrl = true
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         enableEdgeToEdge()
+
+        val startUrl = intent.data?.toString() ?: ""
 
         setContent {
             QuicklyTheme {
                 val navController = rememberNavController()
                 NavHost(
                     navController = navController,
-                    startDestination = WebViewScreenRoute("")
+                    startDestination = WebViewScreenRoute(startUrl)
                 ) {
                     composeWebViewScreen(
-                        onBackClick = {
-                            finish()
-                        },
+                        onBackClick = { finish() },
                         onOpenNewWindow = {
                             navController.navigateToWebViewScreen(it)
                         }
                     )
                 }
-                if (isNeedLoadUrl) {
-                    intent.data?.toString()?.let {
-                        navController.navigateToWebViewScreen(it)
-                    }
-                    isNeedLoadUrl = false
-                }
             }
         }
     }
+
 
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)

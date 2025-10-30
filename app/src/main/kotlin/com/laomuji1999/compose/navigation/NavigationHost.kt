@@ -65,7 +65,7 @@ fun NavigationHost(
                     MainScreenRoute.Graph.NestedScrollConnection -> navHostController.navigateToNestedScrollScreen()
                     MainScreenRoute.Graph.Painter -> navHostController.navigateToPainterScreen()
                     MainScreenRoute.Graph.WebView -> activity?.let {
-                        WebViewActivity.openWebViewActivity("https://www.google.com/", activity)
+                        WebViewActivity.openWebViewActivity("https://www.baidu.com/", activity)
                     }
                 }
             },
