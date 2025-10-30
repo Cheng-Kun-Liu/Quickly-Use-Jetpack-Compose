@@ -18,8 +18,8 @@ object WebViewScreenUtil {
     }){
         try {
             val intent = Intent(Intent.ACTION_VIEW)
-            intent.setData(url.toUri())
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            intent.data = url.toUri()
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
             context.startActivity(intent)
             onSuccess()
         }catch (e:Exception){
