@@ -1,13 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <style name="AppTheme.Quickly" parent="Theme.AppCompat.NoActionBar" />
 
     <style name="AppTheme.SplashScreen" parent="Theme.SplashScreen">
-        <!--  启动页style  -->
         <item name="postSplashScreenTheme">@style/AppTheme.Quickly</item>
-        <!--  启动页背景色  -->
         <item name="windowSplashScreenBackground">#FFFFFFFF</item>
-        <!--  启动页背景图  -->
         <item name="windowSplashScreenAnimatedIcon">@mipmap/ic_start_page</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
+
+    <style name="AppTheme.Quickly.TransparentActivity" parent="AppTheme.Quickly">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+    </style>
+
 </resources>
