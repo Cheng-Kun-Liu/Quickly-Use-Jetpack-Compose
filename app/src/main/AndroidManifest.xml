@@ -70,8 +70,8 @@
 
         <activity
             android:name=".WebViewActivity"
-            android:exported="true"
             android:configChanges="orientation|screenSize|keyboardHidden|keyboard|screenLayout|smallestScreenSize"
+            android:exported="true"
             android:taskAffinity="com.laomuji1999.compose.WebViewTask">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -83,6 +83,28 @@
                 <data android:scheme="https" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".SchemeActivity"
+            android:excludeFromRecents="true"
+            android:exported="true"
+            android:launchMode="singleTop"
+            android:taskAffinity="${applicationId}"
+            android:theme="@style/AppTheme.Quickly.TransparentActivity">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="*"
+                    android:scheme="quickly" />
+            </intent-filter>
+        </activity>
+
+
     </application>
 
 </manifest>
