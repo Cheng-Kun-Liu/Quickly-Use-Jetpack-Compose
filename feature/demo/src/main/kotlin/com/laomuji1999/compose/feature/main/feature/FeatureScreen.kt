@@ -24,10 +24,10 @@ import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutlineType
 import com.laomuji1999.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji1999.compose.core.ui.we.widget.switc.WeSwitch
 import com.laomuji1999.compose.feature.main.MainScreenAction
+import com.laomuji1999.compose.launcher.OpenAlbum
+import com.laomuji1999.compose.launcher.OpenCamera
+import com.laomuji1999.compose.launcher.OpenContact
 import com.laomuji1999.compose.launcher.PermissionUtil
-import com.laomuji1999.compose.launcher.openAlbum
-import com.laomuji1999.compose.launcher.openCamera
-import com.laomuji1999.compose.launcher.openContact
 import com.laomuji1999.compose.launcher.selectMobileLauncher
 import com.laomuji1999.compose.res.R
 
@@ -48,17 +48,11 @@ fun FeatureScreen(
         Toast.showText("...")
     })
 
-    val openAlbum = openAlbum {
-        Toast.showText("$it")
-    }
+    val openAlbum = OpenAlbum.openAlbum()
 
-    val openCamera = openCamera {
-        Toast.showText("$it")
-    }
+    val openCamera = OpenCamera.openCamera()
 
-    val openContact = openContact {
-        Toast.showText("${it.name} : ${it.mobile}")
-    }
+    val openContact = OpenContact.openContact()
 
     val launcherMultiplePermissions = PermissionUtil.getPermissionsLauncher(
         permissions = listOf(
@@ -89,13 +83,21 @@ fun FeatureScreen(
             selectMobile()
         },
         onOpenAlbumClick = {
-            openAlbum()
+            openAlbum.launch {
+                Toast.showText("$it")
+            }
         },
         onOpenCameraClick = {
-            openCamera()
+            openCamera.launch {
+                Toast.showText("$it")
+            }
         },
         onOpenContactClick = {
-            openContact()
+            openContact.launch {
+                it?.let {
+                    Toast.showText("${it.name} : ${it.mobile}")
+                }
+            }
         },
         onAction = onAction,
     )
