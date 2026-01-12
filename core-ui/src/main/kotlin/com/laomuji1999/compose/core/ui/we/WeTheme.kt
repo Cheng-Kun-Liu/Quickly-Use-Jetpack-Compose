@@ -2,6 +2,7 @@ package com.laomuji1999.compose.core.ui.we
 
 import android.content.res.Configuration
 import androidx.compose.foundation.LocalIndication
+import androidx.compose.foundation.LocalOverscrollFactory
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -44,6 +45,7 @@ fun WeTheme(
         LocalWeColorScheme provides weColorScheme,
         LocalWeDimens provides weDimens,
         LocalWeTypography provides weTypography,
+        LocalOverscrollFactory provides null
     ) {
         WeContent(content = content)
     }
