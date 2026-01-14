@@ -24,33 +24,45 @@ class VideoPlayActivity : SlideActivity() {
         }
 
         fun openVideoOtherApp(context: Context, filename: String) {
-            val uri = filename.runCatching {
-                DocumentFile.fromSingleUri(context, filename.toUri()).run {
-                    if (this?.exists() == true) {
-                        this.uri
-                    } else if (File(this@runCatching).exists()) {
-                        FileProvider.getUriForFile(
-                            context,
-                            "${context.packageName}.provider",
-                            File(this@runCatching),
-                        )
-                    } else null
+            if (filename.startsWith("http")) {
+                //打开浏览器
+                filename.runCatching {
+                    val intent = Intent(Intent.ACTION_VIEW)
+                    intent.data = this.toUri()
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+                    context.startActivity(intent)
                 }
-            }.getOrNull() ?: return
+            } else {
+                //打开本地视频文件
+                val uri = filename.runCatching {
+                    DocumentFile.fromSingleUri(context, this.toUri()).run {
+                        if (this?.exists() == true) {
+                            this.uri
+                        } else if (File(this@runCatching).exists()) {
+                            FileProvider.getUriForFile(
+                                context,
+                                "${context.packageName}.provider",
+                                File(this@runCatching),
+                            )
+                        } else null
+                    }
+                }.getOrNull() ?: return
+                runCatching {
+                    val intent = Intent().apply {
+                        action = Intent.ACTION_VIEW
+                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                        addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 
-            val intent = Intent().apply {
-                action = Intent.ACTION_VIEW
-                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        data = uri
+                        setDataAndType(
+                            this.data,
+                            data?.let { context.contentResolver.getType(it) } ?: "media/*")
 
-                data = uri
-                setDataAndType(
-                    this.data,
-                    data?.let { context.contentResolver.getType(it) } ?: "media/*")
-
-                putExtra(Intent.EXTRA_STREAM, data)
+                        putExtra(Intent.EXTRA_STREAM, data)
+                    }
+                    context.startActivity(intent)
+                }
             }
-            context.startActivity(intent)
         }
     }
 

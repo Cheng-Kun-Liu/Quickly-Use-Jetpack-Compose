@@ -3,7 +3,6 @@ package com.laomuji1999.compose.feature.video
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
-import android.content.pm.ActivityInfo
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -16,7 +15,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
@@ -34,21 +32,23 @@ fun VideoScreen(
     val context = LocalContext.current
     LaunchedEffect(isFullScreen) {
         if (isFullScreen) {
-            context.setScreenOrientation(orientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE)
+            context.hideSystemUi()
         } else {
-            context.setScreenOrientation(orientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT)
+            context.showSystemUi()
         }
     }
     Box {
         VideoPlayerView(
             modifier = Modifier.fillMaxSize(),
-            url = videoUri,
+            videoUri = videoUri,
         )
         Box(
             modifier = Modifier
                 .align(Alignment.TopEnd)
-                .padding(top = 20.dp)
-                .padding(end = 20.dp)
+                .padding(
+                    vertical = WeTheme.dimens.actionIconSize * 2,
+                    horizontal = WeTheme.dimens.actionIconSize,
+                )
                 .clickableDebounce(
                     indication = null,
                     onClick = {
@@ -60,22 +60,12 @@ fun VideoScreen(
                 imageVector = WeIcons.More,
                 contentDescription = null,
                 contentScale = ContentScale.FillHeight,
-                colorFilter = ColorFilter.tint(WeTheme.colorScheme.fontColorHeavy),
+                colorFilter = ColorFilter.tint(WeTheme.colorScheme.primaryButton),
                 modifier = Modifier
                     .align(Alignment.Center)
                     .size(WeTheme.dimens.actionIconSize),
             )
         }
-    }
-}
-
-fun Context.setScreenOrientation(orientation: Int) {
-    val activity = this.findActivity() ?: return
-    activity.requestedOrientation = orientation
-    if (orientation == ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
-        hideSystemUi()
-    } else {
-        showSystemUi()
     }
 }
 
