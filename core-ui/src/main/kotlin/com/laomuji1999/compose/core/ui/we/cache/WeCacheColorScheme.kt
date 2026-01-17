@@ -41,7 +41,7 @@ sealed class WeCacheColorScheme {
             }
         }
 
-        fun setWeThemeColorType(clsName: String?) {
+        internal fun setWeThemeColorType(clsName: String?) {
             val weThemeColorType = when (clsName) {
                 FlowSystem::class.java.name -> FlowSystem
                 Dynamic::class.java.name -> Dynamic
@@ -55,17 +55,18 @@ sealed class WeCacheColorScheme {
 
         @Composable
         fun WeCacheColorScheme.toWeColorScheme(): WeColorScheme {
-            val hasDynamicColor = Build.VERSION.SDK_INT >= Build.VERSION_CODES.S
+            val isDarkTheme = isSystemInDarkTheme()
+            val context = LocalContext.current
             return when (this) {
-                FlowSystem -> if (isSystemInDarkTheme()) WeColorSchemeDark else WeColorSchemeLight
-                Dynamic -> if (hasDynamicColor) {
-                    if (isSystemInDarkTheme()) {
-                        dynamicDarkColorScheme(LocalContext.current).toWeColorScheme(isDarkTheme = true)
+                FlowSystem -> if (isDarkTheme) WeColorSchemeDark else WeColorSchemeLight
+                Dynamic -> if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    if (isDarkTheme) {
+                        dynamicDarkColorScheme(context).toWeColorScheme(isDarkTheme = true)
                     } else {
-                        dynamicLightColorScheme(LocalContext.current).toWeColorScheme(isDarkTheme = false)
+                        dynamicLightColorScheme(context).toWeColorScheme(isDarkTheme = false)
                     }
                 } else {
-                    if (isSystemInDarkTheme()) {
+                    if (isDarkTheme) {
                         WeColorSchemeDark
                     } else {
                         WeColorSchemeLight
