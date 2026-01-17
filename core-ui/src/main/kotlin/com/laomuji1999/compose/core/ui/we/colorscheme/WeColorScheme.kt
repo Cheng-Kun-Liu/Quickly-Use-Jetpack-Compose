@@ -4,6 +4,7 @@ import androidx.compose.material3.ColorScheme
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import com.laomuji1999.compose.core.logic.common.Log
 
 internal val LocalWeColorScheme: ProvidableCompositionLocal<WeColorScheme> =
     staticCompositionLocalOf { WeColorSchemeLight }
@@ -95,7 +96,9 @@ fun ColorScheme.toWeColorScheme(
     primaryButton = primary,
     onPrimaryButton = onPrimary,
 
-    secondaryButton = if (isDarkTheme) Color.White.copy(alpha = 0.15f) else Color.Black.copy(alpha = 0.05f),
+    secondaryButton = if (isDarkTheme) Color.White.copy(alpha = 0.15f) else Color.Black.copy(
+        alpha = 0.05f
+    ),
     onSecondaryButton = primary,
 
     disableButton = surfaceVariant.copy(alpha = 0.5f),
@@ -109,7 +112,9 @@ fun ColorScheme.toWeColorScheme(
 
     bottomBarBackground = surface,
     bottomBarSelect = primary,
-    bottomBarUnSelect = if (isDarkTheme) Color.White.copy(alpha = 0.5f) else Color.Black.copy(alpha = 0.5f),
+    bottomBarUnSelect = if (isDarkTheme) Color.White.copy(alpha = 0.5f) else Color.Black.copy(
+        alpha = 0.5f
+    ),
 
     toastBackgroundColor = surface.copy(alpha = 0.9f),
     onToastBackgroundColor = onSurface,

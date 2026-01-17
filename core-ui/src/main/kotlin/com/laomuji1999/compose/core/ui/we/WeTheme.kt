@@ -8,8 +8,8 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalConfiguration
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.unit.Density
 import com.laomuji1999.compose.core.ui.WeIndication
 import com.laomuji1999.compose.core.ui.we.colorscheme.LocalWeColorScheme
@@ -76,7 +76,7 @@ internal fun getAdapterDensity(designWidth: Float = 375f): Density {
     if (orientation != Configuration.ORIENTATION_PORTRAIT) {
         return LocalDensity.current
     } else {
-        val resources = LocalContext.current.resources
+        val resources = LocalResources.current
         val displayMetrics = resources.displayMetrics
         val targetDensity = displayMetrics.widthPixels / designWidth
         //字体缩放固定为1f,不受系统调整字体大小的影响.
