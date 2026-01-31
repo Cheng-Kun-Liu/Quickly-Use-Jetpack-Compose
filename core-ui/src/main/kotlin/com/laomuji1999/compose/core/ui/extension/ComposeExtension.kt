@@ -1,4 +1,4 @@
-package com.laomuji1999.compose.core.ui
+package com.laomuji1999.compose.core.ui.extension
 
 import androidx.activity.BackEventCompat
 import androidx.activity.OnBackPressedCallback

@@ -1,17 +1,25 @@
 package com.laomuji1999.compose.feature.main
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
-import com.laomuji1999.compose.core.ui.isPreview
+import com.laomuji1999.compose.core.ui.extension.isPreview
+import com.laomuji1999.compose.core.ui.extension.modifier.ModifierDraggable.draggable
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
+import com.laomuji1999.compose.core.ui.we.WeTheme
 import com.laomuji1999.compose.core.ui.we.icons.Device
 import com.laomuji1999.compose.core.ui.we.icons.Feature
 import com.laomuji1999.compose.core.ui.we.icons.Ui
@@ -49,23 +57,29 @@ private fun MainScreenUi(
     val pagerState = rememberPagerState(
         pageCount = { MainScreenPageEnum.entries.size })
     val coroutineScope = rememberCoroutineScope()
-    WeScaffold(topBar = {
-        WeTopBar(
-            title = when (MainScreenPageEnum.entries[pagerState.currentPage]) {
-                MainScreenPageEnum.FEATURE -> stringResource(id = R.string.string_main_screen_page_features)
-                MainScreenPageEnum.UI -> stringResource(id = R.string.string_main_screen_page_ui)
-                MainScreenPageEnum.SETTINGS -> stringResource(id = R.string.string_main_screen_page_settings)
-            }
-        )
-    }, bottomBar = {
-        MainScreenBottomBar(
-            selectedEnum = MainScreenPageEnum.entries[pagerState.currentPage],
-            onSelectedEnumChange = {
-                coroutineScope.launch {
-                    pagerState.scrollToPage(it.ordinal)
+    WeScaffold(
+        topBar = {
+            WeTopBar(
+                title = when (MainScreenPageEnum.entries[pagerState.currentPage]) {
+                    MainScreenPageEnum.FEATURE -> stringResource(id = R.string.string_main_screen_page_features)
+                    MainScreenPageEnum.UI -> stringResource(id = R.string.string_main_screen_page_ui)
+                    MainScreenPageEnum.SETTINGS -> stringResource(id = R.string.string_main_screen_page_settings)
                 }
-            })
-    }) {
+            )
+        },
+        bottomBar = {
+            MainScreenBottomBar(
+                selectedEnum = MainScreenPageEnum.entries[pagerState.currentPage],
+                onSelectedEnumChange = {
+                    coroutineScope.launch {
+                        pagerState.scrollToPage(it.ordinal)
+                    }
+                })
+        },
+        extra = {
+            SimpleDragView()
+        }
+    ) {
         HorizontalPager(
             state = pagerState,
             modifier = Modifier.fillMaxSize(),
@@ -109,6 +123,29 @@ private fun MainScreenBottomBar(
             onClick = {
                 onSelectedEnumChange(MainScreenPageEnum.SETTINGS)
             })
+    }
+}
+
+@Composable
+private fun SimpleDragView() {
+    val iconSize = WeTheme.dimens.toastIconSize * 2
+    val density = LocalDensity.current
+    Box(
+        modifier = Modifier
+            .fillMaxSize(),
+    ) {
+        val offsetX = with(density) { (375.dp - iconSize).toPx() }
+        Image(
+            painter = painterResource(R.mipmap.ic_launcher),
+            contentDescription = null,
+            modifier = Modifier
+                .size(iconSize)
+                .draggable(
+                    initOffsetX = offsetX,
+                    initOffsetY = with(density) { 300.dp.toPx() },
+                    enableSnap = true,
+                )
+        )
     }
 }
 

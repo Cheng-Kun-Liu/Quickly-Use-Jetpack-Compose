@@ -4,8 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.laomuji1999.compose.core.logic.AppLanguages
 import com.laomuji1999.compose.core.logic.Language
-import com.laomuji1999.compose.core.ui.emitGraph
-import com.laomuji1999.compose.core.ui.stateInTimeout
+import com.laomuji1999.compose.core.ui.extension.emitGraph
+import com.laomuji1999.compose.core.ui.extension.stateInTimeout
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow

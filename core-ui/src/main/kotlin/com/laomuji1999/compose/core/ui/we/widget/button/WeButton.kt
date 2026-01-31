@@ -14,8 +14,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.laomuji1999.compose.core.ui.clickableDebounce
-import com.laomuji1999.compose.core.ui.ifCondition
+import com.laomuji1999.compose.core.ui.extension.clickableDebounce
+import com.laomuji1999.compose.core.ui.extension.ifCondition
 import com.laomuji1999.compose.core.ui.we.WeTheme
 
 @Composable

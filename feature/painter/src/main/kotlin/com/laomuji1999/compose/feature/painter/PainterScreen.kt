@@ -41,7 +41,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.laomuji1999.compose.core.ui.clickableDebounce
+import com.laomuji1999.compose.core.ui.extension.clickableDebounce
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
 import com.laomuji1999.compose.core.ui.we.widget.button.WeButton
 import com.laomuji1999.compose.core.ui.we.widget.button.WeButtonColor

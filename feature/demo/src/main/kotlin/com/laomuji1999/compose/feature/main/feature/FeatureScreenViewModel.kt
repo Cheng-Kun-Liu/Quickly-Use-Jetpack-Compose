@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.laomuji1999.compose.core.logic.common.cache.CacheUtil
 import com.laomuji1999.compose.core.logic.location.Locator
 import com.laomuji1999.compose.core.logic.location.LocatorResult
-import com.laomuji1999.compose.core.ui.stateInTimeout
+import com.laomuji1999.compose.core.ui.extension.stateInTimeout
 import com.laomuji1999.compose.launcher.PermissionUtil
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -4,7 +4,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
-import com.laomuji1999.compose.core.ui.navOptionsRemoveAll
+import com.laomuji1999.compose.core.ui.extension.navOptionsRemoveAll
 import kotlinx.serialization.Serializable
 
 @Serializable

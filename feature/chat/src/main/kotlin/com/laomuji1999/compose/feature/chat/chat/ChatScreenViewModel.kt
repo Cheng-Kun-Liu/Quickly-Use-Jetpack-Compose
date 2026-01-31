@@ -10,8 +10,8 @@ import com.laomuji1999.compose.core.logic.model.entity.ContactInfoEntity
 import com.laomuji1999.compose.core.logic.model.entity.MessageInfoEntity
 import com.laomuji1999.compose.core.logic.notification.NotificationHelper
 import com.laomuji1999.compose.core.logic.repository.chat.ChatRepository
-import com.laomuji1999.compose.core.ui.emitGraph
-import com.laomuji1999.compose.core.ui.stateInTimeout
+import com.laomuji1999.compose.core.ui.extension.emitGraph
+import com.laomuji1999.compose.core.ui.extension.stateInTimeout
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow

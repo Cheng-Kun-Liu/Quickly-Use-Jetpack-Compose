@@ -11,7 +11,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.content.FileProvider
-import com.laomuji1999.compose.core.ui.isPreview
+import com.laomuji1999.compose.core.ui.extension.isPreview
 import java.io.File
 
 object OpenCamera {

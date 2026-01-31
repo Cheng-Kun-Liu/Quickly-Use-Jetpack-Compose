@@ -25,7 +25,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.laomuji1999.compose.core.ui.clickableDebounce
+import com.laomuji1999.compose.core.ui.extension.clickableDebounce
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
 import com.laomuji1999.compose.core.ui.we.widget.click.WeClick
 import com.laomuji1999.compose.core.ui.we.widget.scaffold.WeScaffold

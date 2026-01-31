@@ -5,7 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.laomuji1999.compose.core.logic.common.dispatchers.IoCoroutineScope
 import com.laomuji1999.compose.core.logic.model.entity.ContactInfoEntity
 import com.laomuji1999.compose.core.logic.repository.contacts.ContactRepository
-import com.laomuji1999.compose.core.ui.stateInTimeout
+import com.laomuji1999.compose.core.ui.extension.stateInTimeout
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow

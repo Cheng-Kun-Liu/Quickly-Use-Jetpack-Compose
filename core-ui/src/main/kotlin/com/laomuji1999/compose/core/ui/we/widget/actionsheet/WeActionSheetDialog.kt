@@ -18,8 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.unit.IntOffset
-import com.laomuji1999.compose.core.ui.BackInvokedCallbackProgress
-import com.laomuji1999.compose.core.ui.clickableDebounce
+import com.laomuji1999.compose.core.ui.extension.BackInvokedCallbackProgress
+import com.laomuji1999.compose.core.ui.extension.clickableDebounce
 import com.laomuji1999.compose.core.ui.we.WeDialog
 import com.laomuji1999.compose.core.ui.we.WeTheme
 import com.laomuji1999.compose.core.ui.we.animated.AnimatedSlideFromBottom

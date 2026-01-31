@@ -46,8 +46,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.laomuji1999.compose.core.logic.model.entity.ContactInfoEntity
-import com.laomuji1999.compose.core.ui.clickableDebounce
-import com.laomuji1999.compose.core.ui.ifCondition
+import com.laomuji1999.compose.core.ui.extension.clickableDebounce
+import com.laomuji1999.compose.core.ui.extension.ifCondition
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
 import com.laomuji1999.compose.core.ui.we.WeTheme
 import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutline
