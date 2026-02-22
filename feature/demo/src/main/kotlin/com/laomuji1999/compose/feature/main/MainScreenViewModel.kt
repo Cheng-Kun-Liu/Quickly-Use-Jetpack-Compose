@@ -1,7 +1,7 @@
 package com.laomuji1999.compose.feature.main
 
 import androidx.lifecycle.ViewModel
-import com.laomuji1999.compose.core.ui.emitGraph
+import com.laomuji1999.compose.core.ui.extension.emitGraph
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.asSharedFlow

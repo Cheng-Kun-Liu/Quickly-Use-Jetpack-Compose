@@ -13,7 +13,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
-import com.laomuji1999.compose.core.ui.clickableDebounce
+import com.laomuji1999.compose.core.ui.extension.clickableDebounce
 import com.laomuji1999.compose.core.ui.we.WeTheme
 
 @Composable

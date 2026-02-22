@@ -2,8 +2,8 @@ package com.laomuji1999.compose.feature.font
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.laomuji1999.compose.core.ui.emitGraph
-import com.laomuji1999.compose.core.ui.stateInTimeout
+import com.laomuji1999.compose.core.ui.extension.emitGraph
+import com.laomuji1999.compose.core.ui.extension.stateInTimeout
 import com.laomuji1999.compose.core.ui.we.cache.WeCacheTypography
 import com.laomuji1999.compose.core.ui.we.typography.WeTypography
 import com.laomuji1999.compose.core.ui.we.typography.WeTypography13

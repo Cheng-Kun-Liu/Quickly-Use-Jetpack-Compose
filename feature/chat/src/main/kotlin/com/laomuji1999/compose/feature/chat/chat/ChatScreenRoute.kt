@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavOptions
 import androidx.navigation.compose.composable
 import androidx.navigation.navDeepLink
-import com.laomuji1999.compose.core.ui.navOptionsPushBack
+import com.laomuji1999.compose.core.ui.extension.navOptionsPushBack
 import kotlinx.serialization.Serializable
 
 const val CHAT_SCREEN_DEEP_LINK = "laomuji://compose.laomuji1999.com/chat"

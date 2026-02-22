@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowInsetsControllerCompat
 import com.laomuji1999.compose.core.logic.common.Toast
-import com.laomuji1999.compose.core.ui.isPreview
+import com.laomuji1999.compose.core.ui.extension.isPreview
 import com.laomuji1999.compose.core.ui.we.widget.toast.WeToast
 import com.laomuji1999.compose.core.ui.we.widget.toast.WeToastType
 

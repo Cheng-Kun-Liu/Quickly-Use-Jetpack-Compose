@@ -9,8 +9,8 @@ import com.laomuji1999.compose.core.logic.model.request.CreateUserRequest
 import com.laomuji1999.compose.core.logic.model.response.ProductResponse
 import com.laomuji1999.compose.core.logic.repository.product.ProductRepository
 import com.laomuji1999.compose.core.logic.repository.user.UserRepository
-import com.laomuji1999.compose.core.ui.combine
-import com.laomuji1999.compose.core.ui.stateInTimeout
+import com.laomuji1999.compose.core.ui.extension.combine
+import com.laomuji1999.compose.core.ui.extension.stateInTimeout
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
