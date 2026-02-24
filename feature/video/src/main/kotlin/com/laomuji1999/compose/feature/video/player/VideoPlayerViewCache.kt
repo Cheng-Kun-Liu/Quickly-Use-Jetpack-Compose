@@ -1,13 +1,16 @@
 package com.laomuji1999.compose.feature.video.player
 
 import android.content.Context
+import androidx.media3.common.util.UnstableApi
 import androidx.media3.database.StandaloneDatabaseProvider
+import androidx.media3.datasource.DefaultDataSource
 import androidx.media3.datasource.DefaultHttpDataSource
 import androidx.media3.datasource.cache.CacheDataSource
 import androidx.media3.datasource.cache.LeastRecentlyUsedCacheEvictor
 import androidx.media3.datasource.cache.SimpleCache
 import java.io.File
 
+@UnstableApi
 internal object VideoPlayerViewCache {
     /**
      * 最大缓存大小
@@ -25,10 +28,13 @@ internal object VideoPlayerViewCache {
         cache = SimpleCache(cacheDir, evictor, StandaloneDatabaseProvider(context))
     }
 
-    fun createMediaSourceFactory(): CacheDataSource.Factory {
-        return CacheDataSource.Factory().setCache(cache)
-            .setUpstreamDataSourceFactory(
-                DefaultHttpDataSource.Factory()
-            ).setFlags(CacheDataSource.FLAG_IGNORE_CACHE_ON_ERROR)
+    fun createMediaSourceFactory(context: Context): CacheDataSource.Factory {
+        init(context)
+        val httpDataSourceFactory = DefaultHttpDataSource.Factory()
+        val defaultDataSourceFactory = DefaultDataSource.Factory(context, httpDataSourceFactory)
+        return CacheDataSource.Factory()
+            .setCache(cache)
+            .setUpstreamDataSourceFactory(defaultDataSourceFactory)
+            .setFlags(CacheDataSource.FLAG_IGNORE_CACHE_ON_ERROR)
     }
 }
