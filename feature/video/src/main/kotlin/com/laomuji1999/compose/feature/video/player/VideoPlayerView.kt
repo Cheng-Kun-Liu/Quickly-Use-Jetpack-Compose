@@ -104,12 +104,11 @@ fun VideoPlayerView(
     //创建播放器
     val context = LocalContext.current.applicationContext
     val player = retain {
-        VideoPlayerViewCache.init(context)
         ExoPlayer.Builder(
             context,
             DefaultRenderersFactory(context).setEnableDecoderFallback(true)
         ).setMediaSourceFactory(
-            DefaultMediaSourceFactory(VideoPlayerViewCache.createMediaSourceFactory())
+            DefaultMediaSourceFactory(VideoPlayerViewCache.createMediaSourceFactory(context))
         ).build().apply {
             repeatMode = Player.REPEAT_MODE_ONE
             playWhenReady = true
