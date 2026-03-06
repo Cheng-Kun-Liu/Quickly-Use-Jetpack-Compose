@@ -28,6 +28,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.retain.RetainedEffect
 import androidx.compose.runtime.retain.retain
 import androidx.compose.runtime.setValue
@@ -37,6 +38,7 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.net.toUri
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.media3.common.MediaItem
 import androidx.media3.common.Player
 import androidx.media3.common.util.UnstableApi
@@ -54,8 +56,34 @@ import com.laomuji1999.compose.core.ui.we.widget.slider.WeSlider
 import kotlinx.coroutines.delay
 
 /**
+ * 视频播放器状态
+ * @param isBuffering 是否正在缓冲
+ * @param currentSecond 当前秒数
+ * @param totalSecond 总秒数
+ * @param isPlaying 是否正在播放
+ * @param onPlayingChange 播放状态变更
+ * @param onSeekChange 进度变更
+ * @param scaleModels 缩放模式
+ * @param scaleModeIndex 当前缩放模式
+ * @param onScaleModelChange 缩放模式变更
+ */
+data class VideoPlayerViewState(
+    val isBuffering: Boolean,
+    val currentSecond: Int,
+    val totalSecond: Int,
+    val isPlaying: Boolean,
+    val onPlayingChange: (Boolean) -> Unit,
+    val onSeekChange: (Int) -> Unit,
+    val scaleModels: List<Pair<ContentScale, String>>,
+    val scaleModeIndex: Int,
+    val onScaleModelChange: (Int) -> Unit,
+)
+
+/**
  * @param modifier Modifier
  * @param videoUri 视频地址
+ * @param scaleModels 缩放模式
+ * @param supportBackgroundPlay 是否支持后台播放
  */
 @OptIn(UnstableApi::class)
 @Composable
@@ -70,7 +98,8 @@ fun VideoPlayerView(
         Pair(ContentScale.FillWidth, "FillWidth"),
         Pair(ContentScale.FillHeight, "FillHeight"),
         Pair(ContentScale.Inside, "Inside"),
-    )
+    ),
+    supportBackgroundPlay: Boolean = false,
 ) {
     //是否正在播放
     var isPlaying by retain {
@@ -154,13 +183,58 @@ fun VideoPlayerView(
     LaunchedEffect(isPlaying) {
         while (isPlaying) {
             currentPosition = player.currentPosition.coerceAtLeast(0)
-            delay(20)
+            delay(200)
         }
     }
     //隐藏控制栏
     LaunchedEffect(showControlBar, lastActionTime) {
         delay(3000L)
         showControlBar = false
+    }
+
+    //播放状态集成
+    val state = VideoPlayerViewState(
+        isBuffering = isBuffering,
+        currentSecond = (currentPosition / 1000L).toInt(),
+        totalSecond = (duration / 1000L).toInt(),
+        isPlaying = isPlaying,
+        onPlayingChange = {
+            if (it) {
+                player.play()
+            } else {
+                player.pause()
+            }
+            lastActionTime = System.currentTimeMillis()
+        },
+        onSeekChange = {
+            player.seekTo(it * 1000L)
+            lastActionTime = System.currentTimeMillis()
+        },
+        scaleModels = scaleModels,
+        scaleModeIndex = scaleModeIndex,
+        onScaleModelChange = {
+            scaleModeIndex = it
+            lastActionTime = System.currentTimeMillis()
+        }
+    )
+
+    //支持后台播放
+    if (supportBackgroundPlay) {
+        var wasPlayingBeforePause by retain { mutableStateOf(false) }
+        val currentOnPlayingChange by rememberUpdatedState(state.onPlayingChange)
+        val currentIsPlaying by rememberUpdatedState(state.isPlaying)
+        LifecycleResumeEffect(Unit) {
+            if (wasPlayingBeforePause) {
+                currentOnPlayingChange(true)
+                wasPlayingBeforePause = false
+            }
+            onPauseOrDispose {
+                if (currentIsPlaying) {
+                    wasPlayingBeforePause = true
+                    currentOnPlayingChange(false)
+                }
+            }
+        }
     }
 
     //ui显示
@@ -181,30 +255,9 @@ fun VideoPlayerView(
             exit = fadeOut(),
         ) {
             Box(modifier = Modifier.fillMaxSize()) {
-                VideoPlayerControlView(
-                    isBuffering = isBuffering,
-                    currentSecond = (currentPosition / 1000L).toInt(),
-                    totalSecond = (duration / 1000L).toInt(),
-                    isPlaying = isPlaying,
-                    onPlayingChange = {
-                        if (it) {
-                            player.play()
-                        } else {
-                            player.pause()
-                        }
-                        lastActionTime = System.currentTimeMillis()
-                    },
-                    onSeekChange = {
-                        player.seekTo(it * 1000L)
-                        lastActionTime = System.currentTimeMillis()
-                    },
-                    scaleModels = scaleModels,
-                    scaleModeIndex = scaleModeIndex,
-                    onScaleModelChange = {
-                        scaleModeIndex = it
-                        lastActionTime = System.currentTimeMillis()
-                    },
-                )
+
+
+                VideoPlayerControlView(state = state)
             }
         }
     }
@@ -212,18 +265,10 @@ fun VideoPlayerView(
 
 @Composable
 private fun BoxScope.VideoPlayerControlView(
-    isBuffering: Boolean,
-    currentSecond: Int,
-    totalSecond: Int,
-    isPlaying: Boolean,
-    onPlayingChange: (Boolean) -> Unit,
-    onSeekChange: (Int) -> Unit,
-    scaleModels: List<Pair<ContentScale, String>>,
-    scaleModeIndex: Int,
-    onScaleModelChange: (Int) -> Unit,
+    state: VideoPlayerViewState
 ) {
     //显示加载中
-    if (isBuffering) {
+    if (state.isBuffering) {
         val infiniteTransition =
             rememberInfiniteTransition(label = "WeToastType.Loading")
         val rotateDegree by infiniteTransition.animateFloat(
@@ -254,19 +299,19 @@ private fun BoxScope.VideoPlayerControlView(
         verticalArrangement = Arrangement.spacedBy(WeTheme.dimens.rowInnerPaddingHorizontal)
     ) {
         WeSlider(
-            value = currentSecond,
+            value = state.currentSecond,
             minValue = 0,
-            maxValue = totalSecond,
+            maxValue = state.totalSecond,
             step = 1,
             onValueChanged = {
-                onSeekChange(it)
+                state.onSeekChange(it)
             },
         )
         Row(
             verticalAlignment = Alignment.CenterVertically
         ) {
             Text(
-                text = "${currentSecond}/${totalSecond}",
+                text = "${state.currentSecond}/${state.totalSecond}",
                 style = WeTheme.typography.body,
                 color = WeTheme.colorScheme.fontColorPrimary,
             )
@@ -276,10 +321,10 @@ private fun BoxScope.VideoPlayerControlView(
                     .clickableDebounce(
                         indication = null,
                         onClick = {
-                            onScaleModelChange((scaleModeIndex + 1) % scaleModels.size)
+                            state.onScaleModelChange((state.scaleModeIndex + 1) % state.scaleModels.size)
                         }
                     ),
-                text = scaleModels[scaleModeIndex].second,
+                text = state.scaleModels[state.scaleModeIndex].second,
                 style = WeTheme.typography.body,
                 color = WeTheme.colorScheme.fontColorPrimary,
             )
@@ -287,14 +332,14 @@ private fun BoxScope.VideoPlayerControlView(
     }
     //显示暂停/播放按钮
     Image(
-        imageVector = if (isPlaying) WeIcons.Pause else WeIcons.Play,
+        imageVector = if (state.isPlaying) WeIcons.Pause else WeIcons.Play,
         contentDescription = null,
         contentScale = ContentScale.FillWidth,
         modifier = Modifier
             .align(Alignment.Center)
             .width(WeTheme.dimens.toastIconSize)
             .clickableDebounce(indication = null) {
-                onPlayingChange(!isPlaying)
+                state.onPlayingChange(!state.isPlaying)
             }
     )
 }
