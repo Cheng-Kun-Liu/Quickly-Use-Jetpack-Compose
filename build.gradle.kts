@@ -1,7 +1,6 @@
 // 为所有模块注册的插件, 不 apply, 只有在模块中注册了插件才 apply
 plugins {
     alias(libs.plugins.android.application) apply false
-    alias(libs.plugins.jetbrains.kotlin.android) apply false
     alias(libs.plugins.composePlugin) apply false
     alias(libs.plugins.ksp) apply false
     alias(libs.plugins.hilt) apply false

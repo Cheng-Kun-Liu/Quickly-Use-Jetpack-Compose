@@ -26,7 +26,6 @@ class ApplicationConventionPlugin : Plugin<Project> {
     private fun Project.applicationPlugins() {
         with(pluginManager) {
             //基础插件
-            apply("org.jetbrains.kotlin.android")
             apply("org.jetbrains.kotlin.plugin.compose")
 
             //application需要的插件

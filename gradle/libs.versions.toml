@@ -1,27 +1,27 @@
 [versions]
-agp = "8.12.0"
+agp = "9.1.1"
 biometric = "1.1.0"
 coilCompose = "2.7.0"
-credentials = "1.5.0"
-googleid = "1.1.1"
-kotlin = "2.3.0"
+credentials = "1.6.0"
+googleid = "1.2.0"
+kotlin = "2.3.21"
 ksp = "2.3.4"
-coreKtx = "1.17.0"
-kotlinxSerializationJson = "1.9.0"
+coreKtx = "1.18.0"
+kotlinxSerializationJson = "1.11.0"
 lifecycleRuntimeKtx = "2.10.0"
-activityCompose = "1.12.2"
-composeBom = "2026.01.00"
-androidGradlePlugin = "8.12.0"
-hilt = "2.58"
+activityCompose = "1.13.0"
+composeBom = "2026.04.01"
+androidGradlePlugin = "9.1.1"
+hilt = "2.59.2"
 androidxCoreSplashscreen = "1.2.0"
 androidxHiltNavigationCompose = "1.3.0"
-media3 = "1.9.0"
-navigationCompose = "2.9.6"
+media3 = "1.10.0"
+navigationCompose = "2.9.8"
 googleGmsGoogleServices = "4.4.4"
-firebaseBom = "34.8.0"
-googleFirebaseCrashlytics = "3.0.6"
-ktor = "3.3.3"
-playServicesAuth = "21.4.0"
+firebaseBom = "34.12.0"
+googleFirebaseCrashlytics = "3.0.7"
+ktor = "3.4.3"
+playServicesAuth = "21.5.1"
 androidxRoom = "2.8.4"
 generativeai = "0.9.0"
 playServicesLocation = "21.3.0"
@@ -30,7 +30,8 @@ documentfile = "1.1.0"
 junit = "1.3.0"
 espressoCore = "3.7.0"
 uiautomator = "2.3.0"
-baselineprofile = "1.4.1"
+baselineprofile = "1.5.0-alpha05"
+profileinstaller = "1.4.1"
 
 [libraries]
 # app
@@ -97,7 +98,7 @@ androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "j
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 androidx-uiautomator = { group = "androidx.test.uiautomator", name = "uiautomator", version.ref = "uiautomator" }
 androidx-benchmark-macro-junit4 = { group = "androidx.benchmark", name = "benchmark-macro-junit4", version.ref = "baselineprofile" }
-androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "baselineprofile" }
+androidx-profileinstaller = { group = "androidx.profileinstaller", name = "profileinstaller", version.ref = "profileinstaller" }
 
 
 [plugins]

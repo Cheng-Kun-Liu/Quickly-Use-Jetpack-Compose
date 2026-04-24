@@ -59,8 +59,6 @@ import com.laomuji1999.compose.feature.chat.AiChatTopBar
 import com.laomuji1999.compose.feature.chat.contacts.ContactsScreenUiState.ContactInfo
 import com.laomuji1999.compose.res.R
 import kotlinx.coroutines.launch
-import kotlin.math.roundToInt
-
 @Composable
 fun ContactsScreen(
     viewModel: ContactsViewModel = hiltViewModel(), onContactClick: (ContactInfoEntity) -> Unit
@@ -138,6 +136,8 @@ private fun ContactsScreenUi(
 private fun CategoryView(
     modifier: Modifier, state: LazyListState, contactInfoList: List<ContactInfo>
 ) {
+    if (contactInfoList.isEmpty()) return
+
     val coroutineScope = rememberCoroutineScope()
     var itemHeight by remember { mutableFloatStateOf(0f) }
     var currentIndex by remember { mutableIntStateOf(-1) }
@@ -150,7 +150,9 @@ private fun CategoryView(
                     }
                     .pointerInput(Unit) {
                         detectVerticalDragGestures(onVerticalDrag = { change, _ ->
-                            val newIndex = (change.position.y / itemHeight).roundToInt()
+                            if (itemHeight == 0f) return@detectVerticalDragGestures
+
+                            val newIndex = (change.position.y / itemHeight).toInt()
                                 .coerceIn(contactInfoList.indices)
                             if (newIndex != currentIndex) {
                                 currentIndex = newIndex
@@ -216,15 +218,9 @@ private fun CategoryView(
 private fun getCategoryIndex(
     contactInfoList: List<ContactInfo>, index: Int
 ): Int {
-    val category = contactInfoList[index].category
-    var findIndex = 0
-    for (contactInfo in contactInfoList) {
-        if (contactInfo.category == category) {
-            return findIndex
-        }
-        findIndex += contactInfo.contactList.size + 1
-    }
-    return 0
+    return contactInfoList
+        .take(index)
+        .sumOf { contactInfo -> contactInfo.contactList.size + 3 }
 }
 
 @Composable

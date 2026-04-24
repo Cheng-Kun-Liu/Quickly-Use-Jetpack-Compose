@@ -13,9 +13,6 @@ class BaselineProfilePlugin : Plugin<Project> {
                 //BaselineProfile
                 apply("com.android.test")
                 apply("androidx.baselineprofile")
-
-                //基础插件
-                apply("org.jetbrains.kotlin.android")
             }
 
             extensions.configure<TestExtension> {
