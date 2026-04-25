@@ -116,7 +116,10 @@ baselineprofile = { id = "androidx.baselineprofile", version.ref = "baselineprof
 laomuji1999-compose-hilt = { id = "laomuji1999.compose.hilt", version = "unspecified" }
 laomuji1999-compose-application = { id = "laomuji1999.compose.application", version = "unspecified" }
 laomuji1999-compose-library = { id = "laomuji1999.compose.library", version = "unspecified" }
-laomuji1999-compose-baselineprofile = { id = "laomuji999.compose.baselineprofile", version = "unspecified" }
+laomuji1999-compose-compose = { id = "laomuji1999.compose.compose", version = "unspecified" }
+laomuji1999-compose-serialization = { id = "laomuji1999.compose.serialization", version = "unspecified" }
+laomuji1999-compose-build-config = { id = "laomuji1999.compose.build.config", version = "unspecified" }
+laomuji1999-compose-baselineprofile = { id = "laomuji1999.compose.baselineprofile", version = "unspecified" }
 
 
 

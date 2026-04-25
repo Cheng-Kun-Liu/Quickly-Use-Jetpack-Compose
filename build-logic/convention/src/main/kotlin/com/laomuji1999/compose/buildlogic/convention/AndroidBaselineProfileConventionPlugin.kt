@@ -1,25 +1,25 @@
+package com.laomuji1999.compose.buildlogic.convention
+
 import com.android.build.api.dsl.TestExtension
+import com.laomuji1999.compose.buildlogic.config.baselineProfileDefaultConfig
+import com.laomuji1999.compose.buildlogic.extension.libs
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
 import org.gradle.kotlin.dsl.dependencies
-import util.baselineprofileDefaultConfig
-import util.libs
 
-class BaselineProfilePlugin : Plugin<Project> {
+class AndroidBaselineProfileConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
             with(pluginManager) {
-                //BaselineProfile
                 apply("com.android.test")
                 apply("androidx.baselineprofile")
             }
 
             extensions.configure<TestExtension> {
-                baselineprofileDefaultConfig()
+                baselineProfileDefaultConfig()
                 buildConfig()
             }
-
 
             dependencies {
                 add("implementation", libs.findLibrary("androidx.junit").get())
@@ -32,7 +32,6 @@ class BaselineProfilePlugin : Plugin<Project> {
     }
 
     private fun TestExtension.buildConfig() {
-        //因为在 :app 里有 flavor 所以需要在这里创建对应的编译变量
         targetProjectPath = ":app"
         flavorDimensions += listOf("channel")
         productFlavors {

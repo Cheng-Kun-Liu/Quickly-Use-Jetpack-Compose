@@ -38,19 +38,31 @@ gradlePlugin {
     plugins {
         register("hiltConvention") {
             id = "laomuji1999.compose.hilt"
-            implementationClass = "HiltConventionPlugin"
+            implementationClass = "com.laomuji1999.compose.buildlogic.convention.AndroidHiltConventionPlugin"
         }
         register("applicationConvention"){
             id = "laomuji1999.compose.application"
-            implementationClass = "ApplicationConventionPlugin"
+            implementationClass = "com.laomuji1999.compose.buildlogic.convention.AndroidApplicationConventionPlugin"
         }
         register("libraryConvention"){
             id = "laomuji1999.compose.library"
-            implementationClass = "LibraryConventionPlugin"
+            implementationClass = "com.laomuji1999.compose.buildlogic.convention.AndroidLibraryConventionPlugin"
+        }
+        register("composeConvention"){
+            id = "laomuji1999.compose.compose"
+            implementationClass = "com.laomuji1999.compose.buildlogic.convention.AndroidComposeConventionPlugin"
+        }
+        register("serializationConvention"){
+            id = "laomuji1999.compose.serialization"
+            implementationClass = "com.laomuji1999.compose.buildlogic.convention.KotlinSerializationConventionPlugin"
+        }
+        register("buildConfigConvention"){
+            id = "laomuji1999.compose.build.config"
+            implementationClass = "com.laomuji1999.compose.buildlogic.convention.AndroidBuildConfigConventionPlugin"
         }
         register("baselineprofile"){
-            id = "laomuji999.compose.baselineprofile"
-            implementationClass = "BaselineProfilePlugin"
+            id = "laomuji1999.compose.baselineprofile"
+            implementationClass = "com.laomuji1999.compose.buildlogic.convention.AndroidBaselineProfileConventionPlugin"
         }
     }
 }

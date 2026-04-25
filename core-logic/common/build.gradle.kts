@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.laomuji1999.compose.library)
+    alias(libs.plugins.laomuji1999.compose.build.config)
     alias(libs.plugins.laomuji1999.compose.hilt)
 }
 

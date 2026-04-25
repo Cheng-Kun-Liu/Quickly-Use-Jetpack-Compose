@@ -1,21 +1,20 @@
+package com.laomuji1999.compose.buildlogic.convention
+
 import com.android.build.api.dsl.ApplicationExtension
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
+import com.laomuji1999.compose.buildlogic.config.applicationDefaultConfig
+import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.configure
-import util.applicationDefaultConfig
 
-class ApplicationConventionPlugin : Plugin<Project> {
+class AndroidApplicationConventionPlugin : Plugin<Project> {
     override fun apply(target: Project) {
         with(target) {
-            //Application需要的插件
             applicationPlugins()
 
             extensions.configure<ApplicationExtension> {
-                //application默认配置
                 applicationDefaultConfig()
-
-                //打包配置
                 buildConfig()
             }
 
@@ -25,16 +24,12 @@ class ApplicationConventionPlugin : Plugin<Project> {
 
     private fun Project.applicationPlugins() {
         with(pluginManager) {
-            //基础插件
-            apply("org.jetbrains.kotlin.plugin.compose")
-
-            //application需要的插件
             apply("com.android.application")
+            apply("laomuji1999.compose.compose")
         }
     }
 
-    private fun Project.signConfig(){
-        //创建SignConfig文件
+    private fun Project.signConfig() {
         extensions.configure<ApplicationExtension> {
             signingConfigs {
                 create("gpSign") {
@@ -52,22 +47,24 @@ class ApplicationConventionPlugin : Plugin<Project> {
             }
         }
 
-        //Flavor匹配对应的Sign.
         extensions.configure<ApplicationAndroidComponentsExtension> {
             onVariants { variant ->
                 val flavorName = variant.flavorName ?: return@onVariants
                 val signName = "${flavorName}Sign"
                 val androidExt = extensions.getByType(ApplicationExtension::class.java)
                 val sign = androidExt.signingConfigs.findByName(signName)
+                    ?: throw GradleException(
+                        "Missing signing config '$signName' for variant '${variant.name}'. " +
+                            "Create signingConfigs.$signName or update the flavor-to-signing mapping."
+                    )
                 @Suppress("UnstableApiUsage")
-                variant.signingConfig.setConfig(sign!!)
+                variant.signingConfig.setConfig(sign)
             }
         }
     }
 
     private fun ApplicationExtension.buildConfig() {
         buildFeatures {
-            compose = true
             buildConfig = true
         }
 
@@ -100,5 +97,4 @@ class ApplicationConventionPlugin : Plugin<Project> {
             }
         }
     }
-
 }
