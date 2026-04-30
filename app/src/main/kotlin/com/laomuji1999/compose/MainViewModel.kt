@@ -26,7 +26,7 @@ class MainViewModel @Inject constructor() : ViewModel() {
     )
 
     /**
-     * 初始化三方SDK,然后标记成功状态.
+     * 初始化三方SDK,然后标记成功状态。
      */
     fun initModule(activity: Activity) {
         Log.debug("tag_flavor", FlavorDemo().getFlavor())

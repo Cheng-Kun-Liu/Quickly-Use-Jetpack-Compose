@@ -1,5 +1,11 @@
 <resources>
     <string name="app_name">Quickly-Use-Jetpack-Compose</string>
+    <string name="string_demo_group_core_features">الميزات الأساسية</string>
+    <string name="string_demo_group_authentication">المصادقة</string>
+    <string name="string_demo_group_device_system">إمكانات الجهاز والنظام</string>
+    <string name="string_demo_group_ui_interaction">واجهة المستخدم والتفاعل</string>
+    <string name="string_demo_group_appearance_localization">المظهر والتوطين</string>
+    <string name="string_demo_screen_banner">بانر</string>
     <string name="string_toast_done">تم بنجاح</string>
     <string name="string_toast_loading">جاري التحميل</string>
     <string name="string_toast_error">فشل</string>
@@ -15,6 +21,7 @@
     <string name="string_demo_screen_date">تقويم مخصص</string>
     <string name="string_demo_screen_scroll_connect">NestedScrollConnection</string>
     <string name="string_demo_screen_scroll_dispatcher">NestedScrollDispatcher</string>
+    <string name="string_demo_screen_simple_drag_view">إظهار أيقونة السحب العائمة</string>
     <string name="string_demo_screen_long_click_sort">اضغط لفترة طويلة واسحب لفرز القائمة</string>
     <string name="string_demo_screen_select_mobile_demo">مثال على تحديد رقم الهاتف المحمول</string>
     <string name="string_demo_screen_get_location">الحصول على الموقع</string>
@@ -34,15 +41,6 @@
     <string name="string_firebase_screen_log_event">حدث الاختبار</string>
     <string name="string_firebase_screen_crush">اختبار الانهيار</string>
     <string name="string_firebase_screen_notification">طلب إذن الإشعارات</string>
-    <string name="string_widget_screen_toast_title">مثال Toast</string>
-    <string name="string_widget_screen_show_toast">إظهار Toast</string>
-    <string name="string_widget_screen_action_sheet_title">مثال ActionSheet</string>
-    <string name="string_widget_screen_show_action_sheet">إظهار ActionSheet</string>
-    <string name="string_widget_screen_action_sheet_cancel">إلغاء</string>
-    <string name="string_widget_screen_action_sheet_item1">نص المطالبة</string>
-    <string name="string_widget_screen_action_sheet_item2">الإجراء الأول</string>
-    <string name="string_widget_screen_action_sheet_item3">الإجراء الثاني</string>
-    <string name="string_widget_screen_action_sheet_item4">إجراء التحذير</string>
     <string name="string_ai_chat_screen_navigation_message">الرسائل</string>
     <string name="string_ai_chat_screen_navigation_contact">جهات الاتصال</string>
     <string name="string_ai_chat_screen_navigation_me">أنا</string>

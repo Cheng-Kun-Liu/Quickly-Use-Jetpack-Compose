@@ -18,10 +18,17 @@
     <string name="string_main_screen_page_settings">Settings</string>
 
     <!--  UiDemoScreen  -->
+    <string name="string_demo_group_core_features">Core features</string>
+    <string name="string_demo_group_authentication">Authentication</string>
+    <string name="string_demo_group_device_system">Device and system capabilities</string>
+    <string name="string_demo_group_ui_interaction">UI and interaction</string>
+    <string name="string_demo_group_appearance_localization">Appearance and localization</string>
+    <string name="string_demo_screen_banner">Banner</string>
     <string name="string_demo_screen_painter">Painting Canvas</string>
     <string name="string_demo_screen_date">Custom Calendar</string>
     <string name="string_demo_screen_scroll_connect">NestedScrollConnection</string>
     <string name="string_demo_screen_scroll_dispatcher">NestedScrollDispatcher</string>
+    <string name="string_demo_screen_simple_drag_view">Show floating drag icon</string>
     <string name="string_demo_screen_long_click_sort">Long press to drag and sort the list</string>
     <!--  DeviceDemoScreen  -->
     <string name="string_demo_screen_select_mobile_demo">Select mobile phone number example</string>
@@ -47,17 +54,6 @@
     <string name="string_firebase_screen_log_event">Test event</string>
     <string name="string_firebase_screen_crush">Test crash</string>
     <string name="string_firebase_screen_notification">Request notification permission</string>
-
-    <!--  WidgetScreen  -->
-    <string name="string_widget_screen_toast_title">Toast Example</string>
-    <string name="string_widget_screen_show_toast">Show Toast</string>
-    <string name="string_widget_screen_action_sheet_title">ActionSheet Example</string>
-    <string name="string_widget_screen_show_action_sheet">Show ActionSheet</string>
-    <string name="string_widget_screen_action_sheet_cancel">Cancel</string>
-    <string name="string_widget_screen_action_sheet_item1">Prompt text</string>
-    <string name="string_widget_screen_action_sheet_item2">Action One</string>
-    <string name="string_widget_screen_action_sheet_item3">Action Two</string>
-    <string name="string_widget_screen_action_sheet_item4">Warning Action</string>
 
     <!--  AiChatScreen  -->
     <string name="string_ai_chat_screen_navigation_message">Messages</string>

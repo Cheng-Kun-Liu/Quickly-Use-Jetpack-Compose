@@ -24,3 +24,5 @@ render.experimental.xml
 
 # Android Profiling
 *.hprof
+
+.artifacts/

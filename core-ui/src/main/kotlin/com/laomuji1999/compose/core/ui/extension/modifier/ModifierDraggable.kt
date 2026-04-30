@@ -12,6 +12,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
@@ -72,6 +73,13 @@ object ModifierDraggable {
 
         val offsetX = remember { Animatable(initOffsetX) }
         val offsetY = remember { Animatable(initOffsetY) }
+        val currentOnDrag by rememberUpdatedState(onDrag)
+
+        // 监听坐标变化，实时同步到外部状态（包含吸附动画过程）
+        LaunchedEffect(offsetX.value, offsetY.value) {
+            currentOnDrag(offsetX.value, offsetY.value)
+        }
+
         val snapAnim: AnimationSpec<Float> = if (enableSnapAnim) {
             spring(
                 dampingRatio = Spring.DampingRatioMediumBouncy, stiffness = Spring.StiffnessLow
@@ -93,7 +101,6 @@ object ModifierDraggable {
                 SnapMode.NONE -> offsetX.value
             }
             offsetX.animateTo(targetX, snapAnim)
-            onDrag(offsetX.value, offsetY.value)
         }
 
         this
@@ -117,7 +124,6 @@ object ModifierDraggable {
                                 SnapMode.NONE -> offsetX.value
                             }
                             offsetX.animateTo(targetX, snapAnim)
-                            onDrag(offsetX.value, offsetY.value)
                         }
                     }
                 }, onDrag = { change, dragAmount ->
@@ -146,7 +152,6 @@ object ModifierDraggable {
                             offsetX.snapTo(newX)
                             offsetY.snapTo(newY)
                         }
-                        onDrag(offsetX.value, offsetY.value)
                     }
                 })
             }
