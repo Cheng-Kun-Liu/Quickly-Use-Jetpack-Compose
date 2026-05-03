@@ -206,6 +206,11 @@ private fun PagerState.calcLastPage(): Int {
 @Preview
 @Composable
 fun PreviewBannerView() {
+    BannerDemoView()
+}
+
+@Composable
+fun BannerDemoView() {
     BannerView(
         modifier = Modifier.height(90.dp), bannerList = listOf(
             Color.Red, Color.Yellow, Color.Blue

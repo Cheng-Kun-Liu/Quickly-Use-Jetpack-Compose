@@ -43,18 +43,13 @@ dependencies {
     implementation(project(":core-logic:notification"))
     implementation(project(":core-logic:language"))
 
-    implementation(project(":feature:demo"))
-    implementation(project(":feature:firebase"))
-    implementation(project(":feature:http"))
+    implementation(project(":feature:main"))
+    implementation(project(":feature:integrations"))
     implementation(project(":feature:chat"))
-    implementation(project(":feature:date"))
-    implementation(project(":feature:scroll"))
-    implementation(project(":feature:biometric"))
-    implementation(project(":feature:painter"))
+    implementation(project(":feature:samples"))
     implementation(project(":feature:video"))
     implementation(project(":feature:webview"))
-    implementation(project(":feature:setting:language"))
-    implementation(project(":feature:setting:font"))
+    implementation(project(":feature:settings"))
 
     //firebase 崩溃分析
     implementation(platform(libs.firebase.bom))

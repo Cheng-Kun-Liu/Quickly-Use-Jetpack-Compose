@@ -1,6 +1,6 @@
 # Quickly-Use-Jetpack-Compose
 
-简单易用的 Jetpack Compose 快速开发框架,以Compose的方式实现功能.如果觉得对您有帮助,请为项目点个star,感谢!项目会大量使用高版本安卓新增的功能.
+一个用于快速学习和复用 Jetpack Compose 实践的示例项目。项目以 Compose、Hilt、Navigation、ViewModel、Flow 和模块化工程为基础，尽量把常见移动端能力整理成可运行的示例。
 
 # 协议
 
@@ -8,97 +8,77 @@
 
 # 架构
 
-Quickly-Use-Jetpack-Compose 的架构参考安卓官方的最佳实践:[Now in Android App](https://github.com/android/nowinandroid).点击查看[DeepWiki](https://deepwiki.com/Cheng-Kun-Liu/Quickly-Use-Jetpack-Compose).
+Quickly-Use-Jetpack-Compose 的架构参考 Android 官方最佳实践项目 [Now in Android App](https://github.com/android/nowinandroid)。
 
 ## 架构组件
 
-+ 模块化,多module,插件化管理依赖.
-+ 依赖注入,使用hilt进行依赖注入.
-+ 单Activity架构,使用Navigation进行导航.
-+ Compose+ViewModel+Flow(MVI),使用协程进行异步操作的反应式ui.
++ **模块化**：按 app、core、feature、flavor、res 等模块组织代码，降低耦合。
++ **依赖注入**：使用 Hilt 管理全局和局部依赖。
++ **数据层**：采用 Repository 模式，集成 **Room** 数据库和 **Ktor (OkHttp)** 网络请求。
++ **UI 驱动**：单 Activity 架构，使用 Navigation 管理页面跳转，结合 Compose + ViewModel + Flow 实现响应式 UI。
 
 # 设计系统
 
-自定义的设计系统,不使用M3的风格,按WX的UI风格设计的一套ui系统.支持动态切换颜色字体语言.
+项目包含一套自定义 Compose 设计系统，偏微信风格，不直接套用 Material 3 的视觉样式。
 
-+ WeTheme: 替代MaterialTheme.竖屏以375宽度适配屏幕,横屏不适配正常显示.
-+ WeColorScheme: 定义颜色.
-+ WeTypography: 定义字体.
-+ WeIndication: 定义触摸效果.
-+ WeDimen: 定义尺寸.
-+ WeIcons: 使用ImageVector绘制图标.
-+ WeWidget: 实现WX风格的组件,如顶部导航,底部导航,Button,Toast,ActionSheet,单选,多选,开关等组件.
-+ View: 一些常用的Compose实现的组件,如Banner,文本替换文字颜色点击,拖动排序等.
++ **WeTheme**：替代 MaterialTheme，竖屏按 375dp 设计宽度适配。
++ **WeColorScheme**：定义颜色体系，支持系统、动态、浅色、深色和蓝色主题。
++ **WeTypography**：定义字体大小体系。
++ **WeIndication**：定义触摸、悬停和焦点反馈。
++ **WeDimen**：定义尺寸规范。
++ **WeIcons**：使用 ImageVector 绘制图标。
++ **WeWidget**：顶部栏、底部栏、Button、Toast、ActionSheet、单选、多选、开关等通用组件。
++ **View**：Banner (BannerView)、可点击富文本 (ClickableAnnotatedText)、拖拽排序 (DragList)、错误页 (ErrorView)、Loading、禁止截屏 (SecureComposeView) 等常用 Compose 组件。
 
-# Module目录简介
+# Module 目录简介
 
-+ app: 程序的入口,把各个module关联起来,组成一个完整的app,Navigation也在这里统一处理.
-+ build-logic: 自定义的插件都放在这里,统一管理依赖.
-+ core-logic: 逻辑模块,如本地数据库,远程服务器,身份认证,语言切换等.
-+ core-ui: 设计系统,不一定按照M3的设计风格,可以自定义设计系统,编写通用的UI组件.
-+ feature: 功能模块,按程序功能分成多个module,每个module都由Route,Screen,ViewModel,UiState,Action组成.
-+ flavor: 区分flavor,根据不同的flavor引入不同的module,不同的module里再引入入不同的包.
-+ res: 资源文件,统一管理图片,文字等资源文件.
-+ baseline-profile: 基准配置文件,性能分析,减少冷启动时间,本项目的启动时间和安卓官方最佳实践一样.
++ **app**：应用入口，汇总各 feature 并统一处理 Navigation。
++ **build-logic**：自定义 Gradle Convention 插件，统一管理 Compose、Hilt、Serialization、Library、Application 等构建配置。
++ **core-logic**：
+    - `common`：日志、Toast、协程调度、缓存等基础工具。
+    - `database`：基于 **Room** 的持久化存储。
+    - `network`：基于 **Ktor** 的网络请求封装。
+    - `repository`：业务数据层，包含聊天 (Google AI Chat)、用户信息、产品等仓库。
+    - `authenticate`：Google 登录、生物认证逻辑封装。
+    - `notification`：通知管理，包含 Firebase Cloud Messaging。
+    - `location`：定位能力封装。
+    - `language`：多语言切换逻辑。
++ **core-ui**：设计系统核心实现和通用 UI 组件库。
++ **core-launcher**：封装 `ActivityResultLauncher`，提供一行代码调用相册、相机、联系人、手机号选择及权限申请的能力。
++ **feature**：
+    - `main`：应用主框架，包含首页 Pager 容器。
+    - `samples`：UI 交互示例，包含 **自定义日历**、**绘画画板**、**嵌套滚动** 等。
+    - `settings`：应用偏好设置（多语言、字体大小、主题切换）。
+    - `integrations`：网络与系统能力集成示例（HTTP、Firebase、生物认证）。
+    - `chat`：基于 **Google AI Gemini** 的智能聊天示例。
+    - `video`：基于 **Media3** 的视频播放器。
+    - `webview`：通用的 WebView 容器。
++ **flavor**：提供 `gp` (Google Play) 和 `sam` (Samsung) 渠道差异化实现示例。
++ **res**：统一管理字符串、图片、多语言等资源文件。
++ **baseline-profile**：配置启动性能优化。
 
-# 已提供的示例代码
+# 开发与运行
 
-+ 屏幕切换动画: 为Compose和Activity提供进入和退出的滑动动画,兼容RTL布局.
-+ 动态切换语言: 兼容高低版本语言切换,支持SDK33的应用首选语言.
-+ 动态切换主题: 白天和夜间主题,Material动态主题,自定义主题.
-+ 动态切换字体: 字体大小任意切换.
-+ 离线可用: 优先从Room数据库获取数据,网络获取数据后更新到数据库.
-+ ktor: 序列化,ViewModel+Flow,等待响应,异常处理,分页加载.
-+ google登录: CredentialManager添加登录选项.
-+ ai聊天: 接入Google Ai模仿微信的聊天效果,联系人列表,聊天消息推送等.
-+ firebase: 埋点,崩溃分析,推送.
-+ 焦点控制: 点击焦点,键盘输入焦点控制,简化用户操作.
-+ 动态切换logo: 比如双十一活动需要修改logo,但是又不想更新包.
-+ 获取定位: 针对粗略和精准的权限,使用不同的方式获取定位.
-+ launcher: 不需要申请权限的情况下,选择相册,拍摄照片,选择通讯录等.
-+ 自定义日历: 使用Calendar获取时间,完全自定义日历.
-+ 滑动嵌套: 处理compose中的滑动嵌套问题.
-+ Lazy列表排序: 长按后拖动,对列表进行排序.
-+ 生物认证: 通过指纹或锁屏密码进行生物认证.
-+ 绘画画板: 选择线条宽度和颜色,绘制到屏幕上.
-+ 视频播放.: 使用media3进行视频播放.
-+ WebView: 在Compose中使用WebView,添加一些常用的WebView功能.
-+ 自定义Toast: 只需要字符串即可全局显示的Toast.
+建议使用最新版本 Android Studio 打开项目。运行时切换到 `app` 配置后启动。
 
-# 开发/发布环境
+## 密钥与签名
 
-保证最新版Android Studio可用,但不保证旧版可用.
-<br/>在Android Studio更新时,项目也会更新,我会持续把学到的新知识更新到本仓库.
+密钥文件存放在根目录的 `keystore` 目录中。签名相关配置在 `AndroidApplicationConventionPlugin.kt`。
 
-## 运行
+## 构建变体 (Build Variants)
 
-确保切换到app,点击运行按钮.
-![Run App](docs/images/RunApp.png)
+项目预设了 `gp` 和 `sam` 两个 productFlavors，分别对应不同的 ApplicationId 和签名配置，可在 Android Studio 的 Build Variants 面板中切换。
 
-## 密钥
+# 运行效果
 
-密钥文件存放在根目录的**keystore**目录中.
-<br/>密钥配置在**ApplicationConventionPlugin.kt**文件中.
-
-## 打包
-
-使用了productFlavors,可以在Build Variant中选择不同的打包信息.
-<br/>bundleRelease打包aab.
-<br/>assembleRelease打包apk.
-
-## 运行效果(gif比较模糊)
-
-| 例子        | 截图                                                             |
-|-----------|----------------------------------------------------------------|
-| 绘画画板      | <img src="docs/images/PainterScreen.png" width="320"/>         |
-| 多语言       | <img src="docs/images/LanguageSwitch.gif" width="320"/>        |
-| Lazy列表排序  | <img src="docs/images/LazySort.gif" width="320"/>              |
-| 自定义日历     | <img src="docs/images/CustomizeCalendar.gif" width="320"/>     |
-| 动态切换logo  | <img src="docs/images/SwitchAppLogo.gif" width="320"/>         |
-| Ai聊天,推送   | <img src="docs/images/AiChat.gif" width="320"/>                | 
-| 网络异常处理    | <img src="docs/images/HttpScreen.gif" width="320"/>            |
-| 轮播图       | <img src="docs/images/BannerView.gif" width="320"/>            |
-| 组件示例      | <img src="docs/images/WidgetScreen.gif" width="320"/>          |
+| 示例 | 截图 |
+| --- | --- |
+| 绘画画板 | <img src="docs/images/PainterScreen.png" width="320"/> |
+| 多语言 | <img src="docs/images/LanguageSwitch.gif" width="320"/> |
+| Lazy 列表排序 | <img src="docs/images/LazySort.gif" width="320"/> |
+| 自定义日历 | <img src="docs/images/CustomizeCalendar.gif" width="320"/> |
+| 动态切换图标 | <img src="docs/images/SwitchAppLogo.gif" width="320"/> |
+| AI 聊天和通知 | <img src="docs/images/AiChat.gif" width="320"/> |
+| 网络异常处理 | <img src="docs/images/HttpScreen.gif" width="320"/> |
+| Banner | <img src="docs/images/BannerView.gif" width="320"/> |
 | 定位、图片、联系人 | <img src="docs/images/LocationPhotoContacts.gif" width="320"/> |
-
-

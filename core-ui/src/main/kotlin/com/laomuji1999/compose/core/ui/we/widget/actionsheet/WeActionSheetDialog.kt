@@ -91,6 +91,7 @@ fun WeActionSheetDialog(
                                 )
                             )
                             .background(WeTheme.colorScheme.background)
+                            .clickableDebounce(indication = null)
                     ) {
                         content(state)
                     }

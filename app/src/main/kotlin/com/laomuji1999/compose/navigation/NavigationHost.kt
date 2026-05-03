@@ -7,32 +7,31 @@ import androidx.navigation.compose.NavHost
 import com.laomuji1999.compose.WebViewActivity
 import com.laomuji1999.compose.core.ui.extension.safePopBackStack
 import com.laomuji1999.compose.core.ui.screen.SlideNavigation
-import com.laomuji1999.compose.feature.biometric.BiometricScreenRoute.composeBiometricScreen
-import com.laomuji1999.compose.feature.biometric.BiometricScreenRoute.navigateToBiometricScreen
+import com.laomuji1999.compose.feature.video.VideoPlayActivity
 import com.laomuji1999.compose.feature.chat.AiChatScreenRoute
 import com.laomuji1999.compose.feature.chat.AiChatScreenRoute.composeAiChatScreen
 import com.laomuji1999.compose.feature.chat.AiChatScreenRoute.navigateToAiChatScreen
 import com.laomuji1999.compose.feature.chat.chat.ChatScreenRoute
 import com.laomuji1999.compose.feature.chat.chat.ChatScreenRoute.Companion.composeChatScreen
 import com.laomuji1999.compose.feature.chat.chat.ChatScreenRoute.Companion.navigateToChatScreen
-import com.laomuji1999.compose.feature.date.DateScreenRoute.composeDateScreen
-import com.laomuji1999.compose.feature.date.DateScreenRoute.navigateToDateScreen
-import com.laomuji1999.compose.feature.firebase.FirebaseScreenRoute.composeFirebaseScreen
-import com.laomuji1999.compose.feature.firebase.FirebaseScreenRoute.navigateToFirebaseScreen
-import com.laomuji1999.compose.feature.font.FontScreenRoute
-import com.laomuji1999.compose.feature.font.FontScreenRoute.composeFontScreen
-import com.laomuji1999.compose.feature.font.FontScreenRoute.navigateToFontScreen
-import com.laomuji1999.compose.feature.http.HttpScreenRoute.composeHttpScreen
-import com.laomuji1999.compose.feature.http.HttpScreenRoute.navigateToHttpScreen
-import com.laomuji1999.compose.feature.language.LanguageScreenRoute
-import com.laomuji1999.compose.feature.language.LanguageScreenRoute.composeLanguageScreen
-import com.laomuji1999.compose.feature.language.LanguageScreenRoute.navigateToLanguageScreen
+import com.laomuji1999.compose.feature.samples.date.DateScreenRoute.composeDateScreen
+import com.laomuji1999.compose.feature.samples.date.DateScreenRoute.navigateToDateScreen
+import com.laomuji1999.compose.feature.integrations.firebase.FirebaseScreenRoute.composeFirebaseScreen
+import com.laomuji1999.compose.feature.integrations.firebase.FirebaseScreenRoute.navigateToFirebaseScreen
+import com.laomuji1999.compose.feature.settings.font.FontScreenRoute
+import com.laomuji1999.compose.feature.settings.font.FontScreenRoute.composeFontScreen
+import com.laomuji1999.compose.feature.settings.font.FontScreenRoute.navigateToFontScreen
+import com.laomuji1999.compose.feature.integrations.http.HttpScreenRoute.composeHttpScreen
+import com.laomuji1999.compose.feature.integrations.http.HttpScreenRoute.navigateToHttpScreen
+import com.laomuji1999.compose.feature.settings.language.LanguageScreenRoute
+import com.laomuji1999.compose.feature.settings.language.LanguageScreenRoute.composeLanguageScreen
+import com.laomuji1999.compose.feature.settings.language.LanguageScreenRoute.navigateToLanguageScreen
 import com.laomuji1999.compose.feature.main.MainScreenRoute
 import com.laomuji1999.compose.feature.main.MainScreenRoute.composeMainScreen
-import com.laomuji1999.compose.feature.painter.PainterScreenRoute.composePainterScreen
-import com.laomuji1999.compose.feature.painter.PainterScreenRoute.navigateToPainterScreen
-import com.laomuji1999.compose.feature.scroll.NestedScrollScreenRoute.composeNestedScrollScreen
-import com.laomuji1999.compose.feature.scroll.NestedScrollScreenRoute.navigateToNestedScrollScreen
+import com.laomuji1999.compose.feature.samples.painter.PainterScreenRoute.composePainterScreen
+import com.laomuji1999.compose.feature.samples.painter.PainterScreenRoute.navigateToPainterScreen
+import com.laomuji1999.compose.feature.samples.scroll.NestedScrollScreenRoute.composeNestedScrollScreen
+import com.laomuji1999.compose.feature.samples.scroll.NestedScrollScreenRoute.navigateToNestedScrollScreen
 
 /**
  * 导航控制器
@@ -53,10 +52,9 @@ fun NavigationHost(
         popExitTransition = SlideNavigation.popExitTransition
     ) {
         composeMainScreen(
-            navigateToGraph = {
-                when (it) {
+            navigateToGraph = { graph ->
+                when (graph) {
                     MainScreenRoute.Graph.AiChat -> navHostController.navigateToAiChatScreen()
-                    MainScreenRoute.Graph.Biometric -> navHostController.navigateToBiometricScreen()
                     MainScreenRoute.Graph.Date -> navHostController.navigateToDateScreen()
                     MainScreenRoute.Graph.Firebase -> navHostController.navigateToFirebaseScreen()
                     MainScreenRoute.Graph.Http -> navHostController.navigateToHttpScreen()
@@ -64,8 +62,9 @@ fun NavigationHost(
                     MainScreenRoute.Graph.Font -> navHostController.navigateToFontScreen()
                     MainScreenRoute.Graph.NestedScrollConnection -> navHostController.navigateToNestedScrollScreen()
                     MainScreenRoute.Graph.Painter -> navHostController.navigateToPainterScreen()
-                    MainScreenRoute.Graph.WebView -> activity?.let {
-                        WebViewActivity.openWebViewActivity("https://www.baidu.com/", activity)
+                    MainScreenRoute.Graph.WebView -> activity?.let { WebViewActivity.openWebViewActivity("https://www.baidu.com/", activity) }
+                    is MainScreenRoute.Graph.VideoPlay -> activity?.let {
+                        VideoPlayActivity.open(it, graph.url)
                     }
                 }
             },
@@ -98,8 +97,6 @@ fun NavigationHost(
         composeDateScreen()
 
         composeNestedScrollScreen()
-
-        composeBiometricScreen()
 
         composePainterScreen()
 

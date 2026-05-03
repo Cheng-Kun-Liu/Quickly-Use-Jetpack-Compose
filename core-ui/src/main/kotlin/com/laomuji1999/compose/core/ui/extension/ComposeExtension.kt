@@ -57,7 +57,7 @@ fun Modifier.ifCondition(
 fun Modifier.clickableDebounce(
     timeout: Long = 300L,
     indication: Indication? = LocalIndication.current,
-    onClick: () -> Unit
+    onClick: () -> Unit = {},
 ): Modifier {
     var lastClickTime by remember { mutableLongStateOf(0L) }
     return this.clickable(
