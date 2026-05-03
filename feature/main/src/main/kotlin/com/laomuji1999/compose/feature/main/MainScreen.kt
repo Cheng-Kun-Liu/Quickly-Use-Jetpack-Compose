@@ -62,9 +62,7 @@ private fun MainScreenUi(
     val pagerState = rememberPagerState(
         pageCount = { MainScreenPageEnum.entries.size })
     val coroutineScope = rememberCoroutineScope()
-    var showSimpleDragView by rememberSaveable {
-        mutableStateOf(true)
-    }
+    var showSimpleDragView by rememberSaveable { mutableStateOf(false) }
     WeScaffold(
         topBar = {
             WeTopBar(

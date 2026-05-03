@@ -35,6 +35,9 @@
     <string name="string_demo_screen_biometric">生物认证</string>
     <string name="string_demo_screen_google_login_demo">谷歌登录例子</string>
     <string name="string_demo_screen_web_view_demo">WebView例子</string>
+    <string name="string_demo_screen_video_play_demo">视频播放例子</string>
+    <string name="string_demo_screen_video_play_url_tip">请输入视频地址</string>
+    <string name="string_demo_screen_video_play_confirm">确定</string>
     <string name="string_http_screen_is_online">网络是否可用: %1$s</string>
     <string name="string_http_screen_get_demo">GET,后台延迟3秒</string>
     <string name="string_http_screen_post_demo">POST</string>

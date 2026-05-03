@@ -15,4 +15,5 @@ dependencies {
     implementation(project(":core-logic:authenticate"))
     implementation(project(":core-logic:location"))
     implementation(project(":core-launcher"))
+    implementation(project(":feature:integrations"))
 }

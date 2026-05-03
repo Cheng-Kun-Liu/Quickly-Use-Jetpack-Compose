@@ -7,8 +7,7 @@ import androidx.navigation.compose.NavHost
 import com.laomuji1999.compose.WebViewActivity
 import com.laomuji1999.compose.core.ui.extension.safePopBackStack
 import com.laomuji1999.compose.core.ui.screen.SlideNavigation
-import com.laomuji1999.compose.feature.integrations.biometric.BiometricScreenRoute.composeBiometricScreen
-import com.laomuji1999.compose.feature.integrations.biometric.BiometricScreenRoute.navigateToBiometricScreen
+import com.laomuji1999.compose.feature.video.VideoPlayActivity
 import com.laomuji1999.compose.feature.chat.AiChatScreenRoute
 import com.laomuji1999.compose.feature.chat.AiChatScreenRoute.composeAiChatScreen
 import com.laomuji1999.compose.feature.chat.AiChatScreenRoute.navigateToAiChatScreen
@@ -53,10 +52,9 @@ fun NavigationHost(
         popExitTransition = SlideNavigation.popExitTransition
     ) {
         composeMainScreen(
-            navigateToGraph = {
-                when (it) {
+            navigateToGraph = { graph ->
+                when (graph) {
                     MainScreenRoute.Graph.AiChat -> navHostController.navigateToAiChatScreen()
-                    MainScreenRoute.Graph.Biometric -> navHostController.navigateToBiometricScreen()
                     MainScreenRoute.Graph.Date -> navHostController.navigateToDateScreen()
                     MainScreenRoute.Graph.Firebase -> navHostController.navigateToFirebaseScreen()
                     MainScreenRoute.Graph.Http -> navHostController.navigateToHttpScreen()
@@ -64,8 +62,9 @@ fun NavigationHost(
                     MainScreenRoute.Graph.Font -> navHostController.navigateToFontScreen()
                     MainScreenRoute.Graph.NestedScrollConnection -> navHostController.navigateToNestedScrollScreen()
                     MainScreenRoute.Graph.Painter -> navHostController.navigateToPainterScreen()
-                    MainScreenRoute.Graph.WebView -> activity?.let {
-                        WebViewActivity.openWebViewActivity("https://www.baidu.com/", activity)
+                    MainScreenRoute.Graph.WebView -> activity?.let { WebViewActivity.openWebViewActivity("https://www.baidu.com/", activity) }
+                    is MainScreenRoute.Graph.VideoPlay -> activity?.let {
+                        VideoPlayActivity.open(it, graph.url)
                     }
                 }
             },
@@ -98,8 +97,6 @@ fun NavigationHost(
         composeDateScreen()
 
         composeNestedScrollScreen()
-
-        composeBiometricScreen()
 
         composePainterScreen()
 

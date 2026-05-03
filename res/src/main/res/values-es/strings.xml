@@ -36,6 +36,9 @@
     <string name="string_demo_screen_biometric">Autenticación biométrica</string>
     <string name="string_demo_screen_google_login_demo">Ejemplo de inicio de sesión de Google</string>
     <string name="string_demo_screen_web_view_demo">Ejemplo de WebView</string>
+    <string name="string_demo_screen_video_play_demo">Video Play Example</string>
+    <string name="string_demo_screen_video_play_url_tip">Please input video URL</string>
+    <string name="string_demo_screen_video_play_confirm">Confirm</string>
     <string name="string_http_screen_is_online">Red disponible: %1$s</string>
     <string name="string_http_screen_get_demo">GET, 3 segundos de retraso en segundo plano</string>
     <string name="string_http_screen_post_demo">POST</string>

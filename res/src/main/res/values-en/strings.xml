@@ -35,6 +35,9 @@
     <string name="string_demo_screen_biometric">Biometric Authentication</string>
     <string name="string_demo_screen_google_login_demo">Google Login Example</string>
     <string name="string_demo_screen_web_view_demo">WebView Example</string>
+    <string name="string_demo_screen_video_play_demo">Video Play Example</string>
+    <string name="string_demo_screen_video_play_url_tip">Please input video URL</string>
+    <string name="string_demo_screen_video_play_confirm">Confirm</string>
     <string name="string_http_screen_is_online">Network available: %1$s</string>
     <string name="string_http_screen_get_demo">GET, 3 seconds delay in the background</string>
     <string name="string_http_screen_post_demo">POST</string>

@@ -36,6 +36,9 @@
     <string name="string_demo_screen_biometric">বায়োমেট্রিক প্রমাণীকরণ</string>
     <string name="string_demo_screen_google_login_demo">Google লগইন উদাহরণ</string>
     <string name="string_demo_screen_web_view_demo">WebView উদাহরণ</string>
+    <string name="string_demo_screen_video_play_demo">Video Play Example</string>
+    <string name="string_demo_screen_video_play_url_tip">Please input video URL</string>
+    <string name="string_demo_screen_video_play_confirm">Confirm</string>
     <string name="string_http_screen_is_online">নেটওয়ার্ক উপলব্ধ: %1$s</string>
     <string name="string_http_screen_get_demo">GET, ব্যাকগ্রাউন্ডে 3 সেকেন্ড বিলম্ব</string>
     <string name="string_http_screen_post_demo">POST</string>

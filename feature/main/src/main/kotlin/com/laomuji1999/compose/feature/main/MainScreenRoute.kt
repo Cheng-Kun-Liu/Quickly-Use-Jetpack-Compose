@@ -16,9 +16,9 @@ data object MainScreenRoute {
         data object AiChat : Graph
         data object Date : Graph
         data object NestedScrollConnection : Graph
-        data object Biometric : Graph
         data object Painter : Graph
         data object WebView : Graph
+        data class VideoPlay(val url: String) : Graph
         data object Language : Graph
         data object Font : Graph
     }

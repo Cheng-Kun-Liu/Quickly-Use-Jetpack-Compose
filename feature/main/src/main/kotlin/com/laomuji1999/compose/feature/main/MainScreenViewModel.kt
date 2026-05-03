@@ -15,7 +15,6 @@ class MainScreenViewModel @Inject constructor() : ViewModel() {
     fun onAction(action: MainScreenAction) {
         when (action) {
             MainScreenAction.OnAiChatClick -> _graph.emitGraph(MainScreenRoute.Graph.AiChat)
-            MainScreenAction.OnBiometricScreenClick -> _graph.emitGraph(MainScreenRoute.Graph.Biometric)
             MainScreenAction.OnDateClick -> _graph.emitGraph(MainScreenRoute.Graph.Date)
             MainScreenAction.OnFirebaseClick -> _graph.emitGraph(MainScreenRoute.Graph.Firebase)
             MainScreenAction.OnHttpClick -> _graph.emitGraph(MainScreenRoute.Graph.Http)
@@ -24,6 +23,7 @@ class MainScreenViewModel @Inject constructor() : ViewModel() {
             MainScreenAction.OnNestedScrollConnectionScreenClick -> _graph.emitGraph(MainScreenRoute.Graph.NestedScrollConnection)
             MainScreenAction.OnPainterScreenClick -> _graph.emitGraph(MainScreenRoute.Graph.Painter)
             MainScreenAction.OnWebViewClick -> _graph.emitGraph(MainScreenRoute.Graph.WebView)
+            is MainScreenAction.OnVideoPlayClick -> _graph.emitGraph(MainScreenRoute.Graph.VideoPlay(action.url))
         }
     }
 }
