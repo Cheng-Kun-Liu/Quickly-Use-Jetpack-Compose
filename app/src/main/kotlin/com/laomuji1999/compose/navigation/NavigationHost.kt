@@ -4,7 +4,7 @@ import androidx.activity.compose.LocalActivity
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import com.laomuji1999.compose.WebViewActivity
+import com.laomuji1999.compose.feature.webview.WebViewActivity
 import com.laomuji1999.compose.core.ui.extension.safePopBackStack
 import com.laomuji1999.compose.core.ui.screen.SlideNavigation
 import com.laomuji1999.compose.feature.video.VideoPlayActivity

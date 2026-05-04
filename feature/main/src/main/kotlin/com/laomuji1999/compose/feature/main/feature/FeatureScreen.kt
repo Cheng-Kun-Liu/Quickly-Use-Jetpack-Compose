@@ -228,7 +228,7 @@ private fun VideoPlayDialog(
     onDismissRequest: () -> Unit,
     onConfirm: (String) -> Unit
 ) {
-    var videoUrl by remember { mutableStateOf("") }
+    var videoUrl by remember { mutableStateOf("https://storage.googleapis.com/exoplayer-test-media-0/BigBuckBunny_320x180.mp4") }
     WeActionSheetDialog(onDismissRequest = onDismissRequest) {
         Column(
             modifier = Modifier.padding(20.dp),
