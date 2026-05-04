@@ -1,8 +1,14 @@
 # Quickly-Use-Jetpack-Compose
 
-这是一个立足于 **商业级开发标准** 的个人 Jetpack Compose 实战型工程模板，我会持续维护并同步最新的实战沉淀。项目深度集成 **多模块插件化管理**、**自定义设计系统**、**离线可用数据仓库**及**启动性能优化**等现代化工程化标准；同时涵盖了**系统能力深度封装**、**三方 SDK 集成示例**及**交互体验优化**等实战方案。旨在为开发者提供一套标准化、可复用的工程底座，跳过基础设施搭建，直接进入高质量业务开发。
+这是一个立足于 **商业级开发标准** 的个人 Jetpack Compose 实战型工程模板，我会持续维护并同步最新的实战沉淀。项目深度集成 **多模块插件化管理**、**自定义设计系统**、**离线可用数据仓库**及**启动性能优化**等现代化工程化标准；同时涵盖了**系统能力深度封装**、**三方 SDK 集成示例**及**交互体验优化**等实战方案。旨在为开发者提供一套标准化、可复用的工程底座，跳过基础设施搭建，直接进入高质量业务开发。[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Cheng-Kun-Liu/Quickly-Use-Jetpack-Compose)
 
-**Wiki 网址：** [DeepWiki](https://deepwiki.com/Cheng-Kun-Liu/Quickly-Use-Jetpack-Compose)
+
+[![GitHub Stars](https://img.shields.io/github/stars/laomuji888/Quickly-Use-Jetpack-Compose.svg?style=flat&logo=github)](https://github.com/laomuji888/Quickly-Use-Jetpack-Compose/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/laomuji888/Quickly-Use-Jetpack-Compose.svg?style=flat&logo=github)](https://github.com/laomuji888/Quickly-Use-Jetpack-Compose/network/members)
+[![GitHub License](https://img.shields.io/github/license/laomuji888/Quickly-Use-Jetpack-Compose.svg?style=flat)](https://github.com/laomuji888/Quickly-Use-Jetpack-Compose/blob/main/LICENSE)
+[![Kotlin](https://img.shields.io/badge/Kotlin-2.x-blue.svg?style=flat&logo=kotlin)](https://kotlinlang.org)
+[![Compose](https://img.shields.io/badge/Compose-Latest-orange.svg?style=flat&logo=jetpackcompose)](https://developer.android.com/jetpack/compose)
+[![Java](https://img.shields.io/badge/Java-21-red.svg?style=flat&logo=openjdk)](https://www.oracle.com/java/technologies/downloads/#java21)
 
 # 📜 协议
 
