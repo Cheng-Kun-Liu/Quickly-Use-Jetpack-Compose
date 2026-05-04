@@ -63,7 +63,6 @@ fun WeActionSheetDialog(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .clickableDebounce(indication = null, onClick = onDismissRequest)
         ) {
             Column(modifier = Modifier.align(Alignment.BottomCenter)) {
                 AnimatedSlideFromBottom(

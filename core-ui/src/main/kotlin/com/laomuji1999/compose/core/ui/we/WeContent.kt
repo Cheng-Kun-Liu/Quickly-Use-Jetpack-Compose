@@ -16,6 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
+import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsControllerCompat
 import com.laomuji1999.compose.core.logic.common.Toast
 import com.laomuji1999.compose.core.ui.extension.isPreview
@@ -96,6 +97,8 @@ private fun ApplySystemBar() {
             windowInsetsController.isAppearanceLightNavigationBars = isDarkFont
             //设置顶部状态栏文字是否为深色
             windowInsetsController.isAppearanceLightStatusBars = isDarkFont
+            //请求刷新DecorView
+            ViewCompat.requestApplyInsets(window.decorView)
         }
     }
 }

@@ -31,7 +31,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji1999.compose.core.logic.authenticate.GoogleAuthenticate
 import com.laomuji1999.compose.core.logic.authenticate.biometric.BiometricAuthenticate
 import com.laomuji1999.compose.core.logic.common.Toast
-import com.laomuji1999.compose.core.ui.extension.clickableDebounce
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
 import com.laomuji1999.compose.core.ui.view.LoadingDialog
 import com.laomuji1999.compose.core.ui.we.WeTheme
@@ -229,7 +228,13 @@ private fun VideoPlayDialog(
     onConfirm: (String) -> Unit
 ) {
     var videoUrl by remember { mutableStateOf("https://storage.googleapis.com/exoplayer-test-media-0/BigBuckBunny_320x180.mp4") }
-    WeActionSheetDialog(onDismissRequest = onDismissRequest) {
+    var animateHide = { onDismissRequest() }
+    WeActionSheetDialog(onDismissRequest = {
+        animateHide()
+    }) { state ->
+        animateHide = {
+            state.hide { onDismissRequest() }
+        }
         Column(
             modifier = Modifier.padding(20.dp),
             horizontalAlignment = Alignment.CenterHorizontally

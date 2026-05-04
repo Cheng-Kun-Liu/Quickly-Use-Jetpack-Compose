@@ -90,7 +90,6 @@ Quickly-Use-Jetpack-Compose 的架构参考 Android 官方最佳实践项目 [No
 
 | 示例 | 截图/GIF | 亮点 |
 | --- | --- | --- |
-| **WeWidget 组件库** | <img src="docs/images/WidgetScreen.gif" width="320"/> | 纯手工打造的微信风格组件库，脱离 Material 限制 |
 | **AI 聊天 (Gemini)** | <img src="docs/images/AiChat.gif" width="320"/> | 集成 Google AI Gemini，展示流式响应与通知集成 |
 | **Media3 视频播放** | <img src="docs/images/Media3.jpg" width="320"/> | 封装 Media3，支持边播边存与离线缓存，处理 Lifecycle 与全屏切换 |
 
@@ -100,18 +99,17 @@ Quickly-Use-Jetpack-Compose 的架构参考 Android 官方最佳实践项目 [No
 
 | 示例 | 截图/GIF | 亮点 |
 | --- | --- | --- |
-| **系统能力合集** | <img src="docs/images/LocationPhotoContacts.gif" width="320"/> | 封装权限申请、定位、相册、联系人选择 |
 | **动态切换图标** | <img src="docs/images/SwitchAppLogo.gif" width="320"/> | 无需发版，动态更换 App 桌面入口图标 |
 | **网络异常处理** | <img src="docs/images/HttpScreen.gif" width="320"/> | 统一的错误码拦截、Loading 与 Retry 机制 |
-
+| **系统能力合集** | <img src="docs/images/LocationPhotoContacts.gif" width="320"/> | 封装权限申请、定位、相册、联系人选择 |
 ---
 
-### UI 交互与多语言
+### 国际化和UI交互
 
 | 示例 | 截图/GIF |
 | --- | --- |
+| **多语言与主题** | <img src="docs/images/LanguageSwitch.gif" width="320"/> |
 | **自定义日历** | <img src="docs/images/CustomizeCalendar.gif" width="320"/> |
 | **绘画画板** | <img src="docs/images/PainterScreen.png" width="320"/> |
-| **多语言与主题** | <img src="docs/images/LanguageSwitch.gif" width="320"/> |
 | **Lazy 列表排序** | <img src="docs/images/LazySort.gif" width="320"/> |
 | **Banner 轮播** | <img src="docs/images/BannerView.gif" width="320"/> |
