@@ -1,12 +1,14 @@
 # Quickly-Use-Jetpack-Compose
 
-一个用于快速学习和复用 Jetpack Compose 实践的示例项目。项目以 Compose、Hilt、Navigation、ViewModel、Flow 和模块化工程为基础，尽量把常见移动端能力整理成可运行的示例。
+这是一个立足于 **商业级开发标准** 的个人 Jetpack Compose 实战型工程模板，我会持续维护并同步最新的实战沉淀。项目深度集成 **多模块插件化管理**、**自定义设计系统**、**离线可用数据仓库**及**启动性能优化**等现代化工程化标准；同时涵盖了**系统能力深度封装**、**三方 SDK 集成示例**及**交互体验优化**等实战方案。旨在为开发者提供一套标准化、可复用的工程底座，跳过基础设施搭建，直接进入高质量业务开发。
 
-# 协议
+**Wiki 网址：** [DeepWiki](https://deepwiki.com/Cheng-Kun-Liu/Quickly-Use-Jetpack-Compose)
+
+# 📜 协议
 
 [查看隐私协议](PRIVACY.md)
 
-# 架构
+# 🏗️ 架构
 
 Quickly-Use-Jetpack-Compose 的架构参考 Android 官方最佳实践项目 [Now in Android App](https://github.com/android/nowinandroid)。
 
@@ -17,7 +19,14 @@ Quickly-Use-Jetpack-Compose 的架构参考 Android 官方最佳实践项目 [No
 + **数据层**：采用 Repository 模式，集成 **Room** 数据库和 **Ktor (OkHttp)** 网络请求。
 + **UI 驱动**：单 Activity 架构，使用 Navigation 管理页面跳转，结合 Compose + ViewModel + Flow 实现响应式 UI。
 
-# 设计系统
+## 体验优化
+
++ **任务栈调度**：内置 `SchemeActivity` 中转层，解决外部回跳（如支付回调、OAuth 登录）时的任务栈错乱问题，确保应用无缝恢复至离开前的状态。
++ **最近任务清理**：封装 `finishAndCleanupTask` 扩展函数，针对独立任务栈（如 WebView）提供自动销毁机制，确保 Activity 退出后及时清理“最近任务列表”中的空白残留。
++ **视频边播边存**：基于 Media3 封装 LRU 缓存机制，实现视频数据在播放时本地同步持久化，实现二次打开秒开并显著节省流量消耗。
++ **图片磁盘缓存**：深度配置 Coil 磁盘缓存策略，确保网络图片在离线状态下依然可见，并大幅提升图片重载速度与滚动流畅度。
+
+# 🎨 设计系统
 
 项目包含一套自定义 Compose 设计系统，偏微信风格，不直接套用 Material 3 的视觉样式。
 
@@ -30,7 +39,7 @@ Quickly-Use-Jetpack-Compose 的架构参考 Android 官方最佳实践项目 [No
 + **WeWidget**：顶部栏、底部栏、Button、Toast、ActionSheet、单选、多选、开关等通用组件。
 + **View**：Banner (BannerView)、可点击富文本 (ClickableAnnotatedText)、拖拽排序 (DragList)、错误页 (ErrorView)、Loading、禁止截屏 (SecureComposeView) 等常用 Compose 组件。
 
-# Module 目录简介
+# 📦 Module 目录简介
 
 + **app**：应用入口，汇总各 feature 并统一处理 Navigation。
 + **build-logic**：自定义 Gradle Convention 插件，统一管理 Compose、Hilt、Serialization、Library、Application 等构建配置。
@@ -57,7 +66,7 @@ Quickly-Use-Jetpack-Compose 的架构参考 Android 官方最佳实践项目 [No
 + **res**：统一管理字符串、图片、多语言等资源文件。
 + **baseline-profile**：配置启动性能优化。
 
-# 开发与运行
+# 🚀 开发与运行
 
 建议使用最新版本 Android Studio 打开项目。运行时切换到 `app` 配置后启动。
 
@@ -69,16 +78,34 @@ Quickly-Use-Jetpack-Compose 的架构参考 Android 官方最佳实践项目 [No
 
 项目预设了 `gp` 和 `sam` 两个 productFlavors，分别对应不同的 ApplicationId 和签名配置，可在 Android Studio 的 Build Variants 面板中切换。
 
-# 运行效果
+# 📱 运行效果
 
-| 示例 | 截图 |
+### 核心业务能力
+
+| 示例 | 截图/GIF | 亮点 |
+| --- | --- | --- |
+| **WeWidget 组件库** | <img src="docs/images/WidgetScreen.gif" width="320"/> | 纯手工打造的微信风格组件库，脱离 Material 限制 |
+| **AI 聊天 (Gemini)** | <img src="docs/images/AiChat.gif" width="320"/> | 集成 Google AI Gemini，展示流式响应与通知集成 |
+| **Media3 视频播放** | <img src="docs/images/Media3.jpg" width="320"/> | 封装 Media3，支持边播边存与离线缓存，处理 Lifecycle 与全屏切换 |
+
+---
+
+### 系统能力集成
+
+| 示例 | 截图/GIF | 亮点 |
+| --- | --- | --- |
+| **系统能力合集** | <img src="docs/images/LocationPhotoContacts.gif" width="320"/> | 封装权限申请、定位、相册、联系人选择 |
+| **动态切换图标** | <img src="docs/images/SwitchAppLogo.gif" width="320"/> | 无需发版，动态更换 App 桌面入口图标 |
+| **网络异常处理** | <img src="docs/images/HttpScreen.gif" width="320"/> | 统一的错误码拦截、Loading 与 Retry 机制 |
+
+---
+
+### UI 交互与多语言
+
+| 示例 | 截图/GIF |
 | --- | --- |
-| 绘画画板 | <img src="docs/images/PainterScreen.png" width="320"/> |
-| 多语言 | <img src="docs/images/LanguageSwitch.gif" width="320"/> |
-| Lazy 列表排序 | <img src="docs/images/LazySort.gif" width="320"/> |
-| 自定义日历 | <img src="docs/images/CustomizeCalendar.gif" width="320"/> |
-| 动态切换图标 | <img src="docs/images/SwitchAppLogo.gif" width="320"/> |
-| AI 聊天和通知 | <img src="docs/images/AiChat.gif" width="320"/> |
-| 网络异常处理 | <img src="docs/images/HttpScreen.gif" width="320"/> |
-| Banner | <img src="docs/images/BannerView.gif" width="320"/> |
-| 定位、图片、联系人 | <img src="docs/images/LocationPhotoContacts.gif" width="320"/> |
+| **自定义日历** | <img src="docs/images/CustomizeCalendar.gif" width="320"/> |
+| **绘画画板** | <img src="docs/images/PainterScreen.png" width="320"/> |
+| **多语言与主题** | <img src="docs/images/LanguageSwitch.gif" width="320"/> |
+| **Lazy 列表排序** | <img src="docs/images/LazySort.gif" width="320"/> |
+| **Banner 轮播** | <img src="docs/images/BannerView.gif" width="320"/> |
