@@ -13,13 +13,14 @@
     <string name="string_error_view_refresh">Refresh the current page</string>
 
     <!--  MainScreen  -->
-    <string name="string_main_screen_page_features">Features</string>
+    <string name="string_main_screen_page_explore">Explore</string>
     <string name="string_main_screen_page_ui">UI</string>
+    <string name="string_main_screen_page_feature">Feature</string>
     <string name="string_main_screen_page_settings">Settings</string>
 
     <!--  UiDemoScreen  -->
-    <string name="string_demo_group_core_features">Core features</string>
-    <string name="string_demo_group_authentication">Authentication</string>
+    <string name="string_demo_group_sdk_samples">Third-party SDK Samples</string>
+    <string name="string_demo_group_authentication">Authentication &amp; Security</string>
     <string name="string_demo_group_device_system">Device and system capabilities</string>
     <string name="string_demo_group_ui_interaction">UI and interaction</string>
     <string name="string_demo_group_appearance_localization">Appearance and localization</string>
@@ -108,7 +109,7 @@
     <!--  Language  -->
     <string name="string_language_system">System language</string>
     <string name="string_language_screen_title">Language</string>
-    
+
     <!--  Font  -->
     <string name="string_font_screen_title">Font Size</string>
     <string name="string_font_screen_confirm">Done</string>

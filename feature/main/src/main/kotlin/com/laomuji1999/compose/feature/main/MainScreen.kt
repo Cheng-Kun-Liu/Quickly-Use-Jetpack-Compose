@@ -23,10 +23,12 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.laomuji1999.compose.core.ui.extension.isPreview
 import com.laomuji1999.compose.core.ui.extension.modifier.ModifierDraggable.draggable
+import com.laomuji1999.compose.core.ui.navigation.AppNavigationAction
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
 import com.laomuji1999.compose.core.ui.we.WeTheme
-import com.laomuji1999.compose.core.ui.we.icons.Device
+import com.laomuji1999.compose.core.ui.we.icons.Explore
 import com.laomuji1999.compose.core.ui.we.icons.Feature
+import com.laomuji1999.compose.core.ui.we.icons.Settings
 import com.laomuji1999.compose.core.ui.we.icons.Ui
 import com.laomuji1999.compose.core.ui.we.icons.WeIcons
 import com.laomuji1999.compose.core.ui.we.widget.bottombar.WeBottomBar
@@ -34,9 +36,10 @@ import com.laomuji1999.compose.core.ui.we.widget.bottombar.WeBottomBarItem
 import com.laomuji1999.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji1999.compose.core.ui.we.widget.topbar.WeTopBar
 import com.laomuji1999.compose.feature.main.MainScreenRoute.Graph
-import com.laomuji1999.compose.feature.main.feature.FeatureScreen
-import com.laomuji1999.compose.feature.main.settings.SettingsScreen
-import com.laomuji1999.compose.feature.main.ui.UiDemoScreen
+import com.laomuji1999.compose.feature.explore.ExploreScreen
+import com.laomuji1999.compose.feature.system.FeatureScreen
+import com.laomuji1999.compose.feature.settings.SettingsScreen
+import com.laomuji1999.compose.feature.uidemo.UiDemoScreen
 import com.laomuji1999.compose.res.R
 import kotlinx.coroutines.launch
 
@@ -57,7 +60,7 @@ fun MainScreen(
 
 @Composable
 private fun MainScreenUi(
-    onAction: (MainScreenAction) -> Unit
+    onAction: (AppNavigationAction) -> Unit
 ) {
     val pagerState = rememberPagerState(
         pageCount = { MainScreenPageEnum.entries.size })
@@ -67,8 +70,9 @@ private fun MainScreenUi(
         topBar = {
             WeTopBar(
                 title = when (MainScreenPageEnum.entries[pagerState.currentPage]) {
-                    MainScreenPageEnum.FEATURE -> stringResource(id = R.string.string_main_screen_page_features)
+                    MainScreenPageEnum.EXPLORE -> stringResource(id = R.string.string_main_screen_page_explore)
                     MainScreenPageEnum.UI -> stringResource(id = R.string.string_main_screen_page_ui)
+                    MainScreenPageEnum.FEATURE -> stringResource(id = R.string.string_main_screen_page_feature)
                     MainScreenPageEnum.SETTINGS -> stringResource(id = R.string.string_main_screen_page_settings)
                 }
             )
@@ -92,7 +96,7 @@ private fun MainScreenUi(
             beyondViewportPageCount = if (isPreview()) 0 else MainScreenPageEnum.entries.size
         ) {
             when (MainScreenPageEnum.entries[it]) {
-                MainScreenPageEnum.FEATURE -> FeatureScreen(onAction = onAction)
+                MainScreenPageEnum.EXPLORE -> ExploreScreen(onAction = onAction)
 
                 MainScreenPageEnum.UI -> UiDemoScreen(
                     showSimpleDragView = showSimpleDragView,
@@ -101,6 +105,8 @@ private fun MainScreenUi(
                     },
                     onAction = onAction,
                 )
+
+                MainScreenPageEnum.FEATURE -> FeatureScreen(onAction = onAction)
 
                 MainScreenPageEnum.SETTINGS -> SettingsScreen(onAction = onAction)
             }
@@ -115,11 +121,11 @@ private fun MainScreenBottomBar(
 ) {
     WeBottomBar {
         WeBottomBarItem(
-            unSelectImageVector = WeIcons.Feature,
-            title = stringResource(id = R.string.string_main_screen_page_features),
-            selected = selectedEnum == MainScreenPageEnum.FEATURE,
+            unSelectImageVector = WeIcons.Explore,
+            title = stringResource(id = R.string.string_main_screen_page_explore),
+            selected = selectedEnum == MainScreenPageEnum.EXPLORE,
             onClick = {
-                onSelectedEnumChange(MainScreenPageEnum.FEATURE)
+                onSelectedEnumChange(MainScreenPageEnum.EXPLORE)
             })
         WeBottomBarItem(
             unSelectImageVector = WeIcons.Ui,
@@ -129,7 +135,15 @@ private fun MainScreenBottomBar(
                 onSelectedEnumChange(MainScreenPageEnum.UI)
             })
         WeBottomBarItem(
-            unSelectImageVector = WeIcons.Device,
+            unSelectImageVector = WeIcons.Feature,
+            title = stringResource(id = R.string.string_main_screen_page_feature),
+            selected = selectedEnum == MainScreenPageEnum.FEATURE,
+            onClick = {
+                onSelectedEnumChange(MainScreenPageEnum.FEATURE)
+            })
+
+        WeBottomBarItem(
+            unSelectImageVector = WeIcons.Settings,
             title = stringResource(id = R.string.string_main_screen_page_settings),
             selected = selectedEnum == MainScreenPageEnum.SETTINGS,
             onClick = {

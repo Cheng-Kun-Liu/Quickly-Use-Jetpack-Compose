@@ -3,6 +3,7 @@ package com.laomuji1999.compose.feature.video
 import android.app.Activity
 import android.content.Context
 import android.content.ContextWrapper
+import android.content.res.Configuration
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
@@ -27,11 +29,13 @@ import com.laomuji1999.compose.feature.video.player.VideoPlayerView
 @Composable
 fun VideoScreen(
     videoUri: String,
-    isFullScreen: Boolean = true
 ) {
     val context = LocalContext.current
-    LaunchedEffect(isFullScreen) {
-        if (isFullScreen) {
+    val configuration = LocalConfiguration.current
+    val isLandscape = configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+
+    LaunchedEffect(isLandscape) {
+        if (isLandscape) {
             context.hideSystemUi()
         } else {
             context.showSystemUi()

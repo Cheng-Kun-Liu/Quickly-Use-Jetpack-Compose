@@ -8,11 +8,12 @@
     <string name="string_error_view_title">出错了</string>
     <string name="string_error_view_content">请检查网络或稍后重试</string>
     <string name="string_error_view_refresh">刷新当前页面</string>
-    <string name="string_main_screen_page_features">功能</string>
+    <string name="string_main_screen_page_feature">功能</string>
+    <string name="string_main_screen_page_explore">探索</string>
     <string name="string_main_screen_page_settings">设置</string>
     <string name="string_main_screen_page_ui">UI</string>
-    <string name="string_demo_group_core_features">核心功能</string>
-    <string name="string_demo_group_authentication">认证</string>
+    <string name="string_demo_group_sdk_samples">三方 SDK 示例</string>
+    <string name="string_demo_group_authentication">认证安全</string>
     <string name="string_demo_group_device_system">设备与系统能力</string>
     <string name="string_demo_group_ui_interaction">UI 与交互</string>
     <string name="string_demo_group_appearance_localization">外观与本地化</string>

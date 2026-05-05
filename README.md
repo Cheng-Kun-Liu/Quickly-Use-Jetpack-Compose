@@ -48,26 +48,19 @@ Quickly-Use-Jetpack-Compose 的架构参考 Android 官方最佳实践项目 [No
 # 📦 Module 目录简介
 
 + **app**：应用入口，汇总各 feature 并统一处理 Navigation。
-+ **build-logic**：自定义 Gradle Convention 插件，统一管理 Compose、Hilt、Serialization、Library、Application 等构建配置。
++ **build-logic**：自定义 Gradle Convention 插件中心，负责构建逻辑的复用与模块化管控。
 + **core-logic**：
-    - `common`：日志、Toast、协程调度、缓存等基础工具。
-    - `database`：基于 **Room** 的持久化存储。
-    - `network`：基于 **Ktor** 的网络请求封装。
-    - `repository`：业务数据层，包含聊天 (Google AI Chat)、用户信息、产品等仓库。
-    - `authenticate`：Google 登录、生物认证逻辑封装。
-    - `notification`：通知管理，包含 Firebase Cloud Messaging。
-    - `location`：定位能力封装。
-    - `language`：多语言切换逻辑。
-+ **core-ui**：设计系统核心实现和通用 UI 组件库。
-+ **core-launcher**：封装 `ActivityResultLauncher`，提供一行代码调用相册、相机、联系人、手机号选择及权限申请的能力。
+    - `repository` / `network` / `database`：核心数据链路，提供离线优先的数据仓库与网络拦截机制。
+    - `authenticate` / `notification` / `location` / `language`：核心领域能力封装，包括生物识别、FCM 通知、定位及多语言切换。
++ **core-ui** & **core-launcher**：
+    - `core-ui`：WeDesign 设计系统核心实现。
+    - `core-launcher`：系统交互封装，提供一行代码调用相机、相册及权限申请的能力。
 + **feature**：
-    - `main`：应用主框架，包含首页 Pager 容器。
-    - `samples`：UI 交互示例，包含 **自定义日历**、**绘画画板**、**嵌套滚动** 等。
-    - `settings`：应用偏好设置（多语言、字体大小、主题切换）。
-    - `integrations`：网络与系统能力集成示例（HTTP、Firebase、生物认证）。
-    - `chat`：基于 **Google AI Gemini** 的智能聊天示例。
-    - `video`：基于 **Media3** 的视频播放器。
-    - `webview`：通用的 WebView 容器。
+    - `main`：应用主框架，包含首页 Pager 容器及“功能”页逻辑。
+    - `chat` / `video` / `webview`：垂直业务模块，深度集成 AI 聊天、Media3 视频架构及通用 WebView。这些模块被 `explore` 模块引用作为三方集成示例。
+    - `explore` / `system`：三方 SDK 集成示例（HTTP、Firebase、Google 登录）与系统原生能力封装（定位、生物识别）。
+    - `ui-demo`：UI 交互示例，包含自定义日历、绘画画板、嵌套滚动等。
+    - `settings`：应用偏好设置（多语言、主题、字体）。
 + **flavor**：提供 `gp` (Google Play) 和 `sam` (Samsung) 渠道差异化实现示例。
 + **res**：统一管理字符串、图片、多语言等资源文件。
 + **baseline-profile**：配置启动性能优化。

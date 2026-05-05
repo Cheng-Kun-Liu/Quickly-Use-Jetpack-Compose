@@ -1,7 +1,8 @@
 package com.laomuji1999.compose.feature.main
 
 enum class MainScreenPageEnum {
-    FEATURE,
+    EXPLORE,
     UI,
+    FEATURE,
     SETTINGS
 }

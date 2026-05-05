@@ -11,9 +11,9 @@ android {
 
 dependencies {
     implementation(project(":core-ui"))
-    implementation(project(":core-logic:common"))
-    implementation(project(":core-logic:authenticate"))
-    implementation(project(":core-logic:location"))
-    implementation(project(":core-launcher"))
-    implementation(project(":feature:integrations"))
+    implementation(project(":res"))
+    implementation(project(":feature:explore"))
+    implementation(project(":feature:system"))
+    implementation(project(":feature:ui-demo"))
+    implementation(project(":feature:settings"))
 }

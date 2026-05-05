@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Quickly-Use-Jetpack-Compose</string>
-    <string name="string_demo_group_core_features">الميزات الأساسية</string>
-    <string name="string_demo_group_authentication">المصادقة</string>
+    <string name="string_demo_group_sdk_samples">نماذج SDK لجهات خارجية</string>
+    <string name="string_demo_group_authentication">المصادقة والأمن</string>
     <string name="string_demo_group_device_system">إمكانات الجهاز والنظام</string>
     <string name="string_demo_group_ui_interaction">واجهة المستخدم والتفاعل</string>
     <string name="string_demo_group_appearance_localization">المظهر والتوطين</string>
@@ -14,7 +14,8 @@
     <string name="string_error_view_title">حدث خطأ ما</string>
     <string name="string_error_view_content">يرجى التحقق من الشبكة أو المحاولة مرة أخرى لاحقًا</string>
     <string name="string_error_view_refresh">تحديث الصفحة الحالية</string>
-    <string name="string_main_screen_page_features">الميزات</string>
+    <string name="string_main_screen_page_explore">استكشاف</string>
+    <string name="string_main_screen_page_feature">الميزات</string>
     <string name="string_main_screen_page_settings">إعدادات</string>
     <string name="string_main_screen_page_ui">واجهة المستخدم</string>
     <string name="string_demo_screen_painter">لوحة الرسم</string>

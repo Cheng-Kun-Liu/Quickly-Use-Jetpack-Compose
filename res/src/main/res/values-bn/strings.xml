@@ -9,11 +9,12 @@
     <string name="string_error_view_title">কিছু ভুল হয়েছে</string>
     <string name="string_error_view_content">অনুগ্রহ করে নেটওয়ার্ক চেক করুন অথবা পরে আবার চেষ্টা করুন</string>
     <string name="string_error_view_refresh">বর্তমান পৃষ্ঠা রিফ্রেশ করুন</string>
-    <string name="string_main_screen_page_features">বৈশিষ্ট্য</string>
+    <string name="string_main_screen_page_explore">অন্বেষণ</string>
+    <string name="string_main_screen_page_feature">বৈশিষ্ট্য</string>
     <string name="string_main_screen_page_settings">সেটিংস</string>
     <string name="string_main_screen_page_ui">UI</string>
-    <string name="string_demo_group_core_features">মূল ফিচার</string>
-    <string name="string_demo_group_authentication">প্রমাণীকরণ</string>
+    <string name="string_demo_group_sdk_samples">তৃতীয় পক্ষের SDK উদাহরণ</string>
+    <string name="string_demo_group_authentication">প্রমাণীকরণ এবং নিরাপত্তা</string>
     <string name="string_demo_group_device_system">ডিভাইস ও সিস্টেম সক্ষমতা</string>
     <string name="string_demo_group_ui_interaction">UI ও ইন্টারঅ্যাকশন</string>
     <string name="string_demo_group_appearance_localization">চেহারা ও স্থানীয়করণ</string>

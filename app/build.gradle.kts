@@ -44,9 +44,10 @@ dependencies {
     implementation(project(":core-logic:language"))
 
     implementation(project(":feature:main"))
-    implementation(project(":feature:integrations"))
+    implementation(project(":feature:explore"))
+    implementation(project(":feature:system"))
     implementation(project(":feature:chat"))
-    implementation(project(":feature:samples"))
+    implementation(project(":feature:ui-demo"))
     implementation(project(":feature:video"))
     implementation(project(":feature:webview"))
     implementation(project(":feature:settings"))

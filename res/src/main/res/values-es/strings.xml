@@ -9,11 +9,12 @@
     <string name="string_error_view_title">Algo salió mal</string>
     <string name="string_error_view_content">Verifique la red o intente nuevamente más tarde</string>
     <string name="string_error_view_refresh">Actualizar la página actual</string>
-    <string name="string_main_screen_page_features">Características</string>
+    <string name="string_main_screen_page_explore">Explorar</string>
+    <string name="string_main_screen_page_feature">Característica</string>
     <string name="string_main_screen_page_settings">Configuración</string>
     <string name="string_main_screen_page_ui">UI</string>
-    <string name="string_demo_group_core_features">Funciones principales</string>
-    <string name="string_demo_group_authentication">Autenticación</string>
+    <string name="string_demo_group_sdk_samples">Ejemplos de SDK de terceros</string>
+    <string name="string_demo_group_authentication">Autenticación y Seguridad</string>
     <string name="string_demo_group_device_system">Capacidades del dispositivo y del sistema</string>
     <string name="string_demo_group_ui_interaction">UI e interacción</string>
     <string name="string_demo_group_appearance_localization">Apariencia y localización</string>
