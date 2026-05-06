@@ -1,41 +1,52 @@
+# Android 持续集成 (CI) 工作流
+# 包含：Lint 检查、单元测试、基准配置文件 (Baseline Profile) 生成、APK/AAB 打包以及自动发布 Release
+
 name: Android CI
 
 on:
   push:
-    branches: [ "main" ]
-    tags: [ "v*" ] # 当推送以 v 开头的标签时触发 release
+    branches: [ "main" ] # 当推送到 main 分支时触发
+    tags: [ "v*" ]      # 当推送到以 'v' 开头的标签 (如 v1.0.1) 时触发 Release 流程
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main" ] # 当针对 main 分支发起拉取请求时触发
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest # 使用最新的 Ubuntu 运行环境
     permissions:
-      contents: write # 赋予上传 Release 的权限
+      contents: write     # 必须赋予写权限，否则无法自动创建 GitHub Release
     env:
+      # 提升 Gradle 堆内存至 4GB，并开启内存溢出时的堆转储，以应对 R8/混淆带来的高内存消耗
       GRADLE_OPTS: -Dorg.gradle.jvmargs="-Xmx4g -XX:+HeapDumpOnOutOfMemoryError"
+      # 强制使用 Node.js 24 运行 Actions 脚本，消除 Node.js 20 的弃用警告
       FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
     steps:
+    # 步骤 1：检出源代码
     - uses: actions/checkout@v4
 
+    # 步骤 2：配置 JDK 21 环境 (项目使用的是 JDK 21)
     - name: set up JDK 21
       uses: actions/setup-java@v4
       with:
         java-version: '21'
         distribution: 'temurin'
 
-    # 1. 优化 Gradle 缓存与执行 (使用官方推荐的 setup-gradle)
+    # 步骤 3：配置 Gradle 环境并开启缓存优化
+    # setup-gradle 会自动处理依赖缓存、Wrapper 缓存以及构建缓存 (Build Cache)
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@v4
 
+    # 步骤 4：赋予 gradlew 执行权限
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
+    # 步骤 5：运行 Lint 静态代码检查
     - name: Run Lint
       run: ./gradlew lintDebug
 
-    # 2. 上传 Lint 报告 (即使失败也会上传)
+    # 步骤 6：上传 Lint 报告
+    # if: always() 确保即使代码检查失败，开发者也能下载 HTML 报告查看具体错误位置
     - name: Upload Lint Report
       if: always()
       uses: actions/upload-artifact@v4
@@ -44,32 +55,37 @@ jobs:
         path: '**/build/reports/lint-results-*.html'
         if-no-files-found: ignore
 
+    # 步骤 7：运行单元测试
+    # 使用 if: always() 确保在代码检查失败的情况下依然验证逻辑测试
     - name: Run Unit Tests
-      if: always() # 即使 Lint 失败也运行测试，以便获取完整报告
-      run: ./gradlew test # 运行所有模块的所有单元测试
+      if: always()
+      run: ./gradlew test
 
-    # 2. 上传测试报告
+    # 步骤 8：上传测试报告
     - name: Upload Test Report
       if: always()
       uses: actions/upload-artifact@v4
       with:
         name: test-reports
-        path: '**/build/reports/tests/**' # 扩大匹配范围，确保能抓取到所有测试报告
+        path: '**/build/reports/tests/**'
         if-no-files-found: ignore
 
-    # 3. 生成 Baseline Profile
-    # 注意：该步骤会启动 Gradle Managed Device (pixel6Api33)。
-    # 使用 --no-configuration-cache 是因为 GMD 在某些 AGP 版本下与配置缓存存在兼容性问题
+    # 步骤 9：生成 Baseline Profile (基准配置文件)
+    # 通过 Gradle Managed Device (GMD) 启动模拟器运行基准分析
     - name: Enable KVM group perms
       run: |
-        sudo chmod 666 /dev/kvm
+        sudo chmod 666 /dev/kvm # 修复 CI 环境下模拟器访问 KVM 硬件加速的权限问题
 
     - name: Generate Baseline Profile
+      # -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect" 确保在无物理显卡的服务器上能渲染 UI
+      # --no-configuration-cache 避开 GMD 目前与配置缓存存在的兼容性 Bug
       run: ./gradlew :app:generateBaselineProfile -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect" --no-configuration-cache
 
+    # 步骤 10：编译生成最终产物 (APK 和 AAB)
     - name: Build All APKs and AABs
       run: ./gradlew assemble bundleRelease --no-configuration-cache
 
+    # 步骤 11：上传构建产物到 Actions Artifacts (有效期通常为 90 天)
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:
@@ -78,14 +94,13 @@ jobs:
           app/build/outputs/apk/
           app/build/outputs/bundle/
 
-    # 4. 自动创建 GitHub Release 并上传产物 (仅在推送 tag 时触发)
+    # 步骤 12：自动发布到 GitHub Release 页面 (仅在推送 Tag 时执行)
+    # 会自动上传所有 APK 和 AAB 文件，并根据提交记录自动生成发行说明
     - name: Create Release
       if: startsWith(github.ref, 'refs/tags/v')
       uses: softprops/action-gh-release@v2
       with:
         files: |
-          app/build/outputs/apk/gp/release/*.apk
-          app/build/outputs/apk/sam/release/*.apk
-          app/build/outputs/bundle/gpRelease/*.aab
-          app/build/outputs/bundle/samRelease/*.aab
+          app/build/outputs/**/*.apk
+          app/build/outputs/**/*.aab
         generate_release_notes: true
