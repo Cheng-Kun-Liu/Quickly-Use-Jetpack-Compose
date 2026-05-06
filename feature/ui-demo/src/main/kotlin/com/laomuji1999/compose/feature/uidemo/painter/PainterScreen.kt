@@ -36,13 +36,11 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji1999.compose.core.ui.extension.clickableDebounce
-import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
 import com.laomuji1999.compose.core.ui.we.widget.button.WeButton
 import com.laomuji1999.compose.core.ui.we.widget.button.WeButtonColor
 import com.laomuji1999.compose.core.ui.we.widget.button.WeButtonType
@@ -98,9 +96,11 @@ private fun PainterScreenUi(
     onDrag: (Offset) -> Unit
 ) {
     val density = LocalDensity.current
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .background(Color.White)) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(Color.White)
+    ) {
         Canvas(
             modifier = Modifier
                 .fillMaxWidth()
@@ -243,12 +243,4 @@ private fun DrawScope.drawPathData(
             cap = cap
         )
     )
-}
-
-@Preview
-@Composable
-private fun PreviewPainterScreenUi() {
-    QuicklyTheme {
-        PainterScreen(viewModel = PainterScreenViewModel())
-    }
 }
