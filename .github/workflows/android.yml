@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      GRADLE_OPTS: -Dorg.gradle.jvmargs="-Xmx4g -XX:+HeapDumpOnOutOfMemoryError"
 
     steps:
     - uses: actions/checkout@v4
@@ -52,16 +54,16 @@ jobs:
 
     # 3. 生成 Baseline Profile
     # 注意：该步骤会启动 Gradle Managed Device (pixel6Api33)。
-    # GitHub Actions 的标准 runner (ubuntu-latest) 支持硬件加速 KVM。
+    # 使用 --no-configuration-cache 是因为 GMD 在某些 AGP 版本下与配置缓存存在兼容性问题
     - name: Enable KVM group perms
       run: |
         sudo chmod 666 /dev/kvm
 
     - name: Generate Baseline Profile
-      run: ./gradlew :app:generateBaselineProfile -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect"
+      run: ./gradlew :app:generateBaselineProfile -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect" --no-configuration-cache
 
     - name: Build All APKs
-      run: ./gradlew assemble
+      run: ./gradlew assemble --no-configuration-cache
 
     - name: Upload APKs
       uses: actions/upload-artifact@v4
