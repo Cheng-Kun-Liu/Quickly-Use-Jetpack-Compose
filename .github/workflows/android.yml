@@ -52,8 +52,11 @@ jobs:
 
     # 3. 生成 Baseline Profile
     # 注意：该步骤会启动 Gradle Managed Device (pixel6Api33)。
-    # GitHub Actions 的标准 runner (ubuntu-latest) 支持硬件加速 KVM，但性能受限。
-    # 使用 swiftshader_indirect 来确保在无 GPU 环境下也能运行。
+    # GitHub Actions 的标准 runner (ubuntu-latest) 支持硬件加速 KVM。
+    - name: Enable KVM group perms
+      run: |
+        sudo chmod 666 /dev/kvm
+
     - name: Generate Baseline Profile
       run: ./gradlew :app:generateBaselineProfile -Pandroid.testoptions.manageddevices.emulator.gpu="swiftshader_indirect"
 
