@@ -81,7 +81,7 @@ fun PainterScreen(
 }
 
 @Composable
-private fun PainterScreenUi(
+fun PainterScreenUi(
     colorList: List<Color>,
     currentColorIndex: Int,
     widthList: List<Dp>,

@@ -49,12 +49,12 @@ fun FirebaseScreen(
 }
 
 @Composable
-private fun FirebaseScreenUi(
+fun FirebaseScreenUi(
     uiState: FirebaseScreenUiState,
     logEventClick: () -> Unit,
-    updatePushToken:()->Unit,
-    testCrashlytics:()->Unit
-){
+    updatePushToken: () -> Unit,
+    testCrashlytics: () -> Unit
+) {
     WeScaffold(
         topBar = {
             WeTopBar(

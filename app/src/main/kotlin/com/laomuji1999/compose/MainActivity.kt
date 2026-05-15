@@ -12,9 +12,10 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation3.runtime.rememberNavBackStack
 import com.laomuji1999.compose.core.ui.screen.SlideActivity
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
+import com.laomuji1999.compose.feature.main.MainScreenRoute
 import com.laomuji1999.compose.navigation.NavigationHost
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -44,10 +45,10 @@ class MainActivity : SlideActivity() {
         enableEdgeToEdge()
 
         setContent {
-            val navHostController = rememberNavController()
+            val backStack = rememberNavBackStack(MainScreenRoute)
             QuicklyTheme {
                 NavigationHost(
-                    navHostController = navHostController
+                    backStack = backStack
                 )
             }
         }

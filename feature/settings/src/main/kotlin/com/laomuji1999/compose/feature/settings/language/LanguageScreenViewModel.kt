@@ -57,10 +57,12 @@ class LanguageScreenViewModel @Inject constructor(
     }
 
     private fun setAppLanguage(action: LanguageScreenAction.OnLanguageClick) {
+        // 更新 ViewModel 状态
         _usingLanguage.update {
             action.appLanguage
         }
 
+        // 执行持久化逻辑 (可能触发 Activity 重建)
         language.setAppUsingLanguage(
             appLanguage = action.appLanguage
         )

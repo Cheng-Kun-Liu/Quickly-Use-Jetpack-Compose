@@ -77,7 +77,7 @@ fun FontScreen(
 }
 
 @Composable
-private fun FontScreenUi(
+fun FontScreenUi(
     uiState: FontScreenUiState,
     onAction: (FontScreenAction) -> Unit,
 ) {

@@ -13,6 +13,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation3.runtime.result.LocalResultEventBus
 import com.laomuji1999.compose.core.logic.AppLanguages
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
 import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutline
@@ -35,6 +36,13 @@ fun LanguageScreen(
     }
 
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
+    val resultBus = LocalResultEventBus.current
+
+    // 当语言状态发生变化时，通过最新的 ResultBus 发送事件
+    LaunchedEffect(uiState.usingLanguage) {
+        resultBus.sendResult(uiState.usingLanguage)
+    }
+
     LanguageScreenUi(
         uiState = uiState,
         onAction = viewModel::onAction,
@@ -45,7 +53,7 @@ fun LanguageScreen(
 }
 
 @Composable
-private fun LanguageScreenUi(
+fun LanguageScreenUi(
     uiState: LanguageScreenUiState,
     onAction: (LanguageScreenAction) -> Unit,
 ) {

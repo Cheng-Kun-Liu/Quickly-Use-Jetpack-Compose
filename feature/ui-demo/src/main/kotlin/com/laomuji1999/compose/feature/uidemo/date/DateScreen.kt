@@ -55,7 +55,7 @@ fun DateScreen(
 }
 
 @Composable
-private fun DateScreenUi(
+fun DateScreenUi(
     uiState: DateScreenUiState, onAction: (DateScreenAction) -> Unit
 ) {
     WeScaffold(topBar = {

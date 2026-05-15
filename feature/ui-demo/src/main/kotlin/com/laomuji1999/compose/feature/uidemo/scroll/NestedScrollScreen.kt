@@ -14,7 +14,7 @@ import com.laomuji1999.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji1999.compose.core.ui.we.widget.topbar.WeTopBar
 
 @Composable
-internal fun NestedScrollScreen() {
+fun NestedScrollScreen() {
     var showConnectionScreen by rememberSaveable { mutableStateOf(false) }
     var showDispatcherScreen by rememberSaveable { mutableStateOf(false) }
 

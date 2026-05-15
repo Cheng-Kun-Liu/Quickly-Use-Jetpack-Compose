@@ -55,13 +55,14 @@ object OpenCamera {
             OpenAlbumLauncher { onResult ->
                 resultCallback = onResult
                 try {
-                    photoUri = context.createTempPictureUri()
-                    if (photoUri == null) {
+                    val currentUri = context.createTempPictureUri()
+                    photoUri = currentUri
+                    if (currentUri == null) {
                         onResult(null)
                         resultCallback = null
                         return@OpenAlbumLauncher
                     }
-                    cameraLauncher.launch(photoUri)
+                    cameraLauncher.launch(currentUri)
                 } catch (_: Exception) {
                     onResult(null)
                     resultCallback = null

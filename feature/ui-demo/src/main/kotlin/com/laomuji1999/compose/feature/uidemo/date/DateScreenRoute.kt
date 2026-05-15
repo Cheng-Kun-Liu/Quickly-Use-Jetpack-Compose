@@ -1,21 +1,7 @@
 package com.laomuji1999.compose.feature.uidemo.date
 
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
-import androidx.navigation.NavOptions
-import androidx.navigation.compose.composable
-import com.laomuji1999.compose.core.ui.extension.navOptionsPushBack
+import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object DateScreenRoute{
-    fun NavHostController.navigateToDateScreen(navOptions: NavOptions = navOptionsPushBack()){
-        navigate(DateScreenRoute, navOptions)
-    }
-
-    fun NavGraphBuilder.composeDateScreen(){
-        composable<DateScreenRoute>{
-            DateScreen()
-        }
-    }
-}
+data object DateScreenRoute : NavKey

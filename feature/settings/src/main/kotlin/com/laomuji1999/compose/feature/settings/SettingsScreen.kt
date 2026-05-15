@@ -5,13 +5,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.navigation3.runtime.result.ResultEffect
+import com.laomuji1999.compose.core.logic.AppLanguages
 import com.laomuji1999.compose.core.ui.navigation.AppNavigationAction
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
 import com.laomuji1999.compose.core.ui.we.widget.click.WeClick
@@ -24,17 +30,26 @@ import com.laomuji1999.compose.res.R
 
 @Composable
 fun SettingsScreen(
+    viewModel: SettingsScreenViewModel = hiltViewModel(),
     onAction: (AppNavigationAction) -> Unit,
 ) {
     var showThemeDialog by rememberSaveable {
         mutableStateOf(false)
     }
+    val usingLanguage by viewModel.usingLanguage.collectAsStateWithLifecycle()
+    val context = LocalContext.current
+
+    ResultEffect<AppLanguages> {
+        viewModel.updateLanguage(it)
+    }
+
     WeThemeColorSchemeSettingDialog(
         isShowDialog = showThemeDialog,
         onDismissRequest = {
             showThemeDialog = false
         })
     SettingsScreenUi(
+        languageDisplayName = usingLanguage.getDisplayName(context),
         onLanguageClick = {
             onAction(AppNavigationAction.OnLanguageClick)
         },
@@ -47,6 +62,7 @@ fun SettingsScreen(
 
 @Composable
 private fun SettingsScreenUi(
+    languageDisplayName: String,
     onLanguageClick: () -> Unit,
     onThemeClick: () -> Unit,
     onAction: (AppNavigationAction) -> Unit,
@@ -60,6 +76,7 @@ private fun SettingsScreenUi(
         WeOutline(weOutlineType = WeOutlineType.Full)
         WeClick(
             title = stringResource(id = R.string.string_language_screen_title),
+            summary = languageDisplayName,
             onClick = onLanguageClick,
         )
         WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
@@ -84,6 +101,7 @@ private fun PreviewSettingsScreen() {
     QuicklyTheme {
         WeScaffold {
             SettingsScreenUi(
+                languageDisplayName = "Default",
                 onLanguageClick = {},
                 onThemeClick = {},
                 onAction = {},

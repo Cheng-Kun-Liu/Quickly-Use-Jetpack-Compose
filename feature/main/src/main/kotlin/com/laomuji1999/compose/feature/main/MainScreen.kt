@@ -59,7 +59,7 @@ fun MainScreen(
 }
 
 @Composable
-private fun MainScreenUi(
+fun MainScreenUi(
     onAction: (AppNavigationAction) -> Unit
 ) {
     val pagerState = rememberPagerState(

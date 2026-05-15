@@ -51,7 +51,10 @@ import com.laomuji1999.compose.res.R
 
 @Composable
 fun ChatScreen(
-    viewModel: ChatScreenViewModel = hiltViewModel(),
+    account: Long,
+    viewModel: ChatScreenViewModel = hiltViewModel<ChatScreenViewModel, ChatScreenViewModel.Factory> { factory ->
+        factory.create(account)
+    },
     navigateToGraph: (ChatScreenRoute.Graph) -> Unit,
 ) {
     LaunchedEffect(Unit) {

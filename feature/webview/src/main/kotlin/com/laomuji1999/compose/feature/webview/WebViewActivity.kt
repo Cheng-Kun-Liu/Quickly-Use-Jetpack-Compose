@@ -5,14 +5,16 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.runtime.remember
 import androidx.core.net.toUri
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.rememberNavController
+import androidx.navigation3.runtime.NavEntry
+import androidx.navigation3.runtime.rememberNavBackStack
+import androidx.navigation3.ui.NavDisplay
 import com.laomuji1999.compose.core.ui.extension.finishAndCleanupTask
+import com.laomuji1999.compose.core.ui.extension.nav3PopBackStack
 import com.laomuji1999.compose.core.ui.screen.SlideActivity
+import com.laomuji1999.compose.core.ui.screen.SlideNavigation
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
-import com.laomuji1999.compose.feature.webview.WebViewScreenRoute.Companion.composeWebViewScreen
-import com.laomuji1999.compose.feature.webview.WebViewScreenRoute.Companion.navigateToWebViewScreen
 import dagger.hilt.android.AndroidEntryPoint
 
 /**
@@ -49,19 +51,37 @@ class WebViewActivity : SlideActivity() {
 
         setContent {
             QuicklyTheme {
-                val navController = rememberNavController()
-                // 使用 Compose Navigation 管理 WebView 内部的跳转
-                NavHost(
-                    navController = navController,
-                    startDestination = WebViewScreenRoute(startUrl)
-                ) {
-                    composeWebViewScreen(
-                        onBackClick = { finish() },
-                        onOpenNewWindow = {
-                            // 当网页请求在新窗口打开时，调用导航跳转
-                            navController.navigateToWebViewScreen(it)
+                val backStack = rememberNavBackStack(WebViewScreenRoute(startUrl))
+                NavDisplay(
+                    backStack = backStack,
+                    onBack = { 
+                        if (backStack.size > 1) {
+                            backStack.nav3PopBackStack()
+                        } else {
+                            finish()
                         }
-                    )
+                    },
+                    transitionSpec = SlideNavigation.nav3TransitionSpec,
+                    popTransitionSpec = SlideNavigation.nav3PopTransitionSpec,
+                    predictivePopTransitionSpec = SlideNavigation.nav3PredictivePopTransitionSpec
+                ) { key ->
+                    when (key) {
+                        is WebViewScreenRoute -> NavEntry(key) {
+                            WebViewScreen(
+                                onBackClick = { 
+                                    if (backStack.size > 1) {
+                                        backStack.nav3PopBackStack()
+                                    } else {
+                                        finish()
+                                    }
+                                },
+                                onOpenNewWindow = {
+                                    backStack.add(WebViewScreenRoute(it))
+                                }
+                            )
+                        }
+                        else -> NavEntry(key) {}
+                    }
                 }
             }
         }

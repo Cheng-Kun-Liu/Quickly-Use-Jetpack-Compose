@@ -73,7 +73,7 @@ fun HttpScreen(
 }
 
 @Composable
-private fun HttpScreenUi(
+fun HttpScreenUi(
     uiState: HttpScreenUiState,
     onAction: (HttpScreenAction) -> Unit,
 ) {

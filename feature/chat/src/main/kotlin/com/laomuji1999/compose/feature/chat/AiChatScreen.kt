@@ -56,7 +56,7 @@ fun AiChatScreen(
 }
 
 @Composable
-private fun AiChatScreenUi(
+fun AiChatScreenUi(
     contactsContent: @Composable () -> Unit, meContent: @Composable () -> Unit
 ) {
     val pagerState = rememberPagerState(

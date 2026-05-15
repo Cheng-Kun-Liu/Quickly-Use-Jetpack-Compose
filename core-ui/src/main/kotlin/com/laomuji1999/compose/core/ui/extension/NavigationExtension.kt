@@ -1,8 +1,6 @@
 package com.laomuji1999.compose.core.ui.extension
 
-import androidx.navigation.NavHostController
-import androidx.navigation.NavOptions
-import androidx.navigation.navOptions
+import androidx.navigation3.runtime.NavKey
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -12,44 +10,21 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.launch
 
 /**
- * 增加一个屏幕
- * 新的屏幕会在添加在当前屏幕后
- */
-fun NavHostController.navOptionsPushBack(): NavOptions {
-    return navOptions {
-        currentDestination?.route?.let {
-            popUpTo(it) {
-                this.saveState = true
-            }
-        }
-    }
-}
-
-/**
- * 增加一个屏幕
- * 从新的屏幕返回时 退出
- */
-fun NavHostController.navOptionsRemoveAll(): NavOptions {
-    return navOptions {
-        popUpTo(0) {
-            saveState = false
-            graph
-            inclusive = true
-        }
-    }
-}
-
-/**
+ * Navigation3 Extension
+ * 安全弹出屏幕
  * 一秒钟内只允许栈中弹出一次屏幕
  * 防止用户连续点击返回按钮
  */
 private var lastPopBackJob: Job? = null
-private val coroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
-fun NavHostController.safePopBackStack() {
+private val navigationCoroutineScope = CoroutineScope(SupervisorJob() + Dispatchers.Main)
+
+fun MutableList<out NavKey>.nav3PopBackStack() {
     if (lastPopBackJob?.isActive == true) return
 
-    lastPopBackJob = coroutineScope.launch {
-        popBackStack()
+    lastPopBackJob = navigationCoroutineScope.launch {
+        if (size > 1) {
+            removeAt(size - 1)
+        }
         delay(1000)
         lastPopBackJob = null
     }

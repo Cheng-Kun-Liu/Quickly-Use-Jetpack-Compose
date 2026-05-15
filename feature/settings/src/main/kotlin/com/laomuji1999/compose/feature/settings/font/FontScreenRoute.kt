@@ -1,32 +1,11 @@
 package com.laomuji1999.compose.feature.settings.font
 
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
-import androidx.navigation.NavOptions
-import androidx.navigation.compose.composable
-import com.laomuji1999.compose.core.ui.extension.navOptionsPushBack
+import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object FontScreenRoute {
-
+data object FontScreenRoute : NavKey {
     sealed interface Graph {
         data object Back : Graph
-    }
-
-    fun NavHostController.navigateToFontScreen(
-        navOptions: NavOptions = navOptionsPushBack()
-    ) {
-        navigate(route = FontScreenRoute, navOptions = navOptions)
-    }
-
-    fun NavGraphBuilder.composeFontScreen(
-        navigateToGraph: (Graph) -> Unit,
-    ) {
-        composable<FontScreenRoute> {
-            FontScreen(
-                navigateToGraph = navigateToGraph
-            )
-        }
     }
 }

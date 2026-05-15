@@ -1,21 +1,7 @@
 package com.laomuji1999.compose.feature.uidemo.scroll
 
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavHostController
-import androidx.navigation.NavOptions
-import androidx.navigation.compose.composable
-import com.laomuji1999.compose.core.ui.extension.navOptionsPushBack
+import androidx.navigation3.runtime.NavKey
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object NestedScrollScreenRoute {
-    fun NavHostController.navigateToNestedScrollScreen(navOptions: NavOptions = navOptionsPushBack()) {
-        navigate(NestedScrollScreenRoute, navOptions)
-    }
-
-    fun NavGraphBuilder.composeNestedScrollScreen() {
-        composable<NestedScrollScreenRoute> {
-            NestedScrollScreen()
-        }
-    }
-}
+data object NestedScrollScreenRoute : NavKey
