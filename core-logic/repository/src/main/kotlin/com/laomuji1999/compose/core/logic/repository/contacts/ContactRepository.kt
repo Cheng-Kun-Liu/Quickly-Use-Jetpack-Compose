@@ -18,7 +18,9 @@ class ContactRepository @Inject constructor(
         emit(cacheContact)
 
         //这里用假数据代替,实际应该不管是否为空都要从后台获取
-        delay(1000)
+        if(cacheContact.isNotEmpty()){
+            delay(1000)
+        }
         val contacts = fakeRequestContacts() + fakeRandomContacts()
         contactDao.insertAll(contacts)
         emit(contacts)

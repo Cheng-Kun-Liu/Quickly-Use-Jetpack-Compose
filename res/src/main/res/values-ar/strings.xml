@@ -5,7 +5,6 @@
     <string name="string_demo_group_device_system">إمكانات الجهاز والنظام</string>
     <string name="string_demo_group_ui_interaction">واجهة المستخدم والتفاعل</string>
     <string name="string_demo_group_appearance_localization">المظهر والتوطين</string>
-    <string name="string_demo_screen_banner">بانر</string>
     <string name="string_toast_done">تم بنجاح</string>
     <string name="string_toast_loading">جاري التحميل</string>
     <string name="string_toast_error">فشل</string>

@@ -22,7 +22,6 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji1999.compose.core.logic.authenticate.GoogleAuthenticate
 import com.laomuji1999.compose.core.logic.common.Toast
-import com.laomuji1999.compose.core.ui.navigation.AppNavigationAction
 import com.laomuji1999.compose.core.ui.view.LoadingDialog
 import com.laomuji1999.compose.core.ui.we.WeTheme
 import com.laomuji1999.compose.core.ui.we.widget.actionsheet.WeActionSheetDialog
@@ -38,7 +37,7 @@ import com.laomuji1999.compose.res.R
 @Composable
 fun ExploreScreen(
     viewModel: ExploreViewModel = hiltViewModel(),
-    onAction: (AppNavigationAction) -> Unit,
+    onNavigate: (ExploreScreenRouter) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val context = LocalContext.current
@@ -50,7 +49,7 @@ fun ExploreScreen(
         VideoPlayDialog(
             onDismissRequest = { showVideoDialog = false },
             onConfirm = { url ->
-                onAction(AppNavigationAction.OnVideoPlayClick(url))
+                onNavigate(ExploreScreenRouter.OnVideoPlayClick(url))
             }
         )
     }
@@ -66,7 +65,7 @@ fun ExploreScreen(
 
         WeClick(
             title = stringResource(id = R.string.string_demo_screen_ai_chat),
-            onClick = { onAction(AppNavigationAction.OnAiChatClick) },
+            onClick = { onNavigate(ExploreScreenRouter.OnAiChatClick) },
         )
         WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
 
@@ -78,7 +77,7 @@ fun ExploreScreen(
 
         WeClick(
             title = stringResource(id = R.string.string_demo_screen_web_view_demo),
-            onClick = { onAction(AppNavigationAction.OnWebViewClick) },
+            onClick = { onNavigate(ExploreScreenRouter.OnWebViewClick) },
         )
         WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
 
@@ -95,13 +94,13 @@ fun ExploreScreen(
 
         WeClick(
             title = stringResource(id = R.string.string_demo_screen_http_demo),
-            onClick = { onAction(AppNavigationAction.OnHttpClick) },
+            onClick = { onNavigate(ExploreScreenRouter.OnHttpClick) },
         )
         WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
 
         WeClick(
             title = stringResource(id = R.string.string_demo_screen_firebase_demo),
-            onClick = { onAction(AppNavigationAction.OnFirebaseClick) },
+            onClick = { onNavigate(ExploreScreenRouter.OnFirebaseClick) },
         )
         WeOutline(weOutlineType = WeOutlineType.Full)
     }

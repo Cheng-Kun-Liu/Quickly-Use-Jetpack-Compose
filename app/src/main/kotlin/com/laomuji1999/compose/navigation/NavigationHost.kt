@@ -13,32 +13,15 @@ import androidx.navigation3.ui.NavDisplay
 import com.laomuji1999.compose.core.logic.common.Log
 import com.laomuji1999.compose.core.ui.extension.nav3PopBackStack
 import com.laomuji1999.compose.core.ui.screen.SlideNavigation
-import com.laomuji1999.compose.feature.chat.AiChatScreen
-import com.laomuji1999.compose.feature.chat.AiChatScreenRoute
-import com.laomuji1999.compose.feature.chat.chat.ChatScreen
-import com.laomuji1999.compose.feature.chat.chat.ChatScreenRoute
-import com.laomuji1999.compose.feature.explore.firebase.FirebaseScreen
-import com.laomuji1999.compose.feature.explore.firebase.FirebaseScreenRoute
-import com.laomuji1999.compose.feature.explore.http.HttpScreen
-import com.laomuji1999.compose.feature.explore.http.HttpScreenRoute
-import com.laomuji1999.compose.feature.main.MainScreen
-import com.laomuji1999.compose.feature.main.MainScreenRoute
-import com.laomuji1999.compose.feature.settings.font.FontScreen
-import com.laomuji1999.compose.feature.settings.font.FontScreenRoute
-import com.laomuji1999.compose.feature.settings.language.LanguageScreen
-import com.laomuji1999.compose.feature.settings.language.LanguageScreenRoute
-import com.laomuji1999.compose.feature.uidemo.date.DateScreen
-import com.laomuji1999.compose.feature.uidemo.date.DateScreenRoute
-import com.laomuji1999.compose.feature.uidemo.painter.PainterScreen
-import com.laomuji1999.compose.feature.uidemo.painter.PainterScreenRoute
-import com.laomuji1999.compose.feature.uidemo.scroll.NestedScrollScreen
-import com.laomuji1999.compose.feature.uidemo.scroll.NestedScrollScreenRoute
-import com.laomuji1999.compose.feature.video.VideoPlayActivity
-import com.laomuji1999.compose.feature.webview.WebViewActivity
+import com.laomuji1999.compose.feature.chat.provideChatNavEntry
+import com.laomuji1999.compose.feature.explore.provideExploreNavEntry
+import com.laomuji1999.compose.feature.main.provideMainNavEntry
+import com.laomuji1999.compose.feature.settings.provideSettingsNavEntry
+import com.laomuji1999.compose.feature.uidemo.provideUiDemoNavEntry
 
 /**
  * 导航控制器
- * 不同的feature之间的跳转
+ * 采用分布式路由分发模式
  */
 @Composable
 fun NavigationHost(
@@ -54,106 +37,17 @@ fun NavigationHost(
             rememberResultEventBusNavEntryDecorator(),
             rememberLoggingNavEntryDecorator()
         ),
-        transitionSpec = SlideNavigation.nav3TransitionSpec,
-        popTransitionSpec = SlideNavigation.nav3PopTransitionSpec,
-        predictivePopTransitionSpec = SlideNavigation.nav3PredictivePopTransitionSpec
+        transitionSpec = SlideNavigation.nav3TransitionSpec(),
+        popTransitionSpec = SlideNavigation.nav3PopTransitionSpec(),
+        predictivePopTransitionSpec = SlideNavigation.nav3PredictivePopTransitionSpec()
     ) { key ->
-        when (key) {
-            is MainScreenRoute -> NavEntry(key) {
-                MainScreen(
-                    navigateToGraph = { graph ->
-                        when (graph) {
-                            MainScreenRoute.Graph.AiChat -> backStack.add(AiChatScreenRoute)
-                            MainScreenRoute.Graph.Date -> backStack.add(DateScreenRoute)
-                            MainScreenRoute.Graph.Firebase -> backStack.add(FirebaseScreenRoute)
-                            MainScreenRoute.Graph.Http -> backStack.add(HttpScreenRoute)
-                            MainScreenRoute.Graph.Language -> backStack.add(LanguageScreenRoute)
-                            MainScreenRoute.Graph.Font -> backStack.add(FontScreenRoute)
-                            MainScreenRoute.Graph.NestedScrollConnection -> backStack.add(
-                                NestedScrollScreenRoute
-                            )
-
-                            MainScreenRoute.Graph.Painter -> backStack.add(PainterScreenRoute)
-                            MainScreenRoute.Graph.WebView -> activity?.let {
-                                WebViewActivity.openWebViewActivity(
-                                    "https://www.baidu.com/",
-                                    activity
-                                )
-                            }
-
-                            is MainScreenRoute.Graph.VideoPlay -> activity?.let {
-                                VideoPlayActivity.open(it, graph.url)
-                            }
-                        }
-                    },
-                )
-            }
-
-            is FirebaseScreenRoute -> NavEntry(key) {
-                FirebaseScreen()
-            }
-
-            is HttpScreenRoute -> NavEntry(key) {
-                HttpScreen()
-            }
-
-            is AiChatScreenRoute -> NavEntry(key) {
-                AiChatScreen(
-                    navigateToGraph = {
-                        when (it) {
-                            is AiChatScreenRoute.Graph.Chat -> {
-                                backStack.add(ChatScreenRoute(it.account))
-                            }
-                        }
-                    },
-                )
-            }
-
-            is ChatScreenRoute -> NavEntry(key) { route ->
-                ChatScreen(
-                    account = (route as ChatScreenRoute).account,
-                    navigateToGraph = {
-                        when (it) {
-                            ChatScreenRoute.Graph.Back -> backStack.nav3PopBackStack()
-                        }
-                    },
-                )
-            }
-
-            is DateScreenRoute -> NavEntry(key) {
-                DateScreen()
-            }
-
-            is NestedScrollScreenRoute -> NavEntry(key) {
-                NestedScrollScreen()
-            }
-
-            is PainterScreenRoute -> NavEntry(key) {
-                PainterScreen()
-            }
-
-            is LanguageScreenRoute -> NavEntry(key) {
-                LanguageScreen(
-                    navigateToGraph = {
-                        when (it) {
-                            LanguageScreenRoute.Graph.Back -> backStack.nav3PopBackStack()
-                        }
-                    },
-                )
-            }
-
-            is FontScreenRoute -> NavEntry(key) {
-                FontScreen(
-                    navigateToGraph = {
-                        when (it) {
-                            FontScreenRoute.Graph.Back -> backStack.nav3PopBackStack()
-                        }
-                    },
-                )
-            }
-
-            else -> NavEntry(key) {}
-        }
+        // 依次询问各个模块是否能处理该路由
+        key.provideMainNavEntry(backStack, activity)
+            ?: key.provideChatNavEntry(backStack)
+            ?: key.provideExploreNavEntry()
+            ?: key.provideSettingsNavEntry(backStack)
+            ?: key.provideUiDemoNavEntry()
+            ?: NavEntry(key) {}
     }
 }
 

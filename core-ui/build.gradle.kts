@@ -33,6 +33,10 @@ dependencies {
     //hilt的navigation扩展
     api(libs.androidx.hilt.navigation.compose)
 
+    // navigation 3
+    api(libs.androidx.navigation3.runtime)
+    api(libs.androidx.navigation3.ui)
+
     //coil 图像加载
     api(libs.coil.compose)
 }

@@ -17,7 +17,6 @@
     <string name="string_demo_group_device_system">设备与系统能力</string>
     <string name="string_demo_group_ui_interaction">UI 与交互</string>
     <string name="string_demo_group_appearance_localization">外观与本地化</string>
-    <string name="string_demo_screen_banner">横幅</string>
     <string name="string_demo_screen_painter">绘画画板</string>
     <string name="string_demo_screen_date">自定义日历</string>
     <string name="string_demo_screen_scroll_connect">滑动嵌套 NestedScrollConnection</string>

@@ -18,7 +18,6 @@
     <string name="string_demo_group_device_system">Capacidades del dispositivo y del sistema</string>
     <string name="string_demo_group_ui_interaction">UI e interacción</string>
     <string name="string_demo_group_appearance_localization">Apariencia y localización</string>
-    <string name="string_demo_screen_banner">Banner</string>
     <string name="string_demo_screen_painter">Lienzo de pintura</string>
     <string name="string_demo_screen_date">Calendario personalizado</string>
     <string name="string_demo_screen_scroll_connect">NestedScrollConnection</string>

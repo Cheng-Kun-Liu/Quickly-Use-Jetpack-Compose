@@ -1,6 +1,5 @@
 package com.laomuji1999.compose.feature.chat.chat
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.laomuji1999.compose.core.logic.common.dispatchers.IoCoroutineScope
@@ -11,6 +10,7 @@ import com.laomuji1999.compose.core.logic.notification.NotificationHelper
 import com.laomuji1999.compose.core.logic.repository.chat.ChatRepository
 import com.laomuji1999.compose.core.ui.extension.emitGraph
 import com.laomuji1999.compose.core.ui.extension.stateInTimeout
+import com.laomuji1999.compose.feature.chat.ChatGraph
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -25,7 +25,6 @@ import kotlinx.coroutines.launch
 @HiltViewModel(assistedFactory = ChatScreenViewModel.Factory::class)
 class ChatScreenViewModel @AssistedInject constructor(
     @Assisted private val account: Long,
-    savedStateHandle: SavedStateHandle,
     contactDao: ContactDao,
     private val chatRepository: ChatRepository,
     private val notificationHelper: NotificationHelper,
@@ -36,7 +35,7 @@ class ChatScreenViewModel @AssistedInject constructor(
         fun create(account: Long): ChatScreenViewModel
     }
 
-    private val _graph = MutableSharedFlow<ChatScreenRoute.Graph>()
+    private val _graph = MutableSharedFlow<ChatGraph>()
     val graph = _graph.asSharedFlow()
 
     private val _contactInfo = MutableStateFlow<ContactInfoEntity?>(null)
@@ -68,7 +67,7 @@ class ChatScreenViewModel @AssistedInject constructor(
             is ChatScreenAction.SetInputText -> setInputText(action.text)
             ChatScreenAction.SendInputText -> sendInputText()
             ChatScreenAction.DismissNotification -> dismissNotification()
-            ChatScreenAction.OnClickBack -> _graph.emitGraph(ChatScreenRoute.Graph.Back)
+            ChatScreenAction.OnClickBack -> _graph.emitGraph(ChatGraph.Back)
         }
     }
 

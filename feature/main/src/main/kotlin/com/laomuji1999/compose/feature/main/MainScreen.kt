@@ -23,7 +23,6 @@ import androidx.compose.ui.unit.dp
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import com.laomuji1999.compose.core.ui.extension.isPreview
 import com.laomuji1999.compose.core.ui.extension.modifier.ModifierDraggable.draggable
-import com.laomuji1999.compose.core.ui.navigation.AppNavigationAction
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
 import com.laomuji1999.compose.core.ui.we.WeTheme
 import com.laomuji1999.compose.core.ui.we.icons.Explore
@@ -60,7 +59,7 @@ fun MainScreen(
 
 @Composable
 fun MainScreenUi(
-    onAction: (AppNavigationAction) -> Unit
+    onAction: (MainScreenRouter) -> Unit
 ) {
     val pagerState = rememberPagerState(
         pageCount = { MainScreenPageEnum.entries.size })
@@ -96,19 +95,29 @@ fun MainScreenUi(
             beyondViewportPageCount = if (isPreview()) 0 else MainScreenPageEnum.entries.size
         ) {
             when (MainScreenPageEnum.entries[it]) {
-                MainScreenPageEnum.EXPLORE -> ExploreScreen(onAction = onAction)
+                MainScreenPageEnum.EXPLORE -> ExploreScreen(
+                    onNavigate = { action ->
+                        onAction(MainScreenRouter.ExploreRouter(action))
+                    }
+                )
 
                 MainScreenPageEnum.UI -> UiDemoScreen(
                     showSimpleDragView = showSimpleDragView,
-                    onShowSimpleDragViewChange = { isShow->
+                    onShowSimpleDragViewChange = { isShow ->
                         showSimpleDragView = isShow
                     },
-                    onAction = onAction,
+                    onNavigate = { action ->
+                        onAction(MainScreenRouter.UiDemoRouter(action))
+                    },
                 )
 
-                MainScreenPageEnum.FEATURE -> FeatureScreen(onAction = onAction)
+                MainScreenPageEnum.FEATURE -> FeatureScreen()
 
-                MainScreenPageEnum.SETTINGS -> SettingsScreen(onAction = onAction)
+                MainScreenPageEnum.SETTINGS -> SettingsScreen(
+                    onNavigate = { action ->
+                        onAction(MainScreenRouter.SettingsRouter(action))
+                    }
+                )
             }
         }
     }

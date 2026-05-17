@@ -18,7 +18,6 @@
     <string name="string_demo_group_device_system">ডিভাইস ও সিস্টেম সক্ষমতা</string>
     <string name="string_demo_group_ui_interaction">UI ও ইন্টারঅ্যাকশন</string>
     <string name="string_demo_group_appearance_localization">চেহারা ও স্থানীয়করণ</string>
-    <string name="string_demo_screen_banner">ব্যানার</string>
     <string name="string_demo_screen_painter">পেইন্টিং ক্যানভাস</string>
     <string name="string_demo_screen_date">কাস্টম ক্যালেন্ডার</string>
     <string name="string_demo_screen_scroll_connect">NestedScrollConnection</string>

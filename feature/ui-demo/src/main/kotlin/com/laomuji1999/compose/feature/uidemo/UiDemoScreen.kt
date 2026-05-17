@@ -15,9 +15,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.laomuji1999.compose.core.ui.navigation.AppNavigationAction
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
-import com.laomuji1999.compose.core.ui.view.BannerDemoView
 import com.laomuji1999.compose.core.ui.view.DragListDemo
 import com.laomuji1999.compose.core.ui.we.WeDialog
 import com.laomuji1999.compose.core.ui.we.widget.click.WeClick
@@ -33,7 +31,7 @@ fun UiDemoScreen(
     viewModel: UiDemoScreenViewModel = hiltViewModel(),
     showSimpleDragView: Boolean,
     onShowSimpleDragViewChange: (Boolean) -> Unit,
-    onAction: (AppNavigationAction) -> Unit,
+    onNavigate: (UiDemoScreenRouter) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
@@ -62,7 +60,7 @@ fun UiDemoScreen(
         onLongClickSortClick = {
             showDragListDialog = true
         },
-        onAction = onAction,
+        onNavigate = onNavigate,
     )
 }
 
@@ -71,18 +69,13 @@ private fun UiDemoScreenUi(
     showSimpleDragView: Boolean,
     onShowSimpleDragViewChange: (Boolean) -> Unit,
     onLongClickSortClick: () -> Unit,
-    onAction: (AppNavigationAction) -> Unit,
+    onNavigate: (UiDemoScreenRouter) -> Unit,
 ) {
     Column(
         modifier = Modifier
             .fillMaxSize()
             .verticalScroll(rememberScrollState())
     ) {
-        WeTitle(title = stringResource(id = R.string.string_demo_screen_banner))
-        WeOutline(weOutlineType = WeOutlineType.Full)
-        BannerDemoView()
-        WeOutline(weOutlineType = WeOutlineType.Split)
-
         WeTitle(title = stringResource(id = R.string.string_demo_group_ui_interaction))
         WeOutline(weOutlineType = WeOutlineType.Full)
         WeSwitch(
@@ -99,7 +92,7 @@ private fun UiDemoScreenUi(
         WeClick(
             title = stringResource(id = R.string.string_demo_screen_date),
             onClick = {
-                onAction(AppNavigationAction.OnDateClick)
+                onNavigate(UiDemoScreenRouter.OnDateClick)
             },
         )
         WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
@@ -110,14 +103,14 @@ private fun UiDemoScreenUi(
                 )
             }",
             onClick = {
-                onAction(AppNavigationAction.OnNestedScrollConnectionScreenClick)
+                onNavigate(UiDemoScreenRouter.OnNestedScrollConnectionScreenClick)
             },
         )
         WeOutline(weOutlineType = WeOutlineType.PaddingHorizontal)
         WeClick(
             title = stringResource(id = R.string.string_demo_screen_painter),
             onClick = {
-                onAction(AppNavigationAction.OnPainterScreenClick)
+                onNavigate(UiDemoScreenRouter.OnPainterScreenClick)
             },
         )
         WeOutline(weOutlineType = WeOutlineType.Full)
@@ -133,7 +126,7 @@ private fun PreviewUiDemoScreen() {
                 showSimpleDragView = true,
                 onShowSimpleDragViewChange = {},
                 onLongClickSortClick = {},
-                onAction = {},
+                onNavigate = {},
             )
         }
     }
