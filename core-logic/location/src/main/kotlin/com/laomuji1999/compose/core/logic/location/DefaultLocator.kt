@@ -38,7 +38,7 @@ import kotlin.coroutines.resume
  */
 class DefaultLocator @Inject constructor(
     private val application: Application,
-    @IoCoroutineScope val coroutineScope: CoroutineScope,
+    @param:IoCoroutineScope val coroutineScope: CoroutineScope,
 ) : Locator {
 
     companion object {

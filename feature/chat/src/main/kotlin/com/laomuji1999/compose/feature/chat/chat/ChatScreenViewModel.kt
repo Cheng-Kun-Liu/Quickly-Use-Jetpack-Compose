@@ -29,7 +29,7 @@ class ChatScreenViewModel @AssistedInject constructor(
     contactDao: ContactDao,
     private val chatRepository: ChatRepository,
     private val notificationHelper: NotificationHelper,
-    @IoCoroutineScope val ioCoroutineScope: CoroutineScope
+    @param:IoCoroutineScope val ioCoroutineScope: CoroutineScope
 ) : ViewModel() {
     @AssistedFactory
     interface Factory {

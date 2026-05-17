@@ -74,7 +74,7 @@ fun <T> DragList(
                 }
                 if (targetIndex == null) return@detectDragGesturesAfterLongPress
                 dragOffsetY = -(targetItem!!.offset - dragItem!!.offset - dragOffsetY)
-                onSwap(dragIndex!!, targetIndex!!)
+                onSwap(dragIndex!!, targetIndex)
                 dragIndex = targetIndex
                 dragItem = targetItem
             }, onDragCancel = {

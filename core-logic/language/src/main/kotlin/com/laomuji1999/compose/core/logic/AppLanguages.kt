@@ -13,10 +13,10 @@ sealed class AppLanguages(open val locale: Locale, val tag: String) {
 
     data object ChineseSimplified : AppLanguages(Locale.forLanguageTag("zh-Hans"), "zh-Hans")
     data object ChineseTraditional : AppLanguages(Locale.forLanguageTag("zh-Hant"), "zh-Hant")
-    data object English : AppLanguages(Locale("en"), "en")
-    data object Spanish : AppLanguages(Locale("es"), "es")
-    data object Arabic : AppLanguages(Locale("ar"), "ar")
-    data object Bengali : AppLanguages(Locale("bn"), "bn")
+    data object English : AppLanguages(Locale.forLanguageTag("en"), "en")
+    data object Spanish : AppLanguages(Locale.forLanguageTag("es"), "es")
+    data object Arabic : AppLanguages(Locale.forLanguageTag("ar"), "ar")
+    data object Bengali : AppLanguages(Locale.forLanguageTag("bn"), "bn")
 
     companion object {
         fun getSystemLanguage(): Locale {

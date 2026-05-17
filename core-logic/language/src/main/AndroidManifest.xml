@@ -1,4 +1,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <queries>
+        <intent>
+            <action android:name="android.settings.APP_LOCALE_SETTINGS" />
+            <data android:scheme="package" />
+        </intent>
+    </queries>
+
     <application>
         <service
             android:name="androidx.appcompat.app.AppLocalesMetadataHolderService"

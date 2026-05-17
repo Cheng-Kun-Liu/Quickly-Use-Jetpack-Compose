@@ -10,28 +10,27 @@ coreKtx = "1.18.0"
 kotlinxSerializationJson = "1.11.0"
 lifecycleRuntimeKtx = "2.10.0"
 activityCompose = "1.13.0"
-composeBom = "2026.04.01"
+composeBom = "2026.05.00"
 androidGradlePlugin = "9.1.1"
 hilt = "2.59.2"
 androidxCoreSplashscreen = "1.2.0"
 androidxHiltNavigationCompose = "1.3.0"
-media3 = "1.10.0"
+media3 = "1.10.1"
 navigationCompose = "2.9.8"
 navigation3 = "1.2.0-alpha02"
 googleGmsGoogleServices = "4.4.4"
-firebaseBom = "34.12.0"
+firebaseBom = "34.13.0"
 googleFirebaseCrashlytics = "3.0.7"
-ktor = "3.4.3"
+ktor = "3.5.0"
 playServicesAuth = "21.5.1"
 androidxRoom = "2.8.4"
-generativeai = "0.9.0"
 playServicesLocation = "21.3.0"
 appcompat = "1.7.1"
 documentfile = "1.1.0"
 junit = "1.3.0"
 espressoCore = "3.7.0"
 uiautomator = "2.3.0"
-baselineprofile = "1.5.0-alpha05"
+baselineprofile = "1.5.0-alpha06"
 profileinstaller = "1.4.1"
 
 [libraries]
@@ -69,12 +68,12 @@ firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.r
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 firebase-messaging = { module = "com.google.firebase:firebase-messaging" }
 firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+firebase-ai = { group = "com.google.firebase", name = "firebase-ai" }
+firebase-appcheck-playintegrity = { group = "com.google.firebase", name = "firebase-appcheck-playintegrity" }
 # database
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidxRoom" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "androidxRoom" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidxRoom" }
-# google ai
-generativeai = { group = "com.google.ai.client.generativeai", name = "generativeai", version.ref = "generativeai" }
 # serialization, Used by build logic
 kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerializationJson" }
 # hilt, Used by build logic

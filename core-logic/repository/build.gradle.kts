@@ -21,5 +21,5 @@ dependencies {
     implementation(platform(libs.firebase.bom))
 
     //google ai
-    implementation(libs.generativeai)
+    implementation(libs.firebase.ai)
 }

@@ -1,11 +1,12 @@
 package com.laomuji1999.compose.core.logic.repository.chat.impl
 
-import com.google.ai.client.generativeai.GenerativeModel
-import com.google.ai.client.generativeai.type.BlockThreshold
-import com.google.ai.client.generativeai.type.HarmCategory
-import com.google.ai.client.generativeai.type.SafetySetting
-import com.google.ai.client.generativeai.type.content
-import com.laomuji1999.compose.core.logic.common.BuildConfig
+import com.google.firebase.Firebase
+import com.google.firebase.ai.ai
+import com.google.firebase.ai.type.GenerativeBackend
+import com.google.firebase.ai.type.HarmBlockThreshold
+import com.google.firebase.ai.type.HarmCategory
+import com.google.firebase.ai.type.SafetySetting
+import com.google.firebase.ai.type.content
 import com.laomuji1999.compose.core.logic.database.dao.ContactDao
 import com.laomuji1999.compose.core.logic.database.dao.MessageDao
 import com.laomuji1999.compose.core.logic.model.entity.MessageInfoEntity
@@ -52,17 +53,16 @@ internal class GoogleAiChat(
                 isSend = true
             )
         )
-        val generativeModel = GenerativeModel(
-            modelName = "gemini-1.5-pro-latest",
-            apiKey = BuildConfig.GEMINI_API_KEY,
+        val generativeModel = Firebase.ai(backend = GenerativeBackend.googleAI()).generativeModel(
+            modelName = "gemini-2.5-flash",
             systemInstruction = content {
                 text("请像友好的${nickname}一样回复此聊天对话")
             },
             safetySettings = listOf(
-                SafetySetting(HarmCategory.HARASSMENT, BlockThreshold.NONE),
-                SafetySetting(HarmCategory.HATE_SPEECH, BlockThreshold.NONE),
-                SafetySetting(HarmCategory.SEXUALLY_EXPLICIT, BlockThreshold.NONE),
-                SafetySetting(HarmCategory.DANGEROUS_CONTENT, BlockThreshold.NONE)
+                SafetySetting(HarmCategory.HARASSMENT, HarmBlockThreshold.NONE),
+                SafetySetting(HarmCategory.HATE_SPEECH, HarmBlockThreshold.NONE),
+                SafetySetting(HarmCategory.SEXUALLY_EXPLICIT, HarmBlockThreshold.NONE),
+                SafetySetting(HarmCategory.DANGEROUS_CONTENT, HarmBlockThreshold.NONE)
             )
         )
         coroutineScope.launch {

@@ -8,7 +8,7 @@ import com.laomuji1999.compose.core.logic.model.entity.ContactInfoEntity
 
 @Dao
 interface ContactDao {
-    @Query("SELECT * FROM ContactInfoEntity ORDER BY category DESC")
+    @Query("SELECT * FROM ContactInfoEntity ORDER BY category ASC")
     fun getAll(): List<ContactInfoEntity>
 
     @Query("SELECT * FROM ContactInfoEntity WHERE account = :account")

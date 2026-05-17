@@ -55,6 +55,7 @@ dependencies {
     //firebase 崩溃分析
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.crashlytics)
+    implementation(libs.firebase.appcheck.playintegrity)
 
     //根据不同的渠道引入不同的 module
     "gpImplementation"(project(":flavor:flavor-gp"))

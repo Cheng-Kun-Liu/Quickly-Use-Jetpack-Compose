@@ -71,6 +71,9 @@ Quickly-Use-Jetpack-Compose 的架构参考 Android 官方最佳实践项目 [No
 
 密钥文件存放在根目录的 `keystore` 目录中。签名相关配置在 `AndroidApplicationConventionPlugin.kt`。
 
+> [!IMPORTANT]
+> **Firebase 配置**：项目中的 `app/google-services.json` 文件仅作为结构参考，**无法直接使用**。在运行项目前，请务必将其替换为您在 Firebase 控制台生成的、属于您自己项目的 `google-services.json` 文件，否则 Firebase 相关功能（如 AI 聊天、崩溃分析等）将无法正常运行。
+
 ## 构建变体 (Build Variants)
 
 项目预设了 `gp` 和 `sam` 两个 productFlavors，分别对应不同的 ApplicationId 和签名配置，可在 Android Studio 的 Build Variants 面板中切换。
