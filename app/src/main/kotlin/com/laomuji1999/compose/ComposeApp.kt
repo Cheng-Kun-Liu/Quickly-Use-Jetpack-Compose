@@ -6,6 +6,10 @@ import coil.ImageLoaderFactory
 import coil.disk.DiskCache
 import coil.request.CachePolicy
 import coil.util.DebugLogger
+import com.google.firebase.Firebase
+import com.google.firebase.appcheck.appCheck
+import com.google.firebase.appcheck.playintegrity.PlayIntegrityAppCheckProviderFactory
+import com.google.firebase.initialize
 import com.laomuji1999.compose.core.logic.Language
 import com.laomuji1999.compose.core.ui.we.cache.WeCache
 import dagger.hilt.android.HiltAndroidApp
@@ -34,6 +38,10 @@ class ComposeApp : Application(), ImageLoaderFactory {
 
     override fun onCreate() {
         super.onCreate()
+        Firebase.initialize(context = this)
+        Firebase.appCheck.installAppCheckProviderFactory(
+            PlayIntegrityAppCheckProviderFactory.getInstance(),
+        )
         language.initLanguage(this)
 
         WeCache.initWeThemeCache(this)

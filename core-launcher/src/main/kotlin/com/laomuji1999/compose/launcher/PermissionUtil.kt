@@ -9,6 +9,7 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
+import androidx.activity.compose.LocalActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
@@ -32,7 +33,7 @@ object PermissionUtil {
         permissions: List<String>,
         onCallback: (granted: List<String>, denied: List<String>, askDenied: List<String>) -> Unit
     ): () -> Unit {
-        val activity = LocalContext.current as Activity
+        val activity = LocalActivity.current as Activity
         val permissionLauncher = rememberLauncherForActivityResult(
             contract = ActivityResultContracts.RequestMultiplePermissions()
         ) { isGrantedMap ->

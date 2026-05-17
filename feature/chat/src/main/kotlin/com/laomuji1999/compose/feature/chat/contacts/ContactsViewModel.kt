@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ContactsViewModel @Inject constructor(
     private val contactsRepository: ContactRepository,
-    @IoCoroutineScope val ioCoroutineScope: CoroutineScope
+    @param:IoCoroutineScope val ioCoroutineScope: CoroutineScope
 ) : ViewModel() {
     private val _contactMap: MutableStateFlow<Map<String, List<ContactInfoEntity>>> =
         MutableStateFlow(emptyMap())
