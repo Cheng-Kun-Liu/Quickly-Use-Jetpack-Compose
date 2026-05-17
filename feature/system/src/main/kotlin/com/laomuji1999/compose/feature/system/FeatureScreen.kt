@@ -29,7 +29,6 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji1999.compose.core.logic.authenticate.biometric.BiometricAuthenticate
 import com.laomuji1999.compose.core.logic.common.Toast
-import com.laomuji1999.compose.core.ui.navigation.AppNavigationAction
 import com.laomuji1999.compose.core.ui.view.LoadingDialog
 import com.laomuji1999.compose.core.ui.we.WeTheme
 import com.laomuji1999.compose.core.ui.we.widget.actionsheet.WeActionSheetDialog
@@ -54,7 +53,6 @@ import com.laomuji1999.compose.res.R
 @Composable
 fun FeatureScreen(
     viewModel: FeatureScreenViewModel = hiltViewModel(),
-    onAction: (AppNavigationAction) -> Unit,
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 

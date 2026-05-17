@@ -47,6 +47,8 @@ import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutline
 import com.laomuji1999.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji1999.compose.core.ui.we.widget.topbar.WeTopBar
 import com.laomuji1999.compose.core.ui.we.widget.topbar.WeTopBarAction
+import com.laomuji1999.compose.feature.chat.ChatGraph
+import com.laomuji1999.compose.feature.chat.ChatScreenRoute
 import com.laomuji1999.compose.res.R
 
 @Composable
@@ -55,7 +57,7 @@ fun ChatScreen(
     viewModel: ChatScreenViewModel = hiltViewModel<ChatScreenViewModel, ChatScreenViewModel.Factory> { factory ->
         factory.create(account)
     },
-    navigateToGraph: (ChatScreenRoute.Graph) -> Unit,
+    navigateToGraph: (ChatGraph) -> Unit,
 ) {
     LaunchedEffect(Unit) {
         viewModel.graph.collect {

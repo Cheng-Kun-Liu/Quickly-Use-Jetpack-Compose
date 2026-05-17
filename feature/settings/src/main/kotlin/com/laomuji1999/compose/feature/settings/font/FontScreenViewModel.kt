@@ -14,6 +14,7 @@ import com.laomuji1999.compose.core.ui.we.typography.WeTypography17
 import com.laomuji1999.compose.core.ui.we.typography.WeTypography18
 import com.laomuji1999.compose.core.ui.we.typography.WeTypography19
 import com.laomuji1999.compose.core.ui.we.typography.WeTypography20
+import com.laomuji1999.compose.feature.settings.FontScreenRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

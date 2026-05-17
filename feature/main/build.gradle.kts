@@ -16,4 +16,7 @@ dependencies {
     implementation(project(":feature:system"))
     implementation(project(":feature:ui-demo"))
     implementation(project(":feature:settings"))
+    implementation(project(":feature:chat"))
+    implementation(project(":feature:video"))
+    implementation(project(":feature:webview"))
 }

@@ -6,6 +6,7 @@ import com.laomuji1999.compose.core.logic.AppLanguages
 import com.laomuji1999.compose.core.logic.Language
 import com.laomuji1999.compose.core.ui.extension.emitGraph
 import com.laomuji1999.compose.core.ui.extension.stateInTimeout
+import com.laomuji1999.compose.feature.settings.LanguageScreenRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow

@@ -21,13 +21,13 @@ import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutlineType
 import com.laomuji1999.compose.core.ui.we.widget.radio.WeRadio
 import com.laomuji1999.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji1999.compose.core.ui.we.widget.topbar.WeTopBar
-import com.laomuji1999.compose.feature.settings.language.LanguageScreenRoute.Graph
+import com.laomuji1999.compose.feature.settings.LanguageScreenRoute
 import com.laomuji1999.compose.res.R
 
 @Composable
 fun LanguageScreen(
     viewModel: LanguageScreenViewModel = hiltViewModel(),
-    navigateToGraph: (Graph) -> Unit,
+    navigateToGraph: (LanguageScreenRoute.Graph) -> Unit,
 ) {
     LaunchedEffect(Unit) {
         viewModel.graph.collect {

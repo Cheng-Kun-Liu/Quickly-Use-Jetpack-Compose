@@ -1,20 +1,25 @@
 package com.laomuji1999.compose.feature.webview
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.toRoute
 import com.laomuji1999.compose.core.ui.extension.stateInTimeout
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.combine
-import javax.inject.Inject
 
-@HiltViewModel
-class WebViewScreenViewModel @Inject constructor(
-    savedStateHandle: SavedStateHandle
+@HiltViewModel(assistedFactory = WebViewScreenViewModel.Factory::class)
+class WebViewScreenViewModel @AssistedInject constructor(
+    @Assisted private val route: WebViewScreenRoute,
 ) : ViewModel() {
-    private val _url = MutableStateFlow((savedStateHandle.toRoute<WebViewScreenRoute>()).url)
+    @AssistedFactory
+    interface Factory {
+        fun create(route: WebViewScreenRoute): WebViewScreenViewModel
+    }
+
+    private val _url = MutableStateFlow(route.url)
     private val _title = MutableStateFlow("")
     private val _progress = MutableStateFlow(0)
 

@@ -28,6 +28,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -55,6 +56,7 @@ import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutlineType
 import com.laomuji1999.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji1999.compose.core.ui.we.widget.slider.WeSlider
 import com.laomuji1999.compose.core.ui.we.widget.topbar.WeTopBar
+import com.laomuji1999.compose.feature.settings.FontScreenRoute
 import com.laomuji1999.compose.res.R
 import kotlin.math.max
 import kotlin.math.roundToInt
@@ -272,33 +274,63 @@ private fun FontSlide(
     max: Int,
     onValueChange: (Int) -> Unit,
 ) {
-    if (index < 0) {
-        return
-    }
-    var sliderPos by remember(index) {
-        mutableFloatStateOf((index).toFloat() / (max).coerceAtLeast(1))
-    }
+    if (index < 0) return
+
     var trackWidth by remember { mutableIntStateOf(0) }
+    
+    // 使用 rememberUpdatedState 确保手势闭包内能拿到最新值而不触发 pointerInput 重启
+    val currentIndex by rememberUpdatedState(index)
+    val currentOnValueChange by rememberUpdatedState(onValueChange)
+    
+    // 记录拖动过程中的逻辑位置 (0.0 ~ 1.0)
+    var dragPosition by remember { mutableFloatStateOf(0f) }
+
     val knobSize = WeTheme.dimens.actionIconSize
     val knobRadius = knobSize / 2
+    
+    // 视觉位置完全由当前 index 决定，实现“跳跃”效果
+    val visualPos = index.toFloat() / max.coerceAtLeast(1)
 
-    Box(contentAlignment = Alignment.CenterStart) {
+    Box(
+        contentAlignment = Alignment.CenterStart,
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(knobSize)
+            .onSizeChanged { trackWidth = it.width }
+            .pointerInput(max) { // 注意：这里不要传 index
+                detectTapGestures { offset ->
+                    if (trackWidth > 0) {
+                        val newIndex = (offset.x / trackWidth * max).roundToInt().coerceIn(0, max)
+                        currentOnValueChange(newIndex)
+                    }
+                }
+            }
+            .pointerInput(max) { // 注意：这里不要传 index
+                detectHorizontalDragGestures(
+                    onDragStart = { 
+                        // 开始拖动时，同步逻辑位置到当前 index 的位置
+                        dragPosition = currentIndex.toFloat() / max.coerceAtLeast(1) 
+                    },
+                    onHorizontalDrag = { _, dragAmount ->
+                        if (trackWidth > 0) {
+                            // 更新逻辑位置
+                            dragPosition = (dragPosition + dragAmount / trackWidth).coerceIn(0f, 1f)
+                            // 计算逻辑位置对应的 index
+                            val nextIndex = (dragPosition * max).roundToInt()
+                            // 如果计算出的 index 变了，则触发更新，滑块会随之跳跃
+                            if (nextIndex != currentIndex) {
+                                currentOnValueChange(nextIndex)
+                            }
+                        }
+                    }
+                )
+            }
+    ) {
+        // 绘制背景刻度线
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(knobRadius)
-                .pointerInput(Unit) {
-                    detectHorizontalDragGestures { _, dragAmount ->
-                        sliderPos = (sliderPos + dragAmount / trackWidth).coerceIn(0f, 1f)
-                        onValueChange(((max) * sliderPos).roundToInt())
-                    }
-                }
-                .pointerInput(Unit) {
-                    detectTapGestures { offset ->
-                        sliderPos = (offset.x / trackWidth).coerceIn(0f, 1f)
-                        onValueChange(((max) * sliderPos).roundToInt())
-                    }
-                },
+                .height(knobRadius),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             for (i in 0..max) {
@@ -306,38 +338,30 @@ private fun FontSlide(
                     modifier = Modifier
                         .height(knobRadius)
                         .width(WeTheme.dimens.outlineHeight)
-                        .background(
-                            WeTheme.colorScheme.fontColorLight
-                        ),
+                        .background(WeTheme.colorScheme.fontColorLight),
                 )
                 if (i < max) {
                     Spacer(
                         modifier = Modifier
                             .height(WeTheme.dimens.outlineHeight)
                             .weight(1f)
-                            .background(
-                                WeTheme.colorScheme.fontColorLight
-                            ),
+                            .background(WeTheme.colorScheme.fontColorLight),
                     )
                 }
             }
         }
+
+        // 绘制滑块 (它的 offset 仅取决于 index，即 visualPos)
         Box(
             modifier = Modifier
-                .fillMaxWidth()
-                .onSizeChanged { trackWidth = it.width },
-            contentAlignment = Alignment.CenterStart
-        ) {
-            Spacer(
-                modifier = Modifier
-                    .offset {
-                        IntOffset(
-                            (trackWidth * sliderPos).toInt() - knobRadius.roundToPx(), 0
-                        )
-                    }
-                    .size(knobSize)
-                    .clip(CircleShape)
-                    .background(WeTheme.colorScheme.primaryButton))
-        }
+                .offset {
+                    IntOffset(
+                        (trackWidth * visualPos).toInt() - knobRadius.roundToPx(), 0
+                    )
+                }
+                .size(knobSize)
+                .clip(CircleShape)
+                .background(WeTheme.colorScheme.primaryButton)
+        )
     }
 }

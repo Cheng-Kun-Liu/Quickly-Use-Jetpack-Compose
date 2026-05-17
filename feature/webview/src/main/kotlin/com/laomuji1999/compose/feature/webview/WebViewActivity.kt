@@ -7,8 +7,11 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.runtime.remember
 import androidx.core.net.toUri
+import androidx.lifecycle.viewmodel.navigation3.rememberViewModelStoreNavEntryDecorator
 import androidx.navigation3.runtime.NavEntry
 import androidx.navigation3.runtime.rememberNavBackStack
+import androidx.navigation3.runtime.rememberSaveableStateHolderNavEntryDecorator
+import androidx.navigation3.runtime.result.rememberResultEventBusNavEntryDecorator
 import androidx.navigation3.ui.NavDisplay
 import com.laomuji1999.compose.core.ui.extension.finishAndCleanupTask
 import com.laomuji1999.compose.core.ui.extension.nav3PopBackStack
@@ -54,21 +57,27 @@ class WebViewActivity : SlideActivity() {
                 val backStack = rememberNavBackStack(WebViewScreenRoute(startUrl))
                 NavDisplay(
                     backStack = backStack,
-                    onBack = { 
+                    onBack = {
                         if (backStack.size > 1) {
                             backStack.nav3PopBackStack()
                         } else {
                             finish()
                         }
                     },
-                    transitionSpec = SlideNavigation.nav3TransitionSpec,
-                    popTransitionSpec = SlideNavigation.nav3PopTransitionSpec,
-                    predictivePopTransitionSpec = SlideNavigation.nav3PredictivePopTransitionSpec
+                    entryDecorators = listOf(
+                        rememberSaveableStateHolderNavEntryDecorator(),
+                        rememberViewModelStoreNavEntryDecorator(),
+                        rememberResultEventBusNavEntryDecorator()
+                    ),
+                    transitionSpec = SlideNavigation.nav3TransitionSpec(),
+                    popTransitionSpec = SlideNavigation.nav3PopTransitionSpec(),
+                    predictivePopTransitionSpec = SlideNavigation.nav3PredictivePopTransitionSpec()
                 ) { key ->
                     when (key) {
-                        is WebViewScreenRoute -> NavEntry(key) {
+                        is WebViewScreenRoute -> NavEntry(key) { route ->
                             WebViewScreen(
-                                onBackClick = { 
+                                route = route as WebViewScreenRoute,
+                                onBackClick = {
                                     if (backStack.size > 1) {
                                         backStack.nav3PopBackStack()
                                     } else {

@@ -37,7 +37,10 @@ import com.laomuji1999.compose.core.ui.we.widget.topbar.WeTopBarAction
 
 @Composable
 fun WebViewScreen(
-    viewModel: WebViewScreenViewModel = hiltViewModel(),
+    route: WebViewScreenRoute,
+    viewModel: WebViewScreenViewModel = hiltViewModel<WebViewScreenViewModel, WebViewScreenViewModel.Factory> { factory ->
+        factory.create(route)
+    },
     onBackClick: () -> Unit,
     onOpenNewWindow: (String) -> Unit,
 ) {

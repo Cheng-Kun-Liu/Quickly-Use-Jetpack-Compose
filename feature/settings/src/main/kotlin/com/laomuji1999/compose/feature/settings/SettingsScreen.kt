@@ -18,7 +18,6 @@ import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation3.runtime.result.ResultEffect
 import com.laomuji1999.compose.core.logic.AppLanguages
-import com.laomuji1999.compose.core.ui.navigation.AppNavigationAction
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
 import com.laomuji1999.compose.core.ui.we.widget.click.WeClick
 import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutline
@@ -31,7 +30,7 @@ import com.laomuji1999.compose.res.R
 @Composable
 fun SettingsScreen(
     viewModel: SettingsScreenViewModel = hiltViewModel(),
-    onAction: (AppNavigationAction) -> Unit,
+    onNavigate: (SettingsScreenRouter) -> Unit,
 ) {
     var showThemeDialog by rememberSaveable {
         mutableStateOf(false)
@@ -51,12 +50,12 @@ fun SettingsScreen(
     SettingsScreenUi(
         languageDisplayName = usingLanguage.getDisplayName(context),
         onLanguageClick = {
-            onAction(AppNavigationAction.OnLanguageClick)
+            onNavigate(SettingsScreenRouter.OnLanguageClick)
         },
         onThemeClick = {
             showThemeDialog = true
         },
-        onAction = onAction,
+        onNavigate = onNavigate,
     )
 }
 
@@ -65,7 +64,7 @@ private fun SettingsScreenUi(
     languageDisplayName: String,
     onLanguageClick: () -> Unit,
     onThemeClick: () -> Unit,
-    onAction: (AppNavigationAction) -> Unit,
+    onNavigate: (SettingsScreenRouter) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -88,7 +87,7 @@ private fun SettingsScreenUi(
         WeClick(
             title = stringResource(id = R.string.string_font_screen_title),
             onClick = {
-                onAction(AppNavigationAction.OnFontClick)
+                onNavigate(SettingsScreenRouter.OnFontClick)
             },
         )
         WeOutline(weOutlineType = WeOutlineType.Full)
@@ -104,7 +103,7 @@ private fun PreviewSettingsScreen() {
                 languageDisplayName = "Default",
                 onLanguageClick = {},
                 onThemeClick = {},
-                onAction = {},
+                onNavigate = {},
             )
         }
     }

@@ -40,15 +40,17 @@ class HttpScreenViewModel @Inject constructor(
                 loading
             }
         },
-        getNextKey = { value ->
+        getNextKey = { _ ->
             //当前页可能是value携带的,也可能是页面数量+1,这里假设直接页面数量+1
             ++currentPage
         },
         onError = { e ->
-            Toast.showText(e?.message)
+            if(e !is kotlinx.coroutines.CancellationException){
+                Toast.showText(e?.message)
+            }
         },
         onSuccess = {
-            _products.value = _products.value + it.products
+            _products.value += it.products
         },
         onRequestEnd = { value, key ->
             _products.value.size >= value.total || key < 0

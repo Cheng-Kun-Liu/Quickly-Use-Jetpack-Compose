@@ -24,7 +24,6 @@
     <string name="string_demo_group_device_system">Device and system capabilities</string>
     <string name="string_demo_group_ui_interaction">UI and interaction</string>
     <string name="string_demo_group_appearance_localization">Appearance and localization</string>
-    <string name="string_demo_screen_banner">Banner</string>
     <string name="string_demo_screen_painter">Painting Canvas</string>
     <string name="string_demo_screen_date">Custom Calendar</string>
     <string name="string_demo_screen_scroll_connect">NestedScrollConnection</string>

@@ -41,7 +41,7 @@ Quickly-Use-Jetpack-Compose 的架构参考 Android 官方最佳实践项目 [No
 + **WeDimen**：定义尺寸规范。
 + **WeIcons**：使用 ImageVector 绘制图标。
 + **WeWidget**：顶部栏、底部栏、Button、Toast、ActionSheet、单选、多选、开关等通用组件。
-+ **View**：Banner (BannerView)、可点击富文本 (ClickableAnnotatedText)、拖拽排序 (DragList)、错误页 (ErrorView)、Loading、禁止截屏 (SecureComposeView) 等常用 Compose 组件。
++ **View**：可点击富文本 (ClickableAnnotatedText)、拖拽排序 (DragList)、错误页 (ErrorView)、Loading、禁止截屏 (SecureComposeView) 等常用 Compose 组件。
 
 # 📦 Module 目录简介
 
@@ -106,4 +106,4 @@ Quickly-Use-Jetpack-Compose 的架构参考 Android 官方最佳实践项目 [No
 | **自定义日历** | <img src="docs/images/CustomizeCalendar.gif" width="320"/> |
 | **绘画画板** | <img src="docs/images/PainterScreen.png" width="320"/> |
 | **Lazy 列表排序** | <img src="docs/images/LazySort.gif" width="320"/> |
-| **Banner 轮播** | <img src="docs/images/BannerView.gif" width="320"/> |
+
