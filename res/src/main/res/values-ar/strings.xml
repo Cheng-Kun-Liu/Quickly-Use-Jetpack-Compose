@@ -89,4 +89,8 @@
     <string name="string_font_screen_title">حجم الخط</string>
     <string name="string_font_screen_confirm">تم</string>
     <string name="string_font_screen_example">A</string>
+
+    <!--  WePicker  -->
+    <string name="string_we_picker_cancel">إلغاء</string>
+    <string name="string_we_picker_confirm">تم</string>
 </resources>

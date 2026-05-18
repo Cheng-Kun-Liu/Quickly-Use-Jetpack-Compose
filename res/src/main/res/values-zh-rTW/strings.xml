@@ -89,4 +89,8 @@
     <string name="string_font_screen_title">字體大小</string>
     <string name="string_font_screen_confirm">完成</string>
     <string name="string_font_screen_example">A</string>
+
+    <!--  WePicker  -->
+    <string name="string_we_picker_cancel">取消</string>
+    <string name="string_we_picker_confirm">完成</string>
 </resources>

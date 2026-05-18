@@ -28,7 +28,7 @@ data object WeColorSchemeLight : WeColorScheme(
 
 
     outline = WeColors.Color_000000_10,
-    pressed = WeColors.Color_000000_08,
+    pressed = WeColors.Color_000000_05,
 
     bottomBarBackground = WeColors.Color_EDEDED,
     bottomBarSelect = WeColors.Color_07C160,

@@ -90,4 +90,8 @@
     <string name="string_font_screen_title">Tamaño de fuente</string>
     <string name="string_font_screen_confirm">Hecho</string>
     <string name="string_font_screen_example">A</string>
+
+    <!--  WePicker  -->
+    <string name="string_we_picker_cancel">Cancelar</string>
+    <string name="string_we_picker_confirm">Hecho</string>
 </resources>

@@ -122,4 +122,8 @@
     <string name="string_theme_dialog_we_theme_dark">Dark Theme</string>
     <string name="string_theme_dialog_we_theme_blue">Blue Theme</string>
     <string name="string_theme_dialog_we_theme_cancel">Cancel</string>
+
+    <!--  WePicker  -->
+    <string name="string_we_picker_cancel">Cancel</string>
+    <string name="string_we_picker_confirm">Done</string>
 </resources>
