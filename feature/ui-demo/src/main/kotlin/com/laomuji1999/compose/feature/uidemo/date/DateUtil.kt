@@ -4,16 +4,16 @@ import java.util.Calendar
 
 object DateUtil {
     /**
-     * @param year �?
-     * @param month �?
-     * @param dayList �?周几
+     * @param year 年
+     * @param month 月
+     * @param dayList 日+周几
      */
     data class DateDetail(
         val year: Int,
         val month: Int,
         val dayList: List<Pair<Int, Int>>
     ){
-        // 补全的日�?
+        // 补全的日期
         val completedDayList = mutableListOf<Pair<Int, Int>>()
 
         init {
@@ -24,7 +24,7 @@ object DateUtil {
             if(dayList.isEmpty()){
                 return
             }
-            //补全前面的日�?
+            //补全前面的日期
             if(dayList[0].second != 1){
                 for (i in 1 until dayList[0].second){
                     completedDayList.add(Pair(-1, i))
@@ -34,7 +34,7 @@ object DateUtil {
             dayList.forEach {
                 completedDayList.add(it)
             }
-            //补全后面的日�?
+            //补全后面的日期
             if(dayList[dayList.lastIndex].second != 7){
                 for (i in dayList[dayList.lastIndex].second + 1..7){
                     completedDayList.add(Pair(-1, i))

@@ -90,4 +90,8 @@
     <string name="string_font_screen_title">ফন্ট আকার</string>
     <string name="string_font_screen_confirm">সম্পন্ন</string>
     <string name="string_font_screen_example">A</string>
+
+    <!--  WePicker  -->
+    <string name="string_we_picker_cancel">বাতিল</string>
+    <string name="string_we_picker_confirm">সম্পন্ন</string>
 </resources>

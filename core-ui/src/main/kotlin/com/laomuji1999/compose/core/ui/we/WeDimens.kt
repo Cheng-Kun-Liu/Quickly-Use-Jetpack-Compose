@@ -67,6 +67,9 @@ data class WeDimens(
 
     //联系人页面,特定尺寸
     val categorySize: Dp,
+
+    //Picker 尺寸
+    val pickerItemHeight: Dp,
 )
 
 val WeDimensDefault = WeDimens(
@@ -116,6 +119,8 @@ val WeDimensDefault = WeDimens(
     chatAvatarRoundedCornerDp = 4.dp,
 
     categorySize = 20.dp,
+
+    pickerItemHeight = 44.dp,
 )
 
 internal val LocalWeDimens = staticCompositionLocalOf { WeDimensDefault }

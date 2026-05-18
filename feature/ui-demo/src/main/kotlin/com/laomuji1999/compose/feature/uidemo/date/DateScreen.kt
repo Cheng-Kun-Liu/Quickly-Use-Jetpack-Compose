@@ -23,6 +23,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
@@ -40,8 +41,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.laomuji1999.compose.core.ui.theme.QuicklyTheme
 import com.laomuji1999.compose.core.ui.we.WeTheme
 import com.laomuji1999.compose.core.ui.we.widget.outline.WeOutline
+import com.laomuji1999.compose.core.ui.we.widget.picker.WePicker
+import com.laomuji1999.compose.core.ui.we.widget.picker.WePickerChangeStrategy
+import com.laomuji1999.compose.core.ui.we.widget.picker.WePickerItem
 import com.laomuji1999.compose.core.ui.we.widget.scaffold.WeScaffold
 import com.laomuji1999.compose.core.ui.we.widget.topbar.WeTopBar
+import java.util.Calendar
 import kotlin.math.abs
 
 @Composable
@@ -58,6 +63,50 @@ fun DateScreen(
 fun DateScreenUi(
     uiState: DateScreenUiState, onAction: (DateScreenAction) -> Unit
 ) {
+    var showDatePicker by remember { mutableStateOf(false) }
+
+    val pickerData = remember(uiState.yearList) {
+        uiState.yearList.map { year ->
+            WePickerItem(
+                label = "${year}年",
+                children = (1..12).map { month ->
+                    val calendar = Calendar.getInstance()
+                    calendar.set(Calendar.YEAR, year)
+                    calendar.set(Calendar.MONTH, month - 1)
+                    val daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH)
+                    WePickerItem(
+                        label = "${month}月",
+                        children = (1..daysInMonth).map { day ->
+                            WePickerItem(label = "${day}日")
+                        }
+                    )
+                }
+            )
+        }
+    }
+
+    if (showDatePicker) {
+        val initYearPos = uiState.yearList.indexOf(uiState.currentYear).coerceAtLeast(0)
+        val initMonthPos = (uiState.currentMonth - 1).coerceIn(0, 11)
+        val initDayPos = (uiState.currentDay - 1).coerceAtLeast(0)
+
+        WePicker(
+            title = stringResource(com.laomuji1999.compose.res.R.string.string_demo_screen_date),
+            data = pickerData,
+            columns = 3,
+            initPositions = listOf(initYearPos, initMonthPos, initDayPos),
+            changeStrategy = WePickerChangeStrategy.Keep,
+            onConfirm = { positions ->
+                val year = uiState.yearList[positions[0]]
+                val month = positions[1] + 1
+                val day = positions[2] + 1
+                onAction(DateScreenAction.OnDateSelect(year, month, day))
+                showDatePicker = false
+            },
+            onCancel = { showDatePicker = false }
+        )
+    }
+
     WeScaffold(topBar = {
         WeTopBar(title = stringResource(com.laomuji1999.compose.res.R.string.string_demo_screen_date))
         SelectYearUi(
@@ -74,7 +123,10 @@ fun DateScreenUi(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(WeTheme.dimens.bottomBarHeight),
+                .height(WeTheme.dimens.bottomBarHeight)
+                .clickable {
+                    showDatePicker = true
+                },
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.Center
         ) {

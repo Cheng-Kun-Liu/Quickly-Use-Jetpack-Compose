@@ -89,4 +89,8 @@
     <string name="string_font_screen_title">Font Size</string>
     <string name="string_font_screen_confirm">Done</string>
     <string name="string_font_screen_example">A</string>
+
+    <!--  WePicker  -->
+    <string name="string_we_picker_cancel">Cancel</string>
+    <string name="string_we_picker_confirm">Done</string>
 </resources>

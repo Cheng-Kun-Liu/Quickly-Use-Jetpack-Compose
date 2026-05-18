@@ -37,7 +37,15 @@ class DateScreenViewModel @Inject constructor():ViewModel() {
             is DateScreenAction.OnYearClick -> onYearClick(action.year)
             is DateScreenAction.OnMonthClick -> onMonthClick(action.month)
             is DateScreenAction.OnDayClick -> onDayClick(action.day)
+            is DateScreenAction.OnDateSelect -> onDateSelect(action.year, action.month, action.day)
         }
+    }
+
+    private fun onDateSelect(year: Int, month: Int, day: Int) {
+        _currentYear.value = year
+        _currentMonth.value = month
+        _currentDay.value = day
+        _dateDetailList.value = DateUtil.getDateDetailList(year)
     }
 
     private fun onYearClick(year:Int){
