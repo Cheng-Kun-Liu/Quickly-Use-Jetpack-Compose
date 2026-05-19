@@ -21,8 +21,8 @@ android {
 
     //默认配置
     defaultConfig {
-        versionCode = 12
-        versionName = "1.2"
+        versionCode = 13
+        versionName = "1.3"
     }
 }
 

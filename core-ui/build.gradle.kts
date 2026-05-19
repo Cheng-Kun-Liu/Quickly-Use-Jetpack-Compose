@@ -27,9 +27,6 @@ dependencies {
     api(libs.androidx.compose.ui)
     api(libs.androidx.compose.ui.graphics)
 
-    //compose的navigation扩展
-    implementation(libs.androidx.navigation.compose)
-
     //hilt的navigation扩展
     api(libs.androidx.hilt.navigation.compose)
 
